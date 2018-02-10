@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Andrew Piper",
+  "classifications": [ "Threax" ],
+  "name": "Threax App Client Template",
+  "identity": "Threax.AppTemplate.Client",
+  "shortName": "threaxappclient",
+  "sourceName": "AppTemplateClient",
+  "symbols": {
+    "appname": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "AppTemplate"
+    }
+  }
+}

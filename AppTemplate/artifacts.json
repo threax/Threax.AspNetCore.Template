@@ -1,0 +1,9 @@
+[
+  {
+    "pathBase": "Client",
+    "outDir": ".",
+    "copy": [
+      "Client/Images/*"
+    ]
+  }
+]

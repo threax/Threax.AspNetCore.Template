@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AppTemplate</title>
+    <asset-bundle src="~/bundle.min.css"></asset-bundle>
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <relogin></relogin>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Threax.IdServer</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    @* if (User.IsInRole(Roles.EditValues))
+                        {*@
+                    <li><a asp-area="" asp-controller="Home" asp-action="Values">Values</a></li>
+                    @*}*@
+                    @if (User.IsInRole(Threax.AspNetCore.UserBuilder.Entities.AuthorizationAdminRoles.EditRoles))
+                    {
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Users">Edit Users</a></li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @* this line fills in the client config using the tag helper and what has been defined in the di *@
+    <client-config></client-config>
+    <token-config></token-config>
+    <asset-bundle src="~/bundle.min.js"></asset-bundle>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/lib/hr-run.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Andrew Piper",
+  "classifications": [ "Threax" ],
+  "name": "Threax App Template",
+  "identity": "Threax.AppTemplate",
+  "shortName": "threaxapp",
+  "sourceName": "AppTemplate"
+}
