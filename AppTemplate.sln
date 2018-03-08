@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplate", "AppTemplate\AppTemplate.csproj", "{A6EC7844-7B55-4C1B-B4FF-967B0EEE6E92}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplateClient", "AppTemplate.Client\AppTemplateClient.csproj", "{67893E30-4493-4ACA-A2A2-1534FD2CB398}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplateTests", "AppTemplate.Tests\AppTemplateTests.csproj", "{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "AppTemplate\DockerCompose\docker-compose.dcproj", "{15C4A629-A868-4C70-90A2-E3F6B6EB1168}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

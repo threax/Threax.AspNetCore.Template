@@ -84,6 +84,10 @@ namespace AppTemplate
                 o.AppOptions = authConfig;
                 o.CookiePath = appConfig.PathBase;
                 o.AccessDeniedPath = "/Account/AccessDenied";
+                o.ConfigureIdServerMetadataJwtOptions = jwtOpt =>
+                {
+                    jwtOpt.Audience = "Threax.IdServer";
+                };
             });
 
             services.UseAppDatabase(appConfig.ConnectionString);
