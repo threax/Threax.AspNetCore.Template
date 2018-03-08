@@ -53,6 +53,7 @@
     <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="8.0.1" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen" Version="5.0.2" />
     <PackageReference Include="Threax.Extensions.Configuration.SchemaBinder" Version="1.1.1" />
+    <PackageReference Include="Threax.AspNetCore.Docker.Certs" Version="1.0.0" />
     <PackageReference Include="HtmlRapier.TagHelpers" Version="5.1.6" />
   </ItemGroup>
   <ItemGroup>
