@@ -19,6 +19,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.IdServerAuth;
 using Threax.Extensions.Configuration.SchemaBinder;
 using Threax.AspNetCore.UserBuilder;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace AppTemplate
 {
@@ -140,6 +141,14 @@ namespace AppTemplate
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+                //Can add ForwardedHeaders.XForwardedFor later, but tricky with container proxy since we don't know its ip
+                //This is enough to get https detection working again, however.
+                //https://github.com/aspnet/Docs/issues/2384
+            });
+
             app.UseUrlFix(o =>
             {
                 o.CorrectPathBase = appConfig.PathBase;
