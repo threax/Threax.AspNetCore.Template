@@ -5,5 +5,20 @@
   "name": "Threax App Template",
   "identity": "Threax.AppTemplate",
   "shortName": "threaxapp",
-  "sourceName": "AppTemplate"
+  "sourceName": "AppTemplate",
+  "symbols": {
+    "containername": {
+      "type": "parameter",
+      "datatype": "text"
+    },
+    "containernameLower": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "containername",
+        "toLower": true
+      },
+      "replaces": "apptemplate"
+    }
+  }
 }
