@@ -7,8 +7,8 @@
   resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.32.tgz#3bcf44fb1e429f3df76188c8c6d874463ba371fd"
 
 "@types/node@^6.0.69":
-  version "6.0.101"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.101.tgz#0c5911cfb434af4a51c0a499931fe6423207d921"
+  version "6.0.102"
+  resolved "http://registry.npmjs.org/@types/node/-/node-6.0.102.tgz#a6cf3b9843286b63eb362a8522bc382d96fe68d1"
 
 bootstrap@>=3.3.7, bootstrap@^3.3, bootstrap@~3.3.7:
   version "3.3.7"
@@ -41,11 +41,11 @@ htmlrapier.bootstrap@>=6.0.2, htmlrapier.bootstrap@^6.0.4:
     htmlrapier ">=8.1.0"
     jquery ">=3.2.1"
 
-htmlrapier.halcyon-explorer@^6.0.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon-explorer/-/htmlrapier.halcyon-explorer-6.1.1.tgz#c366398dfb5627103dac8c21a5c0b0c03de985b3"
+htmlrapier.halcyon-explorer@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon-explorer/-/htmlrapier.halcyon-explorer-7.1.0.tgz#e827a2b3df2d3cf49a164f9cd27d686fbc77a4c5"
   dependencies:
-    htmlrapier ">=9.0.0"
+    htmlrapier ">=14.0.0"
     htmlrapier.halcyon ">=6.0.0"
 
 htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@>=6.0.1, htmlrapier.halcyon@^6.0.2:
@@ -69,13 +69,13 @@ htmlrapier.roleclient@^1.0.0:
     jsns ">=4.2.2"
 
 htmlrapier.widgets@>=6.1.0, htmlrapier.widgets@^12.0.0:
-  version "12.3.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-12.3.0.tgz#d45a834c1af22b75db876f2c0b42d1b267885ca9"
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-14.0.0.tgz#a8e65a9e2185374949d23b48d2778b2a1591dd5e"
   dependencies:
     htmlrapier ">=14.3.0"
     htmlrapier.halcyon ">=6.0.1"
 
-htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^14.0.0:
+htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@^14.0.0:
   version "14.6.1"
   resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-14.6.1.tgz#a210272f2a3e8ece146844ea6afd833f8c009138"
   dependencies:
