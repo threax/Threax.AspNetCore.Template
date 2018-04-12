@@ -12,6 +12,9 @@ services:
       - type: bind
         source: ../../../TrustedRoots
         target: /usr/local/share/ca-certificates
+      - type: bind
+        source: ../../../DevData/apptemplate
+        target: /appdata
 
 networks:
   public_proxy:
