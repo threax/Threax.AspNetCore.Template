@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Threax.AspNetCore.ExceptionFilter;
 using Threax.AspNetCore.Halcyon.Ext;
 
@@ -22,7 +23,7 @@ namespace AppTemplate.Controllers.Api
         [HttpGet("{groupName}/{method}/{*relativePath}")]
         [HalRel(HalDocEndpointInfo.DefaultRels.Get)]
         [AllowAnonymous]
-        public EndpointDoc Get(String groupName, String method, String relativePath)
+        public Task<EndpointDoc> Get(String groupName, String method, String relativePath)
         {
             try
             {
