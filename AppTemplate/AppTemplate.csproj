@@ -42,7 +42,7 @@
     <PackageReference Include="Threax.AspNetCore.Models" Version="3.4.0" />
     <PackageReference Include="Threax.AspNetCore.Tracking" Version="2.0.3" />
     <PackageReference Include="Threax.AspNetCore.Validators" Version="2.0.1" />
-    <PackageReference Include="Threax.AspNetCore.IdServerAuth" Version="2.7.0" />
+    <PackageReference Include="Threax.AspNetCore.IdServerAuth" Version="2.7.1" />
     <PackageReference Include="Threax.AspNetCore.UrlFix" Version="1.1.4" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder" Version="3.1.2" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities" Version="2.7.0" />
@@ -55,7 +55,7 @@
     <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen" Version="6.0.0" />
     <PackageReference Include="Threax.Extensions.Configuration.SchemaBinder" Version="1.2.0" />
     <PackageReference Include="Threax.AspNetCore.Docker.Certs" Version="1.0.0" />
-    <PackageReference Include="HtmlRapier.TagHelpers" Version="5.1.6" />
+    <PackageReference Include="HtmlRapier.TagHelpers" Version="5.1.7" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
