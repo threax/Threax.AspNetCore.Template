@@ -55,24 +55,24 @@ namespace AppTemplate
                     config.Sources.Clear();
 
                     //./appsettings.json - Main settings file, shared between all instances
-                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                    config.AddJsonFileWithInclude("appsettings.json", optional: true, reloadOnChange: true);
 
                     //./appsettings.{environment}.json - Local development settings files, loaded per environment, no need to deploy to server
-                    config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                    config.AddJsonFileWithInclude($"appsettings.{env.EnvironmentName}.json", optional: true);
 
                     //./appsettings.tools.json - Local development tools settings files, loaded in tools mode, no need to deploy to server
                     if (toolsConfigName != null)
                     {
-                        config.AddJsonFile($"appsettings.{toolsConfigName}.json", optional: true);
+                        config.AddJsonFileWithInclude($"appsettings.{toolsConfigName}.json", optional: true);
                     }
 
                     //./../appsettings.{environment}.json - Deployed settings file, loaded per environment, allows you to put the production configs 1 level above the site in produciton, which keeps that config separate from the code
-                    config.AddJsonFile(Path.GetFullPath($"../appsettings.{env.EnvironmentName}.json"), optional: !env.IsProduction(), reloadOnChange: true);
+                    config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{env.EnvironmentName}.json"), optional: !env.IsProduction(), reloadOnChange: true);
 
                     //./../appsettings.tools.json - Deployed tools settings file, loaded in tools mode, allows you to put the production tools configs 1 level above the site in produciton, which keeps that config separate from the code
                     if (toolsConfigName != null)
                     {
-                        config.AddJsonFile(Path.GetFullPath($"../appsettings.{toolsConfigName}.json"), optional: !env.IsProduction());
+                        config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{toolsConfigName}.json"), optional: !env.IsProduction());
                     }
 
                     //User secrets
