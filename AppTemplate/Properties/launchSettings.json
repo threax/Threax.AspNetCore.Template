@@ -20,7 +20,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "local"
       },
       "applicationUrl": "http://localhost:64199/"
     },
@@ -29,7 +29,7 @@
       "commandLineArgs": "tools migrate seed",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "local"
       },
       "applicationUrl": "http://localhost:64199/"
     },
@@ -37,14 +37,14 @@
       "commandName": "Project",
       "commandLineArgs": "tools \"clientgen Client\\Libs\\ServiceClient.ts\"",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "local"
       }
     },
     "Update Config Schema": {
       "commandName": "Project",
       "commandLineArgs": "tools updateConfigSchema",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "local"
       }
     }
   }
