@@ -23,7 +23,7 @@ eonasdan-bootstrap-datetimepicker@>=4.17.47:
     moment "^2.10"
     moment-timezone "^0.4.0"
 
-htmlrapier.bootstrap.datetime@^2.0.0:
+htmlrapier.bootstrap.datetime@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap.datetime/-/htmlrapier.bootstrap.datetime-2.2.1.tgz#53c0c06e9e265f25a64b248c3315e64e34e1ce10"
   dependencies:
@@ -33,9 +33,9 @@ htmlrapier.bootstrap.datetime@^2.0.0:
     htmlrapier.bootstrap ">=6.0.2"
     jquery ">=3.2.1"
 
-htmlrapier.bootstrap@>=6.0.2, htmlrapier.bootstrap@^6.0.4:
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.4.tgz#8687526023a12441508336a03a8c7b657e1eebc7"
+htmlrapier.bootstrap@>=6.0.2, htmlrapier.bootstrap@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.1.0.tgz#26501ad6eab9a51db8f8af9c0c88961ea6979fac"
   dependencies:
     bootstrap ">=3.3.7"
     htmlrapier ">=8.1.0"
@@ -48,7 +48,7 @@ htmlrapier.halcyon-explorer@^7.1.0:
     htmlrapier ">=14.0.0"
     htmlrapier.halcyon ">=6.0.0"
 
-htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@>=6.0.1, htmlrapier.halcyon@^6.0.2:
+htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@>=6.0.1, htmlrapier.halcyon@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/htmlrapier.halcyon/-/htmlrapier.halcyon-6.0.3.tgz#83576120c2a3e6511fbe1c7d901b1928177c1aa4"
   dependencies:
@@ -68,16 +68,16 @@ htmlrapier.roleclient@^1.0.0:
     htmlrapier.widgets ">=6.1.0"
     jsns ">=4.2.2"
 
-htmlrapier.widgets@>=6.1.0, htmlrapier.widgets@^12.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-14.0.0.tgz#a8e65a9e2185374949d23b48d2778b2a1591dd5e"
+htmlrapier.widgets@>=6.1.0, htmlrapier.widgets@^14.1.0:
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-14.1.0.tgz#2d4d62b51fb97addf34eaa77cb7596f9ecd40279"
   dependencies:
     htmlrapier ">=14.3.0"
     htmlrapier.halcyon ">=6.0.1"
 
-htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@^14.0.0:
-  version "14.6.1"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-14.6.1.tgz#a210272f2a3e8ece146844ea6afd833f8c009138"
+htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@^15.1.0:
+  version "15.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-15.1.0.tgz#1ee54ee6e5201b5f3a419b9d9e6e41752f778d81"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
