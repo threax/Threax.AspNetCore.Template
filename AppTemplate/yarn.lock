@@ -68,16 +68,16 @@ htmlrapier.roleclient@^1.0.0:
     htmlrapier.widgets ">=6.1.0"
     jsns ">=4.2.2"
 
-htmlrapier.widgets@>=6.1.0, htmlrapier.widgets@^14.1.0:
+htmlrapier.widgets@>=6.1.0, htmlrapier.widgets@^14.2.0:
   version "14.1.0"
   resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-14.1.0.tgz#2d4d62b51fb97addf34eaa77cb7596f9ecd40279"
   dependencies:
     htmlrapier ">=14.3.0"
     htmlrapier.halcyon ">=6.0.1"
 
-htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@^15.1.0:
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-15.1.0.tgz#1ee54ee6e5201b5f3a419b9d9e6e41752f778d81"
+htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@^15.4.2:
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-15.4.2.tgz#c6971b7fe2bdb8094adf2d79f78b53f46562ece9"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
