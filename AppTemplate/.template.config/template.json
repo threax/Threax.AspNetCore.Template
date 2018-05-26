@@ -19,6 +19,12 @@
         "toLower": true
       },
       "replaces": "apptemplate"
+    },
+    "port": {
+      "type": "parameter",
+      "datatype": "text",
+      "replaces": "44321",
+      "defaultValue": "44321"
     }
   }
 }
