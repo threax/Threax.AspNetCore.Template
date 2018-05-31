@@ -58,10 +58,10 @@
     <PackageReference Include="HtmlRapier.TagHelpers" Version="5.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Threax.ModelGen" Version="4.1.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+    <DotNetCliToolReference Include="Threax.ModelGen" Version="5.3.1" />
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
   </ItemGroup>
 
