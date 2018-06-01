@@ -15,13 +15,14 @@ namespace AppTemplate.Mappers
         public ValueProfile()
         {
             //Map the input model to the entity
-            CreateMap<ValueInput, ValueEntity>()
-                .ForMember(d => d.ValueId, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+            MapInputToEntity(CreateMap<ValueInput, ValueEntity>());
 
             //Map the entity to the view model.
-            CreateMap<ValueEntity, Value>();
+            MapEntityToView(CreateMap<ValueEntity, Value>());
         }
+
+        partial void MapInputToEntity(IMappingExpression<ValueInput, ValueEntity> mapExpr);
+
+        partial void MapEntityToView(IMappingExpression<ValueEntity, Value> mapExpr);
     }
 }

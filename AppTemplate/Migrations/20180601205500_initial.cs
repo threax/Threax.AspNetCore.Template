@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AppTemplate.Migrations
 {
-    public partial class values : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,9 +36,9 @@ namespace AppTemplate.Migrations
                 columns: table => new
                 {
                     ValueId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(maxLength: 450, nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 450, nullable: true)
+                    Modified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

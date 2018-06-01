@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using AppTemplate.Database;
 using AppTemplate.InputModels;
 using AppTemplate.ViewModels;
+using AppTemplate.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace AppTemplate.Repository
 
         public async Task<ValueCollection> List(ValueQuery query)
         {
-            var dbQuery = query.Create(this.Entities);
+            var dbQuery = await query.Create(this.Entities);
 
             var total = await dbQuery.CountAsync();
             dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
@@ -45,7 +46,7 @@ namespace AppTemplate.Repository
         {
             var entity = mapper.Map<ValueEntity>(value);
             this.dbContext.Add(entity);
-            await this.dbContext.SaveChangesAsync();
+            await SaveChanges();
             return mapper.Map<Value>(entity);
         }
 
@@ -55,7 +56,7 @@ namespace AppTemplate.Repository
             if (entity != null)
             {
                 mapper.Map(value, entity);
-                await this.dbContext.SaveChangesAsync();
+                await SaveChanges();
                 return mapper.Map<Value>(entity);
             }
             throw new KeyNotFoundException($"Cannot find value {valueId.ToString()}");
@@ -67,7 +68,7 @@ namespace AppTemplate.Repository
             if (entity != null)
             {
                 Entities.Remove(entity);
-                await this.dbContext.SaveChangesAsync();
+                await SaveChanges();
             }
         }
 
@@ -80,6 +81,11 @@ namespace AppTemplate.Repository
         {
             var entities = values.Select(i => mapper.Map<ValueEntity>(i));
             this.dbContext.Values.AddRange(entities);
+            await SaveChanges();
+        }
+
+        protected virtual async Task SaveChanges()
+        {
             await this.dbContext.SaveChangesAsync();
         }
 

@@ -44,14 +44,14 @@ namespace AppTemplate.Database
         public static IServiceCollection UseAppDatabase(this IServiceCollection services, string connectionString)
         {
             //Add the database
-            services.AddAuthorizationDatabase<AppDbContext>(connectionString, typeof(AppDatabaseServiceExtensions).GetTypeInfo().Assembly, authDbOptions: new AuthorizationDatabaseOptions()
-            {
-                UseSqlServer = false,
-                OptionsAction = o =>
+            services.AddAuthorizationDatabase<AppDbContext>()
+                .AddDbContextPool<AppDbContext>(o =>
                 {
-                    o.UseSqlite(connectionString);
-                }
-            });
+                    o.UseSqlite(connectionString, options =>
+                    {
+                        options.MigrationsAssembly(typeof(AppDbContext).GetTypeInfo().Assembly.GetName().Name);
+                    });
+                });
 
             //Setup the mapper
             var mapperConfig = SetupMappings();

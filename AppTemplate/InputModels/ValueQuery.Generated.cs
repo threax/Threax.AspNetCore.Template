@@ -1,11 +1,14 @@
 using Halcyon.HAL.Attributes;
 using AppTemplate.Controllers;
 using AppTemplate.Models;
+using AppTemplate.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
+using Threax.AspNetCore.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace AppTemplate.InputModels
@@ -20,24 +23,23 @@ namespace AppTemplate.InputModels
 
 
         /// <summary>
-        /// Populate an IQueryable for values. Does not apply the skip or limit.
+        /// Populate an IQueryable for values. Does not apply the skip or limit. Will return
+        /// true if the query should be modified or false if the entire query was built and should
+        /// be left alone.
         /// </summary>
         /// <param name="query">The query to populate.</param>
-        /// <returns>The query passed in populated with additional conditions.</returns>
-        public IQueryable<T> Create<T>(IQueryable<T> query) where T : IValue, IValueId
+        /// <returns>True if the query should continue to be built, false if it should be left alone.</returns>
+        protected bool CreateGenerated(ref IQueryable<ValueEntity> query)
         {
-            if (ValueId.HasValue)
+            if (ValueId != null)
             {
                 query = query.Where(i => i.ValueId == ValueId);
+                return false;
             }
             else
             {
-                OnCreate(ref query);
+                return true;
             }
-
-            return query;
         }
-
-        partial void OnCreate<T>(ref IQueryable<T> query);
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.AspNetCore.Models;
 
 namespace AppTemplate.Models 
 {
@@ -22,6 +23,6 @@ namespace AppTemplate.Models
     public partial interface IValueQuery
     {
         Guid? ValueId { get; set; }
-        
+
     }
 }

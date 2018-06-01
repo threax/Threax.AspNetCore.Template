@@ -7,6 +7,7 @@ using AppTemplate.Repository;
 using Threax.AspNetCore.Halcyon.Ext;
 using AppTemplate.ViewModels;
 using AppTemplate.InputModels;
+using AppTemplate.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace AppTemplate.Controllers.Api
