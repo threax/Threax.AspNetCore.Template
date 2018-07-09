@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Threax.AspNetCore.Models;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using AppTemplate.Repository;
+using Threax.ReflectedServices;
 
 namespace AppTemplate.Repository.Config
 {
