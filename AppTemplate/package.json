@@ -6,14 +6,14 @@
     "@types/node": "^6.0.69"
   },
   "dependencies": {
-    "htmlrapier": "^18.0.2",
+    "htmlrapier": "^18.1.1",
     "htmlrapier.bootstrap": "^6.1.0",
     "htmlrapier.bootstrap.datetime": "^2.2.1",
-    "htmlrapier.halcyon": "^6.0.4",
-    "htmlrapier.halcyon-explorer": "^7.1.0",
+    "htmlrapier.halcyon": "^7.0.0",
+    "htmlrapier.halcyon-explorer": "^8.0.0",
     "htmlrapier.relogin": "^1.0.4",
     "htmlrapier.roleclient": "^1.0.0",
-    "htmlrapier.widgets": "^14.4.0",
+    "htmlrapier.widgets": "^15.0.0",
     "jsns": "^5.0.0",
     "threax.bootstrap": "^0.0.4"
   },

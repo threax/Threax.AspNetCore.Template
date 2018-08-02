@@ -41,7 +41,7 @@ export class RoleAssignmentsResult {
     }
 
     public setUser(data: RoleAssignments): Promise<RoleAssignmentsResult> {
-        return this.client.LoadLinkWithBody("SetUser", data)
+        return this.client.LoadLinkWithData("SetUser", data)
                .then(r => {
                     return new RoleAssignmentsResult(r);
                 });
@@ -179,8 +179,8 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("GetUser");
     }
 
-    public listUsers(query: RolesQuery): Promise<UserCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListUsers", query)
+    public listUsers(data: RolesQuery): Promise<UserCollectionResult> {
+        return this.client.LoadLinkWithData("ListUsers", data)
                .then(r => {
                     return new UserCollectionResult(r);
                 });
@@ -207,7 +207,7 @@ export class EntryPointResult {
     }
 
     public setUser(data: RoleAssignments): Promise<RoleAssignmentsResult> {
-        return this.client.LoadLinkWithBody("SetUser", data)
+        return this.client.LoadLinkWithData("SetUser", data)
                .then(r => {
                     return new RoleAssignmentsResult(r);
                 });
@@ -233,8 +233,8 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("SetUser");
     }
 
-    public listValues(query: ValueQuery): Promise<ValueCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListValues", query)
+    public listValues(data: ValueQuery): Promise<ValueCollectionResult> {
+        return this.client.LoadLinkWithData("ListValues", data)
                .then(r => {
                     return new ValueCollectionResult(r);
                 });
@@ -261,7 +261,7 @@ export class EntryPointResult {
     }
 
     public addValue(data: ValueInput): Promise<ValueResult> {
-        return this.client.LoadLinkWithBody("AddValue", data)
+        return this.client.LoadLinkWithData("AddValue", data)
                .then(r => {
                     return new ValueResult(r);
                 });
@@ -329,7 +329,7 @@ export class ValueResult {
     }
 
     public update(data: ValueInput): Promise<ValueResult> {
-        return this.client.LoadLinkWithBody("Update", data)
+        return this.client.LoadLinkWithData("Update", data)
                .then(r => {
                     return new ValueResult(r);
                 });
@@ -455,7 +455,7 @@ export class ValueCollectionResult {
     }
 
     public add(data: ValueInput): Promise<ValueResult> {
-        return this.client.LoadLinkWithBody("Add", data)
+        return this.client.LoadLinkWithData("Add", data)
                .then(r => {
                     return new ValueResult(r);
                 });
