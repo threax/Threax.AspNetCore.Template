@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Threax.AspNetCore.Models;
+using Threax.ReflectedServices;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using AppTemplate.Repository;
-using Threax.ReflectedServices;
 
 namespace AppTemplate.Repository.Config
 {

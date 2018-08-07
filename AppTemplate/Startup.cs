@@ -90,7 +90,9 @@ namespace AppTemplate
                 };
             });
 
-            services.UseAppDatabase(appConfig.ConnectionString);
+            services.AddAppDatabase(appConfig.ConnectionString);
+            services.AddAppMapper();
+            services.AddAppRepositories();
 
             var halOptions = new HalcyonConventionOptions()
             {

@@ -12,17 +12,40 @@ using Threax.AspNetCore.BuiltInTools;
 using Threax.AspNetCore.Models;
 using Threax.AspNetCore.UserBuilder.Entities;
 using Threax.Sqlite.Ext;
+using AppTemplate.Mappers;
 
 namespace AppTemplate.Database
 {
     public static class AppDatabaseServiceExtensions
     {
         /// <summary>
-        /// Setup mappings, this is separate so it can be called by a unit test without
-        /// spinning up the whole system. No need to call manually unless needed in a unit test.
+        /// Setup the app database. This will register AppDbContext in the services.
         /// </summary>
+        /// <param name="services">The service collection.</param>
+        /// <param name="connectionString">The connection string for the database.</param>
         /// <returns></returns>
-        public static MapperConfiguration SetupMappings()
+        public static IServiceCollection AddAppDatabase(this IServiceCollection services, string connectionString)
+        {
+            //Add the database
+            services.AddAuthorizationDatabase<AppDbContext>()
+                    .AddDbContextPool<AppDbContext>(o =>
+                    {
+                        o.UseSqlServer(connectionString, options =>
+                        {
+                            options.MigrationsAssembly(typeof(AppDbContext).GetTypeInfo().Assembly.GetName().Name);
+                        });
+                    });
+
+            return services;
+        }
+
+        /// <summary>
+        /// Setup the app mapper. This will make the AppMapper class available in services.
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="includeAutomapperConfig">Set this to true to register the automapper config in the services. This is used to allow the automapper unit test to work.</param>
+        /// <returns></returns>
+        public static IServiceCollection AddAppMapper(this IServiceCollection services, bool includeAutomapperConfig = false)
         {
             //Setup mappings between your objects here
             //Check out the AutoMapper docs for more info
@@ -33,34 +56,24 @@ namespace AppTemplate.Database
                 cfg.AddProfiles(typeof(AppDatabaseServiceExtensions).GetTypeInfo().Assembly);
             });
 
-            return mapperConfig;
+            if (includeAutomapperConfig)
+            {
+                services.AddSingleton<MapperConfiguration>(mapperConfig);
+            }
+
+            //Register the AppMapper, The Automapper config is hidden behind the AppMapper, which is what should be used by your classes.
+            services.AddScoped<AppMapper>(s => new AppMapper(mapperConfig.CreateMapper(s.GetRequiredService)));
+
+            return services;
         }
 
         /// <summary>
-        /// Setup the app database, will also setup repositories and mappings.
+        /// Setup the app repositories. This will setup the services with the repositories defined in this program.
         /// </summary>
-        /// <param name="services">The service collection.</param>
-        /// <param name="connectionString">The connection string for the database.</param>
+        /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection UseAppDatabase(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddAppRepositories(this IServiceCollection services)
         {
-            SqliteFileExtensions.TryCreateFile(connectionString);
-
-            //Add the database
-            services.AddAuthorizationDatabase<AppDbContext>()
-                .AddDbContextPool<AppDbContext>(o =>
-                {
-                    o.UseSqlite(connectionString, options =>
-                    {
-                        options.MigrationsAssembly(typeof(AppDbContext).GetTypeInfo().Assembly.GetName().Name);
-                    });
-                });
-
-            //Setup the mapper
-            var mapperConfig = SetupMappings();
-            services.AddScoped<IMapper>(s => mapperConfig.CreateMapper(s.GetRequiredService));
-
-            //Setup repositories
             services.ConfigureReflectedServices(typeof(AppDatabaseServiceExtensions).GetTypeInfo().Assembly);
 
             return services;

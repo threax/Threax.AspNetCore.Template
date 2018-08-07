@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using Threax.AspNetCore.Tests;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AppTemplate.Tests
 {
@@ -24,8 +25,8 @@ namespace AppTemplate.Tests
         /// <returns>The passed in mockup test.</returns>
         public static Mockup SetupGlobal(this Mockup mockup)
         {
-            mockup.Add<MapperConfiguration>(m => AppDatabaseServiceExtensions.SetupMappings());
-            mockup.Add<IMapper>(m => m.Get<MapperConfiguration>().CreateMapper(mockup.Get));
+            mockup.MockServiceCollection.AddTimeTracking();
+            mockup.MockServiceCollection.AddAppMapper(includeAutomapperConfig: true);
 
             mockup.Add<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                                                                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
