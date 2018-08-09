@@ -30,7 +30,7 @@ namespace AppTemplate.Database
             services.AddAuthorizationDatabase<AppDbContext>()
                     .AddDbContextPool<AppDbContext>(o =>
                     {
-                        o.UseSqlServer(connectionString, options =>
+                        o.UseSqlite(connectionString, options =>
                         {
                             options.MigrationsAssembly(typeof(AppDbContext).GetTypeInfo().Assembly.GetName().Name);
                         });
