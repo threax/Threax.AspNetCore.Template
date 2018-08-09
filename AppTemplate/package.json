@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "threax-npm-tk build && dotnet bundle",
-    "yarn-install": "yarn install --flat && yarn link threax-npm-tk",
+    "yarn-install": "yarn install --flat",
     "clean": "threax-npm-tk clean",
     "trash-modules": "powershell -Command Remove-Item 'node_modules\\*' -Recurse -Force",
     "import-tsconfig": "node node_modules\\threax-npm-tk\\tsimport.js",
