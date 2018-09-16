@@ -55,9 +55,7 @@
     "node_modules\\htmlrapier.widgets\\src\\**\\*.ts",
     "node_modules\\htmlrapier\\src\\**\\*.ts"
   ],
-  "exclude": [
-    "node_modules\\threax-npm-tk\\**\\*.js"
-  ],
+  "exclude": [],
   "files": [
     "node_modules\\jsns\\jsns.ts"
   ]

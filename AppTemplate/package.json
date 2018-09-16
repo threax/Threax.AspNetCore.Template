@@ -21,8 +21,8 @@
     "build": "threax-npm-tk build && dotnet bundle",
     "yarn-install": "yarn install --flat",
     "clean": "threax-npm-tk clean",
-    "trash-modules": "powershell -Command Remove-Item 'node_modules\\*' -Recurse -Force",
-    "import-tsconfig": "node node_modules\\threax-npm-tk\\tsimport.js",
+    "trash-modules": "threax-npm-tk clean -o node_modules",
+    "import-tsconfig": "threax-npm-tk tsconfig",
     "yarn-upgrade": "yarn upgrade --flat"
   },
   "resolutions": {
