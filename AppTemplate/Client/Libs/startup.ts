@@ -5,8 +5,7 @@ import * as whitelist from 'hr.whitelist';
 import * as fetcher from 'hr.fetcher';
 import * as bootstrap from 'hr.bootstrap.all';
 import * as client from 'clientlibs.ServiceClient';
-import * as roleClient from 'hr.roleclient.RoleClient';
-import { EntryPointInjector as UserDirectoryEntryPointInjector } from 'hr.roleclient.UserDirectoryClient';
+import * as userSearch from 'clientlibs.UserSearchClientEntryPointInjector';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 import * as xsrf from 'hr.xsrftoken';
@@ -38,9 +37,8 @@ export function createBuilder() {
         var config = pageConfig.read<Config>();
         builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config));
         builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
-        //Map the role entry point to the service entry point and add the user directory
-        builder.Services.addShared(roleClient.IRoleEntryInjector, s => s.getRequiredService(client.EntryPointInjector));
-        builder.Services.addShared(UserDirectoryEntryPointInjector, s => new UserDirectoryEntryPointInjector(config.client.UserDirectoryUrl, s.getRequiredService(fetcher.Fetcher)));
+        
+        userSearch.addServices(builder);
 
         //Setup Deep Links
         deepLink.setPageUrl(builder.Services, config.client.PageBasePath);

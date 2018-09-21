@@ -72,7 +72,7 @@ namespace AppTemplate
 
             services.AddHalClientGen(new HalClientGenOptions()
             {
-                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly },
+                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly, typeof(Spc.AspNetCore.Users.Mvc.Controllers.UserSearchController).Assembly },
                 CSharp = new CSharpOptions()
                 {
                     Namespace = "AppTemplate.Client"
@@ -118,7 +118,8 @@ namespace AppTemplate
                 o.SerializerSettings.SetToHalcyonDefault();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             })
-            .AddConventionalIdServerMvc();
+            .AddConventionalIdServerMvc()
+            .AddUserSearchMvc();
 
             services.AddScoped<IToolRunner>(s =>
             {

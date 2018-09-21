@@ -2,6 +2,7 @@
 using AppTemplate.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
+using Spc.AspNetCore.Users.Mvc.Controllers;
 
 namespace AppTemplate.ViewModels
 {
@@ -12,6 +13,8 @@ namespace AppTemplate.ViewModels
     [HalActionLink(RolesControllerRels.GetUser, typeof(RolesController))]
     [HalActionLink(RolesControllerRels.ListUsers, typeof(RolesController))]
     [HalActionLink(RolesControllerRels.SetUser, typeof(RolesController))]
+    //User Search Actions
+    [HalActionLink(typeof(UserSearchController), nameof(UserSearchController.List), "ListAppUsers")]
     //The additional entry point links are in the other entry point partial classes, expand this node to see them
     public partial class EntryPoint
     {

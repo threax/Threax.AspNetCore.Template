@@ -1,17 +1,12 @@
 ﻿import * as startup from 'clientlibs.startup';
-import * as crudPage from 'hr.widgets.CrudPage';
 import * as controller from 'hr.controller';
 import * as crudService from 'hr.roleclient.UserCrudService';
-import * as UserSearchController from 'hr.roleclient.UserSearchController';
+import * as deepLink from 'hr.deeplink';
+import * as userSearch from 'hr.roleclient.UserSearchController';
 
 var builder = startup.createBuilder();
-crudPage.addServices(builder.Services);
-crudService.addServices(builder.Services);
-UserSearchController.AddServices(builder.Services);
+userSearch.AddServices(builder.Services);
+deepLink.addServices(builder.Services);
+crudService.addServices(builder);
 
-builder.create("userSearch", UserSearchController.UserSearchController);
-
-builder.create("search", crudPage.CrudSearch);
-builder.create("pageNumbers", crudPage.CrudPageNumbers);
-builder.create("mainTable", crudPage.CrudTableController);
-builder.create("entryEditor", crudPage.CrudItemEditorController);
+crudService.createControllers(builder, new crudService.UserCrudSettings());

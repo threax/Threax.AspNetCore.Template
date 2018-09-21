@@ -52,4 +52,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Threax.AspNetCore.IdServerSecurity\src\Threax.AspNetCore.UserSearch.Mvc\Threax.AspNetCore.UserSearch.Mvc.csproj" />
+  </ItemGroup>
+
 </Project>

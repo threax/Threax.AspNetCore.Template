@@ -31,7 +31,8 @@ namespace AppTemplate
     [HalModel]
     [HalSelfActionLink(RolesControllerRels.GetUser, typeof(RolesController))]
     [HalActionLink(RolesControllerRels.SetUser, typeof(RolesController))]
-    [HalActionLink(RolesControllerRels.DeleteUser, typeof(RolesController))]
+    [HalActionLink(CrudRels.Update, RolesControllerRels.SetUser, typeof(RolesController))]
+    [HalActionLink(CrudRels.Delete, RolesControllerRels.DeleteUser, typeof(RolesController))]
     public class RoleAssignments : ReflectedRoleAssignments
     {
         /// <summary>
