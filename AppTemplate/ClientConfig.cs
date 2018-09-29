@@ -1,4 +1,6 @@
-﻿using HtmlRapier.TagHelpers;
+﻿using System;
+using HtmlRapier.TagHelpers;
+using Newtonsoft.Json;
 
 namespace AppTemplate
 {
@@ -8,9 +10,11 @@ namespace AppTemplate
     public class ClientConfig : ClientConfigBase
     {
         /// <summary>
-        /// The url of the app's service, likely the same as the app itself.
+        /// The url of the app's service, defaults to ~/api. You can
+        /// specify an absolute url here if you want.
         /// </summary>
-        public string ServiceUrl { get; set; }
+        [ExpandHostPath]
+        public string ServiceUrl { get; set; } = "~/api";
 
         /// <summary>
         /// The url of the user directory.
