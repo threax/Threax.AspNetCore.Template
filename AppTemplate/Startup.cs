@@ -145,6 +145,19 @@ namespace AppTemplate
             });
 
             services.AddUserBuilderForUserWhitelistWithRoles();
+
+            services.AddThreaxCSP(o =>
+            {
+                o.AddDefault().AddNone();
+                o.AddImg().AddSelf();
+                o.AddConnect().AddSelf();
+                o.AddManifest().AddSelf();
+                o.AddFont().AddSelf();
+                o.AddFrame().AddSelf().AddEntries(new String[] { authConfig.Authority });
+                o.AddScript().AddSelf().AddUnsafeInline();
+                o.AddStyle().AddSelf().AddUnsafeInline();
+                o.AddFrameAncestors().AddSelf();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
