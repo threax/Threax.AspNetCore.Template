@@ -55,8 +55,8 @@ htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@>=7.0.0, htmlrapier.halcyon@^7.0.
     htmlrapier ">=10.0.2"
 
 htmlrapier.relogin@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/htmlrapier.relogin/-/htmlrapier.relogin-1.0.4.tgz#5ee770018da5dee2215773835ddf2b6120f55c54"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/htmlrapier.relogin/-/htmlrapier.relogin-1.0.5.tgz#49f0bd2263fc6778db2ce4d62189a0100c133db3"
   dependencies:
     htmlrapier ">=14.0.0"
 
@@ -76,8 +76,8 @@ htmlrapier.widgets@>=6.1.0, htmlrapier.widgets@^15.0.0:
     htmlrapier.halcyon ">=7.0.0"
 
 htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=8.1.0, htmlrapier@^18.1.1:
-  version "18.1.3"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-18.1.3.tgz#51bc560ee0b60c0ad20bff41497aa1e0d9a52cb6"
+  version "18.1.8"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-18.1.8.tgz#b11d921c4c6a3818bc89d6ef46921e96d4dac632"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
@@ -100,9 +100,9 @@ moment-timezone@^0.4.0:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
-threax.bootstrap@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/threax.bootstrap/-/threax.bootstrap-0.0.4.tgz#5818fd05297092ef132814868c00b4acaa36da78"
+threax.bootstrap@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/threax.bootstrap/-/threax.bootstrap-0.0.5.tgz#f574ea2a423b84dabfe6731a371700d4bb962fe2"
   dependencies:
     bootstrap "~3.3.7"
 
