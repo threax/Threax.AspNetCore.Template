@@ -1,18 +1,20 @@
-FROM microsoft/aspnetcore:2.0 AS base
+FROM microsoft/dotnet:2.1.3-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM build-threax AS build
 WORKDIR /src
-COPY *.sln ./
 COPY AppTemplate/AppTemplate.csproj AppTemplate/
-RUN dotnet restore
+RUN dotnet restore AppTemplate/AppTemplate.csproj
 COPY . .
 WORKDIR /src/AppTemplate
-RUN dotnet build -c Release -o /app
+RUN yarn run yarn-install
+RUN yarn run clean
+RUN yarn run build
+RUN dotnet build AppTemplate.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish AppTemplate.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app

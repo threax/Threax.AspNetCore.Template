@@ -67,12 +67,12 @@ namespace AppTemplate
                     }
 
                     //./../appsettings.{environment}.json - Deployed settings file, loaded per environment, allows you to put the production configs 1 level above the site in produciton, which keeps that config separate from the code
-                    config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{env.EnvironmentName}.json"), optional: !env.IsProduction(), reloadOnChange: true);
+                    config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{env.EnvironmentName}.json"), optional: true, reloadOnChange: true);
 
                     //./../appsettings.tools.json - Deployed tools settings file, loaded in tools mode, allows you to put the production tools configs 1 level above the site in produciton, which keeps that config separate from the code
                     if (toolsConfigName != null)
                     {
-                        config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{toolsConfigName}.json"), optional: !env.IsProduction());
+                        config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{toolsConfigName}.json"), optional: true);
                     }
 
                     //User secrets
