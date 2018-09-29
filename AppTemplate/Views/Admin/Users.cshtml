@@ -40,27 +40,26 @@
     </error>
 </div>
 
-<modal data-hr-controller="userSearch" title-text="Find User">
+<modal data-hr-controller="addEntryEditor" title-text="Find User">
     <load class="modal-body" visible="true">
         <p>Working...</p>
     </load>
     <main class="modal-body">
-        <h2>Search Active Directory</h2>
+        <h2>Search Users</h2>
         <form data-hr-on-submit="runSearch" data-hr-model="search">
-            <div class="form-group">
-                <input class="form-control" type="text" name="term" />
-            </div>
-            <button type="submit" class="btn btn-default">Search</button>
+            <button type="submit" class="btn btn-default" data-hr-form-end>Search</button>
         </form>
 
-        <h3>Active Directory Results</h3>
+        <h3>Search Results</h3>
         <div data-hr-model="searchResults">
             <template>
-                <div>
-                    <h3>{{firstName}} {{lastName}}</h3>
+                <div data-hr-config-rooturl="@Url.Content("~/")">
+                    <h3>{{givenName}} {{surname}}</h3>
                     <p>User Name: {{userName}}</p>
+                    <p>Type: {{spcUserType}}</p>
+                    <p>Id: {{spcEmpId}}</p>
                     <p>Guid: {{userId}}</p>
-                    <button class="btn btn-default" data-hr-on-click="editRoles" data-hr-toggle="editRoles" data-hr-style-on="display:block;" style="display:none;">Edit Roles</button>
+                    <button class="btn btn-default" data-hr-on-click="editRoles" data-hr-toggle="editRoles" data-hr-style-on="display:inline;" style="display:none;">Edit Roles</button>
                 </div>
             </template>
         </div>
