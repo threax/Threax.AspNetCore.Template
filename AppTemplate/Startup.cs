@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AppTemplate.Controllers;
+using AppTemplate.Controllers.Api;
+using AppTemplate.Database;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using AppTemplate.Controllers;
-using AppTemplate.Controllers.Api;
-using AppTemplate.Database;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,9 +18,8 @@ using Threax.AspNetCore.CorsManager;
 using Threax.AspNetCore.Halcyon.ClientGen;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.IdServerAuth;
-using Threax.Extensions.Configuration.SchemaBinder;
 using Threax.AspNetCore.UserBuilder;
-using Microsoft.AspNetCore.HttpOverrides;
+using Threax.Extensions.Configuration.SchemaBinder;
 
 namespace AppTemplate
 {
@@ -120,6 +120,11 @@ namespace AppTemplate
             })
             .AddConventionalIdServerMvc()
             .AddUserSearchMvc();
+
+            services.ConfigureHtmlRapierTagHelpers(o =>
+            {
+                o.FrontEndLibrary = HtmlRapier.TagHelpers.FrontEndLibrary.Bootstrap3;
+            });
 
             services.AddScoped<IToolRunner>(s =>
             {
