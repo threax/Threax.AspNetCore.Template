@@ -32,7 +32,7 @@
     <PackageReference Include="HtmlRapier.TagHelpers" Version="6.0.1" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.0" />
     <PackageReference Include="Threax.Sqlite.Ext" Version="1.0.1" />
-    <PackageReference Include="Threax.AspNetCore.UserSearch.Mvc" Version="0.0.0-pre1" />
+    <PackageReference Include="Threax.AspNetCore.UserSearch.Mvc" Version="0.0.0-pre4" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Threax.ModelGen" Version="8.0.0" />
