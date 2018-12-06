@@ -165,6 +165,13 @@ namespace AppTemplate
                 o.AddStyle().AddSelf().AddUnsafeInline();
                 o.AddFrameAncestors().AddSelf();
             });
+
+            services.AddLogging(o =>
+            {
+                o.AddConfiguration(Configuration.GetSection("Logging"))
+                    .AddConsole()
+                    .AddDebug();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -182,9 +189,6 @@ namespace AppTemplate
             {
                 o.CorrectPathBase = appConfig.PathBase;
             });
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             app.UseStaticFiles();
 
