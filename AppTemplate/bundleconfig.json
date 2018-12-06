@@ -5,7 +5,7 @@
     "outputFileName": "wwwroot/bundle.min.css",
     "inputFiles": [
       "wwwroot/lib/bootstrap/dist/css/threax.bootstrap.css",
-      "wwwroot/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+      "wwwroot/lib/htmlrapier.bootstrap.datetime/css/bootstrap-datetimepicker.css"
     ]
   },
   {
@@ -14,7 +14,6 @@
       "wwwroot/lib/jquery/dist/jquery.min.js",
       "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "wwwroot/lib/moment/min/moment.min.js",
-      "wwwroot/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
       "wwwroot/lib/polyfill.js",
       "wwwroot/lib/tslib.js",
       "wwwroot/lib/tsbin.js"
