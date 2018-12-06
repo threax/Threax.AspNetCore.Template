@@ -4,6 +4,7 @@ using AppTemplate.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -119,7 +120,8 @@ namespace AppTemplate
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             })
             .AddConventionalIdServerMvc()
-            .AddUserSearchMvc();
+            .AddUserSearchMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
