@@ -32,7 +32,8 @@ namespace AppTemplate
             Scope = "AppTemplate", //The name of the scope for api access
             DisplayName = "AppTemplate", //Change this to a pretty name for the client/resource
             ClientId = "AppTemplate", //Change this to a unique client id
-            AdditionalScopes = new List<String>{ /*Additional scopes here "ScopeName", "Scope2Name", "etc"*/ }
+            AdditionalScopes = new List<String> { /*Additional scopes here "ScopeName", "Scope2Name", "etc"*/ },
+            ClientCredentialsScopes = new List<string> { "Threax.IdServer" }
         };
         //End user replace
 
@@ -106,6 +107,12 @@ namespace AppTemplate
             services.AddExceptionErrorFilters(new ExceptionFilterOptions()
             {
                 DetailedErrors = appConfig.DetailedErrors
+            });
+
+            services.AddThreaxIdServerClient(o =>
+            {
+                o.GetSharedClientCredentials = s => Configuration.Bind("SharedClientCredentials", s);
+                Configuration.Bind("IdServerClient", o);
             });
 
             // Add framework services.

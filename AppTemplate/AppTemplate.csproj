@@ -24,7 +24,7 @@
     <PackageReference Include="Threax.AspNetCore.BuiltInTools" Version="5.1.0" />
     <PackageReference Include="Threax.AspNetCore.CorsManager" Version="3.1.0" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.3" />
-    <PackageReference Include="Threax.AspNetCore.Halcyon.Client" Version="6.2.0" />
+    <PackageReference Include="Threax.AspNetCore.Halcyon.Client" Version="7.0.1" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen.Tools" Version="5.0.0" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="12.5.0" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen" Version="11.0.0" />
@@ -33,7 +33,7 @@
     <PackageReference Include="HtmlRapier.TagHelpers" Version="7.0.0" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.0" />
     <PackageReference Include="Threax.Sqlite.Ext" Version="1.0.1" />
-    <PackageReference Include="Threax.AspNetCore.UserSearch.Mvc" Version="0.0.0-pre4" />
+    <!--<PackageReference Include="Threax.AspNetCore.UserSearch.Mvc" Version="0.0.0-pre4" />-->
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Threax.ModelGen" Version="8.0.0" />
@@ -42,6 +42,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Threax.AspNetCore.IdServerSecurity\src\Threax.AspNetCore.UserSearch.Mvc\Threax.AspNetCore.UserSearch.Mvc.csproj" />
   </ItemGroup>
 
 </Project>

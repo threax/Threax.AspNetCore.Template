@@ -5,7 +5,6 @@ import * as deepLink from 'hr.deeplink';
 import * as userSearch from 'hr.roleclient.UserSearchController';
 
 var builder = startup.createBuilder();
-userSearch.AddServices(builder.Services);
 deepLink.addServices(builder.Services);
 crudService.addServices(builder);
 
