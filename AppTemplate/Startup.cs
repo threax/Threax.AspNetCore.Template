@@ -74,7 +74,7 @@ namespace AppTemplate
 
             services.AddHalClientGen(new HalClientGenOptions()
             {
-                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly, typeof(Spc.AspNetCore.Users.Mvc.Controllers.UserSearchController).Assembly },
+                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly, typeof(Threax.AspNetCore.UserSearchMvc.Controllers.UserSearchController).Assembly },
                 CSharp = new CSharpOptions()
                 {
                     Namespace = "AppTemplate.Client"

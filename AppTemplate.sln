@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplateClient", "AppTem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplateTests", "AppTemplate.Tests\AppTemplateTests.csproj", "{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.AspNetCore.UserSearch.Mvc", "..\Threax.AspNetCore.IdServerSecurity\src\Threax.AspNetCore.UserSearch.Mvc\Threax.AspNetCore.UserSearch.Mvc.csproj", "{8CEF15BF-46EF-4A5A-9477-D1E972994A45}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CEF15BF-46EF-4A5A-9477-D1E972994A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CEF15BF-46EF-4A5A-9477-D1E972994A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CEF15BF-46EF-4A5A-9477-D1E972994A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CEF15BF-46EF-4A5A-9477-D1E972994A45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
