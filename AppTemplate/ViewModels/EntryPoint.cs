@@ -2,7 +2,7 @@
 using AppTemplate.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
-using Threax.AspNetCore.UserSearchMvc.Controllers;
+using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 
 namespace AppTemplate.ViewModels
 {

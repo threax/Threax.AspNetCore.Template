@@ -33,7 +33,9 @@
     <PackageReference Include="HtmlRapier.TagHelpers" Version="7.0.0" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.0" />
     <PackageReference Include="Threax.Sqlite.Ext" Version="1.0.1" />
-    <PackageReference Include="Threax.AspNetCore.UserSearch.Mvc" Version="1.0.0" />
+    <PackageReference Include="Threax.AspNetCore.UserLookup" Version="1.0.0" />
+    <PackageReference Include="Threax.AspNetCore.UserLookup.Mvc" Version="1.0.0" />
+    <PackageReference Include="Threax.AspNetCore.UserLookup.IdServer" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Threax.ModelGen" Version="8.0.0" />

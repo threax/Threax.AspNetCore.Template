@@ -20,6 +20,7 @@ using Threax.AspNetCore.Halcyon.ClientGen;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.IdServerAuth;
 using Threax.AspNetCore.UserBuilder;
+using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 using Threax.Extensions.Configuration.SchemaBinder;
 
 namespace AppTemplate
@@ -74,7 +75,7 @@ namespace AppTemplate
 
             services.AddHalClientGen(new HalClientGenOptions()
             {
-                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly, typeof(Threax.AspNetCore.UserSearchMvc.Controllers.UserSearchController).Assembly },
+                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly, typeof(UserSearchController).Assembly },
                 CSharp = new CSharpOptions()
                 {
                     Namespace = "AppTemplate.Client"
@@ -127,7 +128,10 @@ namespace AppTemplate
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             })
             .AddConventionalIdServerMvc()
-            .AddUserSearchMvc()
+            .AddThreaxUserLookup(o =>
+            {
+                o.UseIdServer();
+            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.ConfigureHtmlRapierTagHelpers(o =>
