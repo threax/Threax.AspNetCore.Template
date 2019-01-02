@@ -20,14 +20,11 @@ namespace AppTemplate.ViewModels
     [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
     [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
-    public partial class ValueCollection
+    public partial class ValueCollection : PagedCollectionViewWithQuery<Value, ValueQuery>
     {
         public ValueCollection(ValueQuery query, int total, IEnumerable<Value> items) : base(query, total, items)
         {
             
         }
-
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ValueCollection.Generated for the generated code
     }
 }

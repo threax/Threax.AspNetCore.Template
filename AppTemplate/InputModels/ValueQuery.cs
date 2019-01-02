@@ -1,19 +1,25 @@
-using System;
+using Halcyon.HAL.Attributes;
+using AppTemplate.Controllers;
+using AppTemplate.Models;
 using AppTemplate.Database;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using Threax.AspNetCore.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppTemplate.InputModels
 {
-    public partial class ValueQuery
+    [HalModel]
+    public partial class ValueQuery : PagedCollectionQuery, IValueQuery
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ValueQuery.Generated for the generated code
+        /// <summary>
+        /// Lookup a value by id.
+        /// </summary>
+        public Guid? ValueId { get; set; }
 
         /// <summary>
         /// Populate an IQueryable. Does not apply the skip or limit.
@@ -22,7 +28,11 @@ namespace AppTemplate.InputModels
         /// <returns>The query passed in populated with additional conditions.</returns>
         public Task<IQueryable<ValueEntity>> Create(IQueryable<ValueEntity> query)
         {
-            if(CreateGenerated(ref query))
+            if (ValueId != null)
+            {
+                query = query.Where(i => i.ValueId == ValueId);
+            }
+            else
             {
                 //Customize query further
             }

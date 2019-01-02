@@ -7,20 +7,22 @@ using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
 
-namespace AppTemplate.Models
+namespace AppTemplate.Models 
 {
-    public partial interface IValue
+    public partial interface IValue 
     {
-        //Customize main interface here, see Value.Generated for generated code
-    }  
+        String Name { get; set; }
+
+    }
 
     public partial interface IValueId
     {
-        //Customize id interface here, see Value.Generated for generated code
+        Guid ValueId { get; set; }
     }    
 
     public partial interface IValueQuery
     {
-        //Customize query interface here, see Value.Generated for generated code
+        Guid? ValueId { get; set; }
+
     }
 }

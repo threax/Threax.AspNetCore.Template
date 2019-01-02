@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
+using Threax.AspNetCore.Tracking;
+using AppTemplate.Models;
 
-namespace AppTemplate.Database
+namespace AppTemplate.Database 
 {
-    public partial class ValueEntity
+    public partial class ValueEntity : IValue, IValueId, ICreatedModified
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ValueEntity.Generated for the generated code
+        [Key]
+        public Guid ValueId { get; set; }
+
+        [Required(ErrorMessage = "Name must have a value.")]
+        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
+        public String Name { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public DateTime Modified { get; set; }
+
     }
 }

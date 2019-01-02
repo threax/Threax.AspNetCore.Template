@@ -15,10 +15,5 @@ namespace AppTemplate
         /// </summary>
         [ExpandHostPath]
         public string ServiceUrl { get; set; } = "~/api";
-
-        /// <summary>
-        /// The url of the user directory.
-        /// </summary>
-        public string UserDirectoryUrl { get; set; }
     }
 }

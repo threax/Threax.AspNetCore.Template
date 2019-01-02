@@ -14,7 +14,6 @@ import * as pageConfig from 'hr.pageconfig';
 export interface Config {
     client: {
         ServiceUrl: string,
-        UserDirectoryUrl: string,
         PageBasePath: string
     };
     tokens: {
@@ -63,7 +62,7 @@ function createFetcher(config: Config): fetcher.Fetcher {
     if (config.tokens.AccessTokenPath !== undefined) {
         fetcher = new AccessTokens.AccessTokenFetcher(
             config.tokens.AccessTokenPath,
-            new whitelist.Whitelist([config.client.ServiceUrl, config.client.UserDirectoryUrl]),
+            new whitelist.Whitelist([config.client.ServiceUrl]),
             fetcher);
     }
 
