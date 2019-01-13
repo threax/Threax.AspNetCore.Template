@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <UserSecretsId>aspnet-SpcAppTemplate</UserSecretsId>
+    <UserSecretsId>aspnet-AppTemplate</UserSecretsId>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>1701;1702;1705;1591</NoWarn>
