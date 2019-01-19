@@ -40,5 +40,12 @@ namespace AppTemplate
         /// Set this to true to use asset bundles instead of individual client side files.
         /// </summary>
         public bool UseAssetBundles { get; set; } = false;
+
+        /// <summary>
+        /// Set this to false to disable value provider resolution. This should be true for produciton or your value providers
+        /// won't work, but you can set it to false in tools mode, which will keep the value providers from resolving when
+        /// doing stuff like regenerating clients. The default is true.
+        /// </summary>
+        public bool EnableValueProviders { get; set; } = true;
     }
 }
