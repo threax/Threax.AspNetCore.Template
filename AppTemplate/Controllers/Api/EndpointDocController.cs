@@ -23,11 +23,16 @@ namespace AppTemplate.Controllers.Api
         [HttpGet("{groupName}/{method}/{*relativePath}")]
         [HalRel(HalDocEndpointInfo.DefaultRels.Get)]
         [AllowAnonymous]
-        public Task<EndpointDoc> Get(String groupName, String method, String relativePath)
+        public Task<EndpointDoc> Get(String groupName, String method, String relativePath, EndpointDocQuery docQuery)
         {
             try
             {
-                return descriptionProvider.GetDoc(groupName, method, relativePath, User);
+                return descriptionProvider.GetDoc(groupName, method, relativePath, new EndpointDocBuilderOptions()
+                {
+                    User = User,
+                    IncludeRequest = docQuery.IncludeRequest,
+                    IncludeResponse = docQuery.IncludeResponse
+                });
             }
             catch (UnauthorizedAccessException)
             {

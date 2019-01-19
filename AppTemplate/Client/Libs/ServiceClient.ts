@@ -432,17 +432,17 @@ export class ValueCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: ValueResult[];
+    private itemsStrong: ValueResult[];
     public get items(): ValueResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new ValueResult(clients[i]));
+                this.itemsStrong.push(new ValueResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<ValueCollectionResult> {
@@ -654,17 +654,17 @@ export class UserCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: RoleAssignmentsResult[];
+    private itemsStrong: RoleAssignmentsResult[];
     public get items(): RoleAssignmentsResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new RoleAssignmentsResult(clients[i]));
+                this.itemsStrong.push(new RoleAssignmentsResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<UserCollectionResult> {
@@ -917,17 +917,17 @@ export class UserSearchCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: UserSearchResult[];
+    private itemsStrong: UserSearchResult[];
     public get items(): UserSearchResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new UserSearchResult(clients[i]));
+                this.itemsStrong.push(new UserSearchResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<UserSearchCollectionResult> {
