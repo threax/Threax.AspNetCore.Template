@@ -137,7 +137,7 @@ namespace AppTemplate
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
-                o.FrontEndLibrary = HtmlRapier.TagHelpers.FrontEndLibrary.Bootstrap3;
+                o.FrontEndLibrary = HtmlRapier.TagHelpers.FrontEndLibrary.Bootstrap4;
             });
 
             services.AddScoped<IToolRunner>(s =>
