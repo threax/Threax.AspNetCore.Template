@@ -10,9 +10,9 @@
   version "6.14.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.14.2.tgz#40b3dbb1221c7d66802cbcc32fe3b85e54569c77"
 
-bootstrap@>=3.3.7, bootstrap@^3.3.7, bootstrap@~3.3.7:
-  version "3.3.7"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+bootstrap@4.2.1, bootstrap@>=3.3.7, bootstrap@>=4.1.0:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.2.1.tgz#8f8bdca024dbf0e8644da32e918c8a03a90a5757"
 
 htmlrapier.bootstrap.datetime@^3.1.0:
   version "3.1.0"
@@ -33,11 +33,11 @@ htmlrapier.bootstrap@>=6.0.2, htmlrapier.bootstrap@^7.0.0:
     htmlrapier ">=8.1.0"
     jquery ">=3.2.1"
 
-htmlrapier.form.bootstrap3@^1.0.0:
+htmlrapier.form.bootstrap4@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.form.bootstrap3/-/htmlrapier.form.bootstrap3-1.0.0.tgz#75bd08b70f5dadeb91bccde27861f7f5794854f5"
+  resolved "https://registry.yarnpkg.com/htmlrapier.form.bootstrap4/-/htmlrapier.form.bootstrap4-1.0.0.tgz#4dda23a45a567b7e6fc7f5144f298b47297d9c70"
   dependencies:
-    bootstrap "^3.3.7"
+    bootstrap ">=4.1.0"
     htmlrapier ">=19.0.0"
     jquery ">=3.2.1"
 
@@ -99,12 +99,6 @@ moment-timezone@^0.4.0:
 "moment@>= 2.6.0", moment@^2.10:
   version "2.23.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
-
-threax.bootstrap@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/threax.bootstrap/-/threax.bootstrap-1.0.0.tgz#18c3572df3722bd125de0b0e9b2688681f185093"
-  dependencies:
-    bootstrap "~3.3.7"
 
 tslib@^1.6.1:
   version "1.9.3"
