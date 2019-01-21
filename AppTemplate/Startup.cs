@@ -168,7 +168,7 @@ namespace AppTemplate
             services.AddThreaxCSP(o =>
             {
                 o.AddDefault().AddNone();
-                o.AddImg().AddSelf().AddEntries(new String[] { "data:" });
+                o.AddImg().AddSelf().AddData();
                 o.AddConnect().AddSelf();
                 o.AddManifest().AddSelf();
                 o.AddFont().AddSelf().AddUnsafeInline();

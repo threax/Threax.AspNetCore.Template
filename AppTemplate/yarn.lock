@@ -10,7 +10,7 @@
   version "6.14.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.14.2.tgz#40b3dbb1221c7d66802cbcc32fe3b85e54569c77"
 
-bootstrap@4.2.1, bootstrap@>=3.3.7, bootstrap@>=4.1.0, bootstrap@>=4.2.1:
+bootstrap@>=3.3.7, bootstrap@>=4.1.0, bootstrap@>=4.2.1, bootstrap@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.2.1.tgz#8f8bdca024dbf0e8644da32e918c8a03a90a5757"
 
