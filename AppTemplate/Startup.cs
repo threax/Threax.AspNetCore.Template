@@ -168,10 +168,10 @@ namespace AppTemplate
             services.AddThreaxCSP(o =>
             {
                 o.AddDefault().AddNone();
-                o.AddImg().AddSelf();
+                o.AddImg().AddSelf().AddEntries(new String[] { "data:" });
                 o.AddConnect().AddSelf();
                 o.AddManifest().AddSelf();
-                o.AddFont().AddSelf();
+                o.AddFont().AddSelf().AddUnsafeInline();
                 o.AddFrame().AddSelf().AddEntries(new String[] { authConfig.Authority });
                 o.AddScript().AddSelf().AddUnsafeInline();
                 o.AddStyle().AddSelf().AddUnsafeInline();
