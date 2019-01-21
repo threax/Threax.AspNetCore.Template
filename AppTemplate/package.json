@@ -16,7 +16,8 @@
     "htmlrapier.relogin": "^1.0.4",
     "htmlrapier.roleclient": "^4.0.0",
     "htmlrapier.widgets": "^15.0.0",
-    "jsns": "^5.0.0"
+    "jsns": "^5.0.0",
+    "threax.bootstrap4": "0.0.0"
   },
   "scripts": {
     "build": "threax-npm-tk build && dotnet bundle",
