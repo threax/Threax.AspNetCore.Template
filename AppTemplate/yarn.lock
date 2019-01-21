@@ -100,9 +100,9 @@ moment-timezone@^0.4.0:
   version "2.23.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
 
-threax.bootstrap4@0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/threax.bootstrap4/-/threax.bootstrap4-0.0.0.tgz#d260f58bd4d683783f11801dda46f715c0e681e1"
+threax.bootstrap4@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/threax.bootstrap4/-/threax.bootstrap4-0.0.1.tgz#b2efe04c22d4b390aaeb8bf3c38b7e0b35bc03f8"
   dependencies:
     bootstrap ">=4.2.1"
 

@@ -17,7 +17,7 @@
     "htmlrapier.roleclient": "^4.0.0",
     "htmlrapier.widgets": "^15.0.0",
     "jsns": "^5.0.0",
-    "threax.bootstrap4": "0.0.0"
+    "threax.bootstrap4": "^0.0.1"
   },
   "scripts": {
     "build": "threax-npm-tk build && dotnet bundle",
