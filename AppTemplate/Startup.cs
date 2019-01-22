@@ -171,7 +171,7 @@ namespace AppTemplate
                 o.AddImg().AddSelf().AddData();
                 o.AddConnect().AddSelf();
                 o.AddManifest().AddSelf();
-                o.AddFont().AddSelf().AddUnsafeInline();
+                o.AddFont().AddSelf();
                 o.AddFrame().AddSelf().AddEntries(new String[] { authConfig.Authority });
                 o.AddScript().AddSelf().AddUnsafeInline();
                 o.AddStyle().AddSelf().AddUnsafeInline();
