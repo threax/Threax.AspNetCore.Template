@@ -5,8 +5,8 @@ services:
     image: apptemplate
     container_name: apptemplate
     build:
-      context: AppTemplate
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: AppTemplate/Dockerfile
     networks:
       - appnet
     volumes:
