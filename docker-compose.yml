@@ -16,6 +16,8 @@ services:
       - type: bind
         source: ../DevData/apptemplate
         target: /appdata
+    labels:
+      - "threax.nginx.host=apptemplate.dev.threax.com"
 
 networks:
   appnet:
