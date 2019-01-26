@@ -4,10 +4,8 @@ EXPOSE 80
 
 FROM threax/build AS build
 WORKDIR /src
-COPY AppTemplate/AppTemplate.csproj AppTemplate/
-RUN dotnet restore AppTemplate/AppTemplate.csproj
 COPY . .
-WORKDIR /src/AppTemplate
+RUN dotnet restore AppTemplate.csproj
 RUN dotnet build AppTemplate.csproj -c Release -o /app
 
 FROM build AS publish
