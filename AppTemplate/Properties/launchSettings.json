@@ -21,8 +21,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:64199/"
+      }
     },
     "Setup Db": {
       "commandName": "Project",
@@ -30,8 +29,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:64199/"
+      }
     },
     "Update Client": {
       "commandName": "Project",
@@ -43,6 +41,13 @@
     "Update Config Schema": {
       "commandName": "Project",
       "commandLineArgs": "tools updateConfigSchema",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "createCert": {
+      "commandName": "Project",
+      "commandLineArgs": "tools \"createCert AppCert.pfx AppCert.pem\"",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

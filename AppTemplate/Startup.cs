@@ -13,7 +13,11 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Threax.AspNetCore.BuiltInTools;
 using Threax.AspNetCore.CorsManager;
 using Threax.AspNetCore.Halcyon.ClientGen;
@@ -159,6 +163,33 @@ namespace AppTemplate
                 {
                     var json = await Configuration.CreateSchema();
                     await File.WriteAllTextAsync("appsettings.schema.json", json);
+                }))
+                .AddTool("createCert", new ToolCommand("Create a cert to secure the server. createCert publicandprivate.pfx [public.pem]", a =>
+                {
+                    var rsa = RSA.Create(); // generate asymmetric key pair
+                    var request = new CertificateRequest($"cn=localhost", rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                    
+                    //Thanks to Muscicapa Striata for these settings at
+                    //https://stackoverflow.com/questions/42786986/how-to-create-a-valid-self-signed-x509certificate2-programmatically-not-loadin
+                    request.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.DataEncipherment | X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature, false));
+                    request.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") }, false));
+
+                    //Create the cert
+                    var certificate = request.CreateSelfSigned(new DateTimeOffset(DateTime.UtcNow.AddMinutes(-1)), new DateTimeOffset(DateTime.UtcNow.AddYears(5)));
+
+                    // Create pfx with private key
+                    File.WriteAllBytes(a.Args[0], certificate.Export(X509ContentType.Pfx));
+
+                    if (a.Args.Count > 1)
+                    {
+                        // Create Base 64 encoded CER public key only
+                        File.WriteAllText(a.Args[1],
+                        "-----BEGIN CERTIFICATE-----\r\n"
+                        + Convert.ToBase64String(certificate.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks)
+                        + "\r\n-----END CERTIFICATE-----");
+                    }
+
+                    return Task.CompletedTask;
                 }))
                 .UseClientGenTools();
             });

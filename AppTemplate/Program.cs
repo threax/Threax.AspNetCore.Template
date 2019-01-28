@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using Threax.AspNetCore.BuiltInTools;
 
 namespace AppTemplate
@@ -48,6 +49,17 @@ namespace AppTemplate
         public static IWebHost BuildWebHostWithConfig(string[] args, String toolsConfigName = null)
         {
             var webHostBuilder = WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(o =>
+                {
+                    var certFile = Environment.GetEnvironmentVariable("THREAX_CERT_FILE") ?? "AppCert.pfx";
+                    if (File.Exists(certFile))
+                    {
+                        o.ConfigureHttpsDefaults(httpsOpt =>
+                        {
+                            httpsOpt.ServerCertificate = new X509Certificate2(certFile);
+                        });
+                    }
+                })
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((hostContext, config) =>
                 {
