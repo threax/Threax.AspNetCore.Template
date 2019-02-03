@@ -20,6 +20,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var options = new AppTemplateOptions();
             configure?.Invoke(options);
 
+            var sharedCredentials = new SharedClientCredentials();
+            options.GetSharedClientCredentials?.Invoke(sharedCredentials);
+            sharedCredentials.MergeWith(options.ClientCredentials);
+
             services.TryAddSingleton<IHttpClientFactory, DefaultHttpClientFactory>();
             services.TryAddSingleton<IHttpClientFactory<EntryPointInjector>>(s =>
             {
