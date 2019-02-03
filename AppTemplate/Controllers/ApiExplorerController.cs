@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AppTemplate.Controllers
 {
+    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
     public class ApiExplorerController : Controller
     {
         /// <summary>
@@ -15,6 +16,7 @@ namespace AppTemplate.Controllers
         /// </summary>
         public static bool Allow { get; set; } = false;
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             if (Allow)
