@@ -12,16 +12,7 @@ namespace AppTemplate
         public static void Main(string[] args)
         {
             var tools = new ToolManager(args);
-            var toolsEnv = tools.GetEnvironment();
-            var toolsConfigName = default(String);
-            if (toolsEnv != null)
-            {
-                //If we are running tools, clear the arguments (this causes an error if the tool args are passed) and set the tools config to the environment name
-                args = new String[0];
-                toolsConfigName = toolsEnv;
-            }
-
-            var host = BuildWebHostWithConfig(args, toolsConfigName);
+            var host = BuildWebHostWithConfig(tools.GetCleanArgs(), tools.GetEnvironment());
 
             if (tools.ProcessTools(host))
             {
@@ -75,14 +66,19 @@ namespace AppTemplate
                         config.AddJsonFileWithInclude(Path.GetFullPath($"../appsettings.{toolsConfigName}.json"), optional: true);
                     }
 
-                    //User secrets
-                    if (!env.IsProduction())
+                    //Secrets
+                    if (File.Exists("appsettings.secrets.json"))
+                    {
+                        config.AddJsonFileWithInclude(Path.GetFullPath("appsettings.secrets.json"), optional: false);
+                    }
+                    else if (!env.IsProduction())
                     {
                         config.AddUserSecrets<Program>();
                     }
 
                     //Environment variables
                     config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
                 });
 
             return webHostBuilder.Build();
