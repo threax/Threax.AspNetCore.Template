@@ -20,7 +20,7 @@
     <PackageReference Include="Threax.AspNetCore.UrlFix" Version="1.1.4" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder" Version="3.2.0" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities" Version="4.0.1" />
-    <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities.Mvc" Version="5.0.0" />
+    <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities.Mvc" Version="5.1.0" />
     <PackageReference Include="Threax.AspNetCore.BuiltInTools" Version="5.2.0" />
     <PackageReference Include="Threax.AspNetCore.CorsManager" Version="3.1.0" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.3" />
