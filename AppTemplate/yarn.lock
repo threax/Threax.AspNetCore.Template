@@ -7,23 +7,23 @@
   resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.32.tgz#3bcf44fb1e429f3df76188c8c6d874463ba371fd"
 
 "@types/node@^6.0.69":
-  version "6.14.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.14.2.tgz#40b3dbb1221c7d66802cbcc32fe3b85e54569c77"
+  version "6.14.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.14.3.tgz#3f2faad3a0b1d8233f568d1779a14be375112c97"
 
 bootstrap@>=3.3.7, bootstrap@>=4.1.0, bootstrap@>=4.2.1, bootstrap@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.2.1.tgz#8f8bdca024dbf0e8644da32e918c8a03a90a5757"
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.3.1.tgz#280ca8f610504d99d7b6b4bfc4b68cec601704ac"
 
 htmlrapier.bootstrap.datetime@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap.datetime/-/htmlrapier.bootstrap.datetime-3.1.0.tgz#97a72a2cabbc67ec6df3917700dc09f69592ef87"
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap.datetime/-/htmlrapier.bootstrap.datetime-3.3.1.tgz#c761ae29798891d6a86d4e951c06bb87f52e8b6d"
   dependencies:
     bootstrap ">=3.3.7"
     htmlrapier ">=12.7.0"
     htmlrapier.bootstrap ">=6.0.2"
     jquery ">=3.2.1"
-    moment "^2.10"
-    moment-timezone "^0.4.0"
+    moment "^2.24.0"
+    moment-timezone "^0.5.23"
 
 htmlrapier.bootstrap@>=6.0.2, htmlrapier.bootstrap@^7.0.0:
   version "7.0.0"
@@ -69,15 +69,15 @@ htmlrapier.roleclient@^4.0.0:
     jsns ">=4.2.2"
 
 htmlrapier.widgets@>=14.0.0, htmlrapier.widgets@^15.0.0:
-  version "15.5.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-15.5.0.tgz#aacc1a01e83bee21d57bef86154f94a32b4c390b"
+  version "15.6.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-15.6.0.tgz#743e8ac17ed859b32a302c88ac308f7c8fa068c4"
   dependencies:
     htmlrapier ">=14.3.0"
     htmlrapier.halcyon ">=7.0.0"
 
 htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=19.0.0, htmlrapier@>=8.1.0, htmlrapier@^19.0.0:
-  version "19.1.1"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-19.1.1.tgz#b54d71d86bcb2a2c70a12d875bbe7ef82a2a193e"
+  version "19.2.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-19.2.1.tgz#011266c6cd14341e07e30becb8768ea05fe2010b"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
@@ -90,15 +90,15 @@ jsns@>=4.2.2, jsns@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/jsns/-/jsns-5.0.0.tgz#c76429b822a68100eef8d4b8d3f1172b028664e4"
 
-moment-timezone@^0.4.0:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.4.1.tgz#81f598c3ad5e22cdad796b67ecd8d88d0f5baa06"
+moment-timezone@^0.5.23:
+  version "0.5.23"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.23.tgz#7cbb00db2c14c71b19303cb47b0fb0a6d8651463"
   dependencies:
-    moment ">= 2.6.0"
+    moment ">= 2.9.0"
 
-"moment@>= 2.6.0", moment@^2.10:
-  version "2.23.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
+"moment@>= 2.9.0", moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
 
 threax.bootstrap4@^0.0.1:
   version "0.0.1"

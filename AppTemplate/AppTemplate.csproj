@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="Threax.AspNetCore.CSP" Version="1.2.0" />
-    <PackageReference Include="Threax.AspNetCore.Models" Version="6.3.0" />
+    <PackageReference Include="Threax.AspNetCore.Models" Version="6.4.0" />
     <PackageReference Include="Threax.AspNetCore.Tracking" Version="2.0.3" />
     <PackageReference Include="Threax.AspNetCore.Validators" Version="2.0.1" />
     <PackageReference Include="Threax.AspNetCore.IdServerAuth" Version="2.10.0" />

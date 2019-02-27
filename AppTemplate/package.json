@@ -27,6 +27,5 @@
     "import-tsconfig": "threax-npm-tk tsconfig",
     "yarn-upgrade": "yarn upgrade --flat"
   },
-  "resolutions": {
-  }
+  "resolutions": {}
 }
