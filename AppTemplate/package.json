@@ -24,6 +24,5 @@
     "clean": "threax-npm-tk clean",
     "trash-modules": "threax-npm-tk clean -o node_modules",
     "import-tsconfig": "threax-npm-tk tsconfig"
-  },
-  "resolutions": {}
+  }
 }
