@@ -34,8 +34,8 @@ htmlrapier.bootstrap@>=6.0.2, htmlrapier.bootstrap@^7.0.0:
     jquery ">=3.2.1"
 
 htmlrapier.form.bootstrap4@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.form.bootstrap4/-/htmlrapier.form.bootstrap4-1.0.0.tgz#4dda23a45a567b7e6fc7f5144f298b47297d9c70"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.form.bootstrap4/-/htmlrapier.form.bootstrap4-1.1.1.tgz#b2c0ce817f293711be24e9c02acce2c95792d0e3"
   dependencies:
     bootstrap ">=4.1.0"
     htmlrapier ">=19.0.0"
@@ -69,15 +69,15 @@ htmlrapier.roleclient@^4.0.0:
     jsns ">=4.2.2"
 
 htmlrapier.widgets@>=14.0.0, htmlrapier.widgets@^15.0.0:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-15.6.0.tgz#743e8ac17ed859b32a302c88ac308f7c8fa068c4"
+  version "15.7.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-15.7.1.tgz#57d68903a5f911d4f87df64683b2a6baf7bc78c7"
   dependencies:
     htmlrapier ">=14.3.0"
     htmlrapier.halcyon ">=7.0.0"
 
 htmlrapier@>=10.0.2, htmlrapier@>=12.7.0, htmlrapier@>=14.0.0, htmlrapier@>=14.3.0, htmlrapier@>=19.0.0, htmlrapier@>=8.1.0, htmlrapier@^19.0.0:
-  version "19.3.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-19.3.0.tgz#ece39baa8a37d6983c3af81962280e1f4c7f2baf"
+  version "19.4.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-19.4.0.tgz#364a89df9ad70076ce1f0714159b65a2b0aa897f"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
