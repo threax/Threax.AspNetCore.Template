@@ -21,11 +21,9 @@
   },
   "scripts": {
     "build": "threax-npm-tk build && dotnet bundle",
-    "yarn-install": "yarn install --flat",
     "clean": "threax-npm-tk clean",
     "trash-modules": "threax-npm-tk clean -o node_modules",
-    "import-tsconfig": "threax-npm-tk tsconfig",
-    "yarn-upgrade": "yarn upgrade --flat"
+    "import-tsconfig": "threax-npm-tk tsconfig"
   },
   "resolutions": {}
 }
