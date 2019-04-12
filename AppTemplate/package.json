@@ -10,7 +10,7 @@
     "htmlrapier": "^19.0.0",
     "htmlrapier.bootstrap": "^7.0.0",
     "htmlrapier.bootstrap.datetime": "^3.1.0",
-    "htmlrapier.form.bootstrap4": "^1.0.0",
+    "htmlrapier.form.bootstrap4": "^2.0.0",
     "htmlrapier.halcyon": "^7.0.0",
     "htmlrapier.halcyon-explorer": "^8.0.0",
     "htmlrapier.relogin": "^1.0.4",
