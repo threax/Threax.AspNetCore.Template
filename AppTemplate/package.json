@@ -2,9 +2,6 @@
   "name": "asp.net",
   "version": "0.0.0",
   "private": true,
-  "devDependencies": {
-    "@types/node": "^6.0.69"
-  },
   "dependencies": {
     "bootstrap": "^4.2.1",
     "htmlrapier": "^19.0.0",
@@ -15,7 +12,7 @@
     "htmlrapier.halcyon-explorer": "^8.0.0",
     "htmlrapier.relogin": "^1.0.4",
     "htmlrapier.roleclient": "^4.0.0",
-    "htmlrapier.widgets": "^15.0.0",
+    "htmlrapier.widgets": "^15.8.0",
     "jsns": "^5.0.0",
     "threax.bootstrap4": "^0.0.1"
   },
