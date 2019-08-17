@@ -53,7 +53,12 @@ namespace AppTemplate.Database
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 //Auto find profile classes
-                cfg.AddProfiles(typeof(AppDatabaseServiceExtensions).GetTypeInfo().Assembly);
+                var profiles = typeof(AppDatabaseServiceExtensions).GetTypeInfo().Assembly.GetTypes()
+                    .Where(t => t.IsSubclassOf(typeof(Profile)))
+                    .Select(i => Activator.CreateInstance(i) as Profile)
+                    .ToList();
+
+                cfg.AddProfiles(profiles);
             });
 
             if (includeAutomapperConfig)
