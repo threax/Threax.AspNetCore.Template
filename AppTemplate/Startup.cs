@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Threax.AspNetCore.BuiltInTools;
 using Threax.AspNetCore.CorsManager;
 using Threax.AspNetCore.Halcyon.ClientGen;
@@ -22,6 +23,7 @@ using Threax.AspNetCore.IdServerAuth;
 using Threax.AspNetCore.UserBuilder;
 using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 using Threax.Extensions.Configuration.SchemaBinder;
+using Threax.Sqlite.Ext.EfCore3;
 
 namespace AppTemplate
 {
@@ -145,6 +147,7 @@ namespace AppTemplate
                 .AddTool("migrate", new ToolCommand("Migrate database to newest version. Run anytime new migrations have been added.", async a =>
                 {
                     await a.Migrate();
+                    a.Scope.ServiceProvider.GetRequiredService<AppDbContext>().ConvertToEfCore3();
                 }))
                 .AddTool("seed", new ToolCommand("Seed database data. Only needed for an empty database.", async a =>
                 {
@@ -158,10 +161,6 @@ namespace AppTemplate
                 {
                     var json = await Configuration.CreateSchema();
                     await File.WriteAllTextAsync("appsettings.schema.json", json);
-                }))
-                .AddTool("updateSqLite30", new ToolCommand("Update the app's sqlite db to ef core 3.0.", async a =>
-                {
-                    a.Scope.ServiceProvider.GetRequiredService<UpdateSqLiteDb<AppDbContext>>().Execute();
                 }))
                 .UseClientGenTools();
             });
@@ -187,8 +186,6 @@ namespace AppTemplate
                     .AddConsole()
                     .AddDebug();
             });
-
-            services.AddScoped<UpdateSqLiteDb<AppDbContext>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
