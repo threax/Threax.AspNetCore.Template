@@ -123,7 +123,7 @@ namespace AppTemplate
                 o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
             })
-            .AddJsonOptions(o =>
+            .AddNewtonsoftJson(o =>
             {
                 o.SerializerSettings.SetToHalcyonDefault();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -132,8 +132,7 @@ namespace AppTemplate
             .AddThreaxUserLookup(o =>
             {
                 o.UseIdServer();
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            });
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
@@ -187,7 +186,7 @@ namespace AppTemplate
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -206,18 +205,20 @@ namespace AppTemplate
 
             app.UseCorsManager(corsOptions, loggerFactory);
 
+            app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "root",
-                    template: "{action=Index}/{*inPagePath}",
+                    pattern: "{action=Index}/{*inPagePath}",
                     defaults: new { controller = "Home" });
 
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{*inPagePath}");
+                    pattern: "{controller=Home}/{action=Index}/{*inPagePath}");
             });
         }
     }
