@@ -159,6 +159,10 @@ namespace AppTemplate
                     var json = await Configuration.CreateSchema();
                     await File.WriteAllTextAsync("appsettings.schema.json", json);
                 }))
+                .AddTool("updateSqLite30", new ToolCommand("Update the app's sqlite db to ef core 3.0.", async a =>
+                {
+                    a.Scope.ServiceProvider.GetRequiredService<UpdateSqLiteDb<AppDbContext>>().Execute();
+                }))
                 .UseClientGenTools();
             });
 
@@ -183,6 +187,8 @@ namespace AppTemplate
                     .AddConsole()
                     .AddDebug();
             });
+
+            services.AddScoped<UpdateSqLiteDb<AppDbContext>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
