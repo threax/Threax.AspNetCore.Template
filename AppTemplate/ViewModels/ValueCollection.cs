@@ -1,6 +1,5 @@
 using Halcyon.HAL.Attributes;
 using AppTemplate.Controllers.Api;
-using AppTemplate.Models;
 using AppTemplate.InputModels;
 using System;
 using System.Collections.Generic;

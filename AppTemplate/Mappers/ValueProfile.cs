@@ -7,6 +7,7 @@ using Threax.AspNetCore.Tracking;
 using AppTemplate.InputModels;
 using AppTemplate.Database;
 using AppTemplate.ViewModels;
+using System.Linq;
 
 namespace AppTemplate.Mappers
 {
@@ -20,6 +21,11 @@ namespace AppTemplate.Mappers
         public Value MapValue(ValueEntity src, Value dest)
         {
             return mapper.Map(src, dest);
+        }
+
+        public IQueryable<Value> ProjectValue(IQueryable<ValueEntity> query)
+        {
+            return mapper.ProjectTo<Value>(query);
         }
     }
 

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
-using AppTemplate.Models;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace AppTemplate.InputModels 
 {
     [HalModel]
-    public partial class ValueInput : IValue
+    public partial class ValueInput
     {
         [Required(ErrorMessage = "Name must have a value.")]
         [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]

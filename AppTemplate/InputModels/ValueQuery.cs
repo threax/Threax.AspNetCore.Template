@@ -1,6 +1,5 @@
 using Halcyon.HAL.Attributes;
 using AppTemplate.Controllers;
-using AppTemplate.Models;
 using AppTemplate.Database;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AppTemplate.InputModels
 {
     [HalModel]
-    public partial class ValueQuery : PagedCollectionQuery, IValueQuery
+    public partial class ValueQuery : PagedCollectionQuery
     {
         /// <summary>
         /// Lookup a value by id.

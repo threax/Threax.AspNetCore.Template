@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppTemplate.InputModels;
 using AppTemplate.ViewModels;
-using AppTemplate.Models;
 using Threax.AspNetCore.Halcyon.Ext;
 
 namespace AppTemplate.Repository
