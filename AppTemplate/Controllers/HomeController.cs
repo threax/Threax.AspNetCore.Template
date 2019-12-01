@@ -31,7 +31,7 @@ namespace AppTemplate.Controllers
         [AllowAnonymous]
         public IActionResult Manifest([FromServices] IWebManifestProvider webManifestProvider)
         {
-            return Json(webManifestProvider.CreateManifest());
+            return Json(webManifestProvider.CreateManifest(Url));
         }
 
         //The other view action methods are in the additional partial classes for HomeController, expand the node for
