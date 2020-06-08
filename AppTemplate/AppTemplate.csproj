@@ -47,7 +47,7 @@
     <PackageReference Include="Threax.AspNetCore.UserLookup.IdServer" Version="2.0.0" />
     <PackageReference Include="Threax.IdServer.Client" Version="3.0.1" />
     <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.0" GeneratePathProperty="true" />
-    <PackageReference Include="Threax.K8sDeploy.Config" Version="0.0.0-pre06" GeneratePathProperty="true" />
+    <PackageReference Include="Threax.K8sDeploy.Config" Version="1.0.1" GeneratePathProperty="true" />
     <PackageReference Include="IdentityModel" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
