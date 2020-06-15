@@ -49,6 +49,7 @@
     <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.0" GeneratePathProperty="true" />
     <PackageReference Include="Threax.DeployConfig" Version="1.0.0-pre01" GeneratePathProperty="true" />
     <PackageReference Include="IdentityModel" Version="4.3.0" />
+    <PackageReference Include="Threax.ModelGen" Version="15.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="3.2.435" />
