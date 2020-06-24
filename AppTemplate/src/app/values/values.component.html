@@ -1,1 +1,35 @@
-<p>values works!</p>
+<div data-hr-controller="mainTable">
+    <h1>Values</h1>
+    <load visible="true">
+        <p>Working...</p>
+    </load>
+    <main>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody data-hr-view="listing" data-hr-view-component="mainTableBody">
+                    <tr *ngFor="let item of items">
+                        <td>{{item.name}}</td>
+                        <td>
+                            <button class="btn btn-default">Edit</button>
+                            <button class="btn btn-default">View</button>
+                            <button class="btn btn-default">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button data-hr-on-click="add" class="btn btn-default" data-hr-toggle="add" data-hr-style-off="display:none;">Add</button>
+
+        <page-numbers></page-numbers>
+    </main>
+
+    <error>
+        An error occured loading the values. Please try again later.
+    </error>
+</div>
