@@ -52,7 +52,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/threax.bootstrap4/threax.bootstrap.scss"
+              "src/app.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",

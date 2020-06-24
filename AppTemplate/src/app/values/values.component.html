@@ -1,9 +1,20 @@
 <div data-hr-controller="mainTable">
     <h1>Values</h1>
-    <load visible="true">
-        <p>Working...</p>
-    </load>
-    <main>
+
+    <div *ngIf="loading">
+        <div class="center">
+            <div class="load-linebar center-block">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            <p>Working...</p>
+        </div>
+    </div>
+
+    <main *ngIf="items">
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -12,7 +23,7 @@
                         <th>Edit</th>
                     </tr>
                 </thead>
-                <tbody data-hr-view="listing" data-hr-view-component="mainTableBody">
+                <tbody>
                     <tr *ngFor="let item of items">
                         <td>{{item.name}}</td>
                         <td>
@@ -24,12 +35,12 @@
                 </tbody>
             </table>
         </div>
-        <button data-hr-on-click="add" class="btn btn-default" data-hr-toggle="add" data-hr-style-off="display:none;">Add</button>
+        <button class="btn btn-default">Add</button>
 
-        <page-numbers></page-numbers>
+        
     </main>
 
-    <error>
+    <div *ngIf="error">
         An error occured loading the values. Please try again later.
-    </error>
+    </div>
 </div>
