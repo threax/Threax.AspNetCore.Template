@@ -1,26 +1,35 @@
 {
-  "name": "asp.net",
+  "name": "app-template",
   "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
   "private": true,
   "dependencies": {
-    "bootstrap": "^4.5.0",
-    "htmlrapier": "^20.2.2",
-    "htmlrapier.bootstrap": "^7.2.0",
-    "htmlrapier.bootstrap.datetime": "^3.5.0",
-    "htmlrapier.form.bootstrap4": "^2.1.2",
-    "htmlrapier.halcyon": "^7.0.0",
-    "htmlrapier.halcyon-explorer": "^8.0.0",
-    "htmlrapier.relogin": "^1.0.4",
-    "htmlrapier.roleclient": "^4.0.0",
-    "htmlrapier.widgets": "^15.12.0",
-    "jquery": "^3.5.1",
-    "jsns": "^5.0.0",
-    "threax.bootstrap4": "^0.0.1"
+    "@angular/animations": "~9.1.11",
+    "@angular/common": "~9.1.11",
+    "@angular/compiler": "~9.1.11",
+    "@angular/core": "~9.1.11",
+    "@angular/forms": "~9.1.11",
+    "@angular/platform-browser": "~9.1.11",
+    "@angular/platform-browser-dynamic": "~9.1.11",
+    "@angular/router": "~9.1.11",
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
   },
-  "scripts": {
-    "build": "threax-npm-tk build && dotnet bundle",
-    "clean": "threax-npm-tk clean",
-    "trash-modules": "threax-npm-tk clean -o node_modules",
-    "import-tsconfig": "threax-npm-tk tsconfig"
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.901.9",
+    "@angular/cli": "~9.1.9",
+    "@angular/compiler-cli": "~9.1.11",
+    "@types/node": "^12.11.1",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~3.8.3"
   }
 }
