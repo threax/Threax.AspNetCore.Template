@@ -218,6 +218,13 @@ namespace AppTemplate
 
             app.UseStaticFiles();
 
+            //This will serve the files, but map still not working.
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                RequestPath = "/src",
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "src"))
+            });
+
             app.UseCorsManager(corsOptions, loggerFactory);
 
             app.UseRouting();

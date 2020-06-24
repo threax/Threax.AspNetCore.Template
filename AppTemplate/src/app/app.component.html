@@ -1,0 +1,38 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-brand-app">
+    <div class="container">
+        <a class="navbar-brand" href="/">AppTemplate</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/Values">Values</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container body-content mt-3">
+
+    <router-outlet></router-outlet>
+
+</div>
+<div class="container">
+    <hr />
+</div>
+<div class="modal fade " tabindex="-1" role="dialog" data-hr-controller="hr-relogin" data-hr-toggle="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <iframe data-hr-handle="loginFrame" width="100%" class="border-0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

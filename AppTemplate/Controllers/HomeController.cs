@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Threax.ProgressiveWebApp;
+using Microsoft.AspNetCore.StaticFiles;
+using System.IO;
 
 namespace AppTemplate.Controllers
 {
@@ -15,7 +17,17 @@ namespace AppTemplate.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            //return View();
+
+            var file = "wwwroot/index.html";
+            var content = new FileExtensionContentTypeProvider();
+            String contentType;
+            if (content.TryGetContentType(file, out contentType))
+            {
+                var stream = System.IO.File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Read);
+                return new FileStreamResult(stream, contentType); //Dispose happens in here
+            }
+            throw new FileNotFoundException($"Cannot find file type for '{file}'", file);
         }
 
         //The following functions enable this site to work as a progressive web app.
