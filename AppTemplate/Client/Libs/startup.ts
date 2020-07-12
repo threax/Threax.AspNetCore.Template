@@ -24,6 +24,7 @@ export interface Config {
     client: {
         ServiceUrl: string;
         PageBasePath: string;
+        BearerCookieName?: string;
     };
     tokens: {
         AccessTokenPath?: string;
@@ -75,6 +76,7 @@ function createFetcher(config: Config): fetcher.Fetcher {
             fetcher);
         accessFetcher.alwaysRequestLogin = config.page.AlwaysRequestLogin;
         accessFetcher.disableOnNoToken = false;
+        accessFetcher.bearerCookieName = config.client.BearerCookieName;
         fetcher = accessFetcher;
     }
 

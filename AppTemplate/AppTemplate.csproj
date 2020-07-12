@@ -41,7 +41,7 @@
     <PackageReference Include="HtmlRapier.TagHelpers" Version="8.1.1" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.0" />
     <PackageReference Include="Threax.Sqlite.Ext" Version="2.0.0" />
-    <PackageReference Include="Threax.AspNetCore.JwtCookieAuth" Version="3.0.0" />
+    <PackageReference Include="Threax.AspNetCore.JwtCookieAuth" Version="3.1.0" />
     <PackageReference Include="Threax.AspNetCore.UserLookup" Version="1.0.0" />
     <PackageReference Include="Threax.AspNetCore.UserLookup.Mvc" Version="2.1.0" />
     <PackageReference Include="Threax.AspNetCore.UserLookup.IdServer" Version="2.0.0" />

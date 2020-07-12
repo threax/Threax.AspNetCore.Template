@@ -15,5 +15,20 @@ namespace AppTemplate
         /// </summary>
         [ExpandHostPath]
         public string ServiceUrl { get; set; } = "~/api";
+
+        /// <summary>
+        /// The path to the bearer cookie. Move this somewhere else
+        /// </summary>
+        public String BearerCookieName { 
+            
+            //This needs to move to a tag helper, this is why its so ugly
+            
+            get; 
+            
+            
+            
+            
+            
+            set; }
     }
 }
