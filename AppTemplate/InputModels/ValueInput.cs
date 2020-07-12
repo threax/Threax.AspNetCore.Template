@@ -11,6 +11,7 @@ using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 namespace AppTemplate.InputModels 
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class ValueInput
     {
         [Required(ErrorMessage = "Name must have a value.")]

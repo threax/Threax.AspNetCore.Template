@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AppTemplate.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class ValueQuery : PagedCollectionQuery
     {
         /// <summary>

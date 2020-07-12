@@ -16,6 +16,7 @@ namespace AppTemplate.ViewModels
     [HalSelfActionLink(typeof(ValuesController), nameof(ValuesController.Get))]
     [HalActionLink(typeof(ValuesController), nameof(ValuesController.Update))]
     [HalActionLink(typeof(ValuesController), nameof(ValuesController.Delete))]
+    [CacheEndpointDoc]
     public partial class Value : ICreatedModified
     {
         public Guid ValueId { get; set; }
