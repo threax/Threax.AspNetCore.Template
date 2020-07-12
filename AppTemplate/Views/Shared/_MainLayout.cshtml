@@ -3,7 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style csp-nonce>html{visibility:hidden;opacity:0;background-color:#222;}body{min-height:800px;}</style>
+    <style csp-nonce>
+        html {
+            visibility: hidden;
+            opacity: 0;
+            background-color: #222;
+        }
+        iframe {
+            width: 1px;
+            min-width: 100%;
+        }
+    </style>
     <link rel="shortcut icon" type="image/x-icon" href="@Url.Content(config.Favicon)" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,18 +23,20 @@
     <link rel="manifest" href="@Url.Content("~/webmanifest.json")">
 </head>
 <body>
-    <div class="container body-content mt-3">
-        @RenderBody()
-    </div>
+    @RenderBody()
     <div class="container">
         <hr />
     </div>
-    <relogin></relogin>
     @* this line fills in the client config using the tag helper and what has been defined in the di *@
     <client-config csp-nonce></client-config>
     <token-config csp-nonce></token-config>
-    <style csp-nonce>html{visibility: visible;opacity: 1;}</style>
-    <script type="text/javascript" src="~/lib/iframe-resizer/js/iframeResizer.contentWindow.min.js" asp-append-version="true"></script>
+    <style csp-nonce>
+        html {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <script type="text/javascript" src="~/lib/iframe-resizer/js/iframeResizer.js" asp-append-version="true"></script>
     <asset-bundle src="~/bundle.min.js"></asset-bundle>
     @RenderSection("scripts", required: false)
     <script type="text/javascript" src="~/lib/hr-run.js" asp-append-version="true"></script>

@@ -9,7 +9,8 @@ namespace AppTemplate.Controllers
 {
     public partial class HomeController
     {
-        [Authorize(Roles = Roles.EditValues)]
+        //[Authorize(Roles = Roles.EditValues)]
+        [AllowAnonymous]
         public IActionResult Values()
         {
             return View();

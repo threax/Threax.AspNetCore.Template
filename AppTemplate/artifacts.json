@@ -12,6 +12,13 @@
     ]
   },
   {
+    "pathBase": "node_modules",
+    "outDir": "./lib",
+    "copy": [
+      "node_modules/iframe-resizer/js/*"
+    ]
+  },
+  {
     "outDir": ".",
     "bundle": [
       {

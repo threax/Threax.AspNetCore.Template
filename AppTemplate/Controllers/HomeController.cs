@@ -27,6 +27,14 @@ namespace AppTemplate.Controllers
             return View();
         }
 
+        //A root page for the embedded iframe to load.
+
+        [AllowAnonymous]
+        public IActionResult Startup()
+        {
+            return View();
+        }
+
         [Route("webmanifest.json")]
         [AllowAnonymous]
         public IActionResult Manifest([FromServices] IWebManifestProvider webManifestProvider)
