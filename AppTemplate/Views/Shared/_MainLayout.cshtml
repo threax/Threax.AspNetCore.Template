@@ -30,6 +30,16 @@
     @* this line fills in the client config using the tag helper and what has been defined in the di *@
     <client-config csp-nonce></client-config>
     <token-config csp-nonce></token-config>
+    <script csp-nonce>
+        window.hr_config = (function (next) {
+            return function (config) {
+                config.page = {
+                    "AlwaysRequestLogin": false
+                };
+                return next ? next(config) : config;
+            }
+        })(window.hr_config);
+    </script>
     <style csp-nonce>
         html {
             visibility: visible;

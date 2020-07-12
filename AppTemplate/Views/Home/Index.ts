@@ -1,7 +1,8 @@
 import * as controller from 'hr.controller';
 import * as startup from 'clientlibs.startup';
 import * as deepLink from 'hr.deeplink';
-import * as uri from 'hr.uri';
+import * as client from 'clientlibs.ServiceClient';
+import * as loginPopup from 'hr.relogin.LoginPopup';
 
 declare function iFrameResize(arg: any, iframe: HTMLIFrameElement);
 
@@ -14,14 +15,6 @@ class ContentFrameController {
 
     constructor(bindings: controller.BindingCollection) {
         this.frame = bindings.getHandle("frame") as HTMLIFrameElement;
-        //this.iframeURLChange(this.frame, (href) => {
-        //    console.log(`Frame Changing to ${href}`);
-        //    const newUri = uri.parseUri(href);
-        //    const currentUri = uri.parseUri(window.location.href);
-        //    if (newUri.host !== currentUri.host) {
-        //        window.location.href = href; //Underling page changing domains, just load it top level instead
-        //    }
-        //});
         const opt = {
             log: false,                  // Enable console logging
             resizedCallback: function (messageData) { // Callback fn when resize is received
@@ -48,59 +41,56 @@ class ContentFrameController {
                 this.frame.style.height = "1000px";
             }
         });
-
-        window.onmessage = (e) => {
-            console.log(`Got message ${e.data}`);
-            //if (e.data == 'hello') {
-            //    alert('It works!');
-            //}
-        };
     }
 
     public load(evt: Event): void {
         console.log("Frame loaded");
     }
+}
 
-    ////Thanks to nicojs for this https://gist.github.com/hdodov/a87c097216718655ead6cf2969b0dcfa
-    //private iframeURLChange(iframe, callback) {
-    //    //let lastDispatched = null;
-    //    let allowDispatch = false;
+class AppMenu {
+    public static get InjectorArgs(): controller.DiFunction<any>[] {
+        return [controller.BindingCollection, client.EntryPointInjector];
+    }
 
-    //    const dispatchChange = function () {
-    //        const newHref = iframe.contentWindow.location.href;
+    private userInfoView: controller.IView<client.AppMenu>;
+    private menuItemsView: controller.IView<client.AppMenuItem>;
+    private loggedInAreaToggle: controller.OnOffToggle;
 
-    //        //if (newHref !== lastDispatched) {
-    //        if (allowDispatch) {
-    //            callback(newHref);
-    //            //lastDispatched = newHref;
-    //        }
-    //        allowDispatch = true;
-    //    };
+    constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector) {
+        this.userInfoView = bindings.getView("userInfo");
+        this.menuItemsView = bindings.getView("menuItems");
+        this.loggedInAreaToggle = bindings.getToggle("loggedInArea");
 
-    //    const unloadHandler = function () {
-    //        // Timeout needed because the URL changes immediately after
-    //        // the `unload` event is dispatched.
-    //        setTimeout(dispatchChange, 0);
-    //    };
+        //Listen for relogin events
+        window.addEventListener("message", e => { this.handleMessage(e); });
 
-    //    function attachUnload() {
-    //        // Remove the unloadHandler in case it was already attached.
-    //        // Otherwise, there will be two handlers, which is unnecessary.
-    //        iframe.contentWindow.removeEventListener("unload", unloadHandler);
-    //        iframe.contentWindow.addEventListener("unload", unloadHandler);
-    //    }
+        this.reloadMenu();
+    }
 
-    //    iframe.addEventListener("load", function () {
-    //        attachUnload();
-    //    });
+    private async reloadMenu(): Promise<void> {
+        const entry = await this.entryPointInjector.load();
+        const menu = await entry.getAppMenu();
+        this.userInfoView.setData(menu.data);
+        this.menuItemsView.setData(menu.data.menuItems);
+        this.loggedInAreaToggle.mode = menu.data.isAuthenticated;
+    }
 
-    //    attachUnload();
-    //}
-
+    private handleMessage(e: MessageEvent): void {
+        try {
+            const message: loginPopup.ILoginMessage = JSON.parse(e.data);
+            if (message.type === loginPopup.MessageType && message.success) {
+                this.reloadMenu();
+            }
+        }
+        catch (err) { }
+    }
 }
 
 const builder = startup.createBuilder();
 builder.Services.tryAddTransient(ContentFrameController, ContentFrameController);
+builder.Services.tryAddTransient(AppMenu, AppMenu);
 deepLink.addServices(builder.Services);
 builder.create("contentFrame", ContentFrameController);
+builder.create("appMenu", AppMenu);
 

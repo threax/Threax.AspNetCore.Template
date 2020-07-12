@@ -9,6 +9,7 @@ namespace AppTemplate.ViewModels
     [HalModel]
     [HalEntryPoint]
     [HalSelfActionLink(typeof(EntryPointController), nameof(EntryPointController.Get))]
+    [HalActionLink(typeof(EntryPointController), nameof(EntryPointController.AppMenu))]
     //This first set of links is for role editing, you can erase them if you don't have users or roles.
     [HalActionLink(RolesControllerRels.GetUser, typeof(RolesController))]
     [HalActionLink(RolesControllerRels.ListUsers, typeof(RolesController))]

@@ -30,6 +30,9 @@ export interface Config {
         XsrfCookie?: string;
         XsrfPaths?: string[];
     };
+    page: {
+        AlwaysRequestLogin: boolean;
+    };
 }
 
 let builder: controller.InjectedControllerBuilder = null;
@@ -66,10 +69,13 @@ function createFetcher(config: Config): fetcher.Fetcher {
     }
 
     if (config.tokens.AccessTokenPath !== undefined) {
-        fetcher = new AccessTokens.AccessTokenFetcher(
+        const accessFetcher = new AccessTokens.AccessTokenFetcher(
             config.tokens.AccessTokenPath,
             new whitelist.Whitelist([config.client.ServiceUrl]),
             fetcher);
+        accessFetcher.alwaysRequestLogin = config.page.AlwaysRequestLogin;
+        accessFetcher.disableOnNoToken = false;
+        fetcher = accessFetcher;
     }
 
     return fetcher;

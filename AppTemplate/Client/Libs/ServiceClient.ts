@@ -107,6 +107,47 @@ export class RoleAssignmentsResult {
     }
 }
 
+export class AppMenuResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: AppMenu = undefined;
+    public get data(): AppMenu {
+        this.strongData = this.strongData || this.client.GetData<AppMenu>();
+        return this.strongData;
+    }
+
+    public refresh(): Promise<AppMenuResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new AppMenuResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+}
+
 export class EntryPointInjector {
     private url: string;
     private fetcher: hal.Fetcher;
@@ -174,6 +215,33 @@ export class EntryPointResult {
 
     public hasRefreshDocs(): boolean {
         return this.client.HasLinkDoc("self");
+    }
+
+    public getAppMenu(): Promise<AppMenuResult> {
+        return this.client.LoadLink("GetAppMenu")
+               .then(r => {
+                    return new AppMenuResult(r);
+                });
+
+    }
+
+    public canGetAppMenu(): boolean {
+        return this.client.HasLink("GetAppMenu");
+    }
+
+    public linkForGetAppMenu(): hal.HalLink {
+        return this.client.GetLink("GetAppMenu");
+    }
+
+    public getGetAppMenuDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("GetAppMenu", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetAppMenuDocs(): boolean {
+        return this.client.HasLinkDoc("GetAppMenu");
     }
 
     public getUser(): Promise<RoleAssignmentsResult> {
@@ -1106,6 +1174,17 @@ export interface RoleAssignments {
     superAdmin?: boolean;
 }
 
+export interface AppMenuItem {
+    text?: string;
+    href?: string;
+}
+
+export interface AppMenu {
+    userName?: string;
+    isAuthenticated?: boolean;
+    menuItems?: AppMenuItem[];
+}
+
 export interface EntryPoint {
 }
 
@@ -1159,7 +1238,7 @@ export interface ValueCollection {
 }
 
 export interface ValueInput {
-    name: string;
+    name?: string;
 }
 
 export interface Value {
