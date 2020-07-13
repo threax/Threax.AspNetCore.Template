@@ -12,6 +12,7 @@ import * as userSearch from 'clientlibs.UserSearchClientEntryPointInjector';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 import * as pageConfig from 'hr.pageconfig';
+import * as contentFrame from 'clientlibs.ContentFrameController';
 
 //Activate htmlrapier
 hr.setup();
@@ -25,6 +26,7 @@ export interface Config {
         PageBasePath: string;
         BearerCookieName?: string;
         AccessTokenPath?: string;
+        HashUiBasePath: string;
     };
     page: {
         AlwaysRequestLogin: boolean;
@@ -36,10 +38,17 @@ let builder: controller.InjectedControllerBuilder = null;
 
 export function createBuilder() {
     if (builder === null) {
+        const config = pageConfig.read<Config>();
         builder = new controller.InjectedControllerBuilder();
 
+        //Setup content frame controller
+        builder.Services.addShared(contentFrame.ContentFrameControllerConfig, s => {
+            const frameConfig = new contentFrame.ContentFrameControllerConfig();
+            frameConfig.urlBasePath = config.client.PageBasePath + config.client.HashUiBasePath;
+            return frameConfig;
+        });
+
         //Set up the access token fetcher
-        const config = pageConfig.read<Config>();
         builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config));
         builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
         

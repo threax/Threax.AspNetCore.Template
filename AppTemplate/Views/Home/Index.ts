@@ -3,71 +3,7 @@ import * as startup from 'clientlibs.startup';
 import * as deepLink from 'hr.deeplink';
 import * as client from 'clientlibs.ServiceClient';
 import * as loginPopup from 'hr.relogin.LoginPopup';
-import * as uri from 'hr.uri';
-
-declare function iFrameResize(arg: any, iframe: HTMLIFrameElement);
-
-class ContentFrameController {
-    public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection];
-    }
-
-    private frame: HTMLIFrameElement;
-
-    constructor(bindings: controller.BindingCollection) {
-        this.frame = bindings.getHandle("frame") as HTMLIFrameElement;
-        const opt = {
-            log: false,                  // Enable console logging
-            resizedCallback: function (messageData) { // Callback fn when resize is received
-
-            },
-            messageCallback: function (messageData) { // Callback fn when message is received
-
-                alert(messageData.message);
-            },
-            closedCallback: function (id) { // Callback fn when iFrame is closed
-
-            }
-        };
-        iFrameResize(opt, this.frame);
-
-        //Want this to fire after the resize.
-        this.frame.addEventListener("load", () => {
-            let href = null;
-            try {
-                href = this.frame.contentWindow.location.href;
-            }
-            catch (err) {
-                //Unknown embedded site, go into full size mode
-                this.frame.style.height = "1000px";
-            }
-        });
-    }
-
-    public load(evt: Event): void {
-        let path: string = "External";
-        let query: string = "";
-        const currentUrl = uri.parseUri(window.location.href);
-        try {
-            const frameUrl = uri.parseUri(this.frame.contentWindow.location.href);
-            path = frameUrl.path;
-            query = frameUrl.query;
-            const hashString = frameUrl.getPathPart(2);
-            if (hashString) {
-                const index = frameUrl.path.indexOf(hashString) + hashString.length;
-                path = path.substr(index);
-            }
-        }
-        catch (err) { } //Ignored
-
-        if (query && query.charAt(0) !== '?') {
-            query = '?' + query;
-        }
-        currentUrl.anchor = path + query;
-        const newUrl = `${currentUrl.build()}#${currentUrl.anchor}`;
-        window.location.href = newUrl;
-    }
-}
+import * as contentFrame from 'clientlibs.ContentFrameController';
 
 class AppMenu {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
@@ -109,9 +45,9 @@ class AppMenu {
 }
 
 const builder = startup.createBuilder();
-builder.Services.tryAddTransient(ContentFrameController, ContentFrameController);
+contentFrame.addServices(builder.Services);
 builder.Services.tryAddTransient(AppMenu, AppMenu);
 deepLink.addServices(builder.Services);
-builder.create("contentFrame", ContentFrameController);
+builder.create("contentFrame", contentFrame.ContentFrameController);
 builder.create("appMenu", AppMenu);
 

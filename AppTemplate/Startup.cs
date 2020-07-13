@@ -109,6 +109,7 @@ namespace AppTemplate
 
             var assemblyMd5 = this.GetType().Assembly.ComputeMd5();
             CacheUiUrlHelperExtensions.CacheToken = assemblyMd5;
+            clientConfig.HashUiBasePath = $"CacheUi/{assemblyMd5}";
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,

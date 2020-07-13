@@ -22,16 +22,37 @@ namespace AppTemplate
         /// <summary>
         /// The path to the bearer cookie. Move this somewhere else
         /// </summary>
-        public String BearerCookieName { 
-            
+        public String BearerCookieName
+        {
+
             //This needs to move to a tag helper, this is why its so ugly
-            
-            get; 
-            
-            
-            
-            
-            
-            set; }
+
+            get;
+
+
+
+
+
+            set;
+        }
+
+        /// <summary>
+        /// The base path to the cached uis. This should use forward slash '/' and not start or end with one. 
+        /// It will be combined with the PageBasePath provided by the framework,
+        /// so it should be a relative path.
+        /// </summary>
+        public String HashUiBasePath
+        {
+
+            //This needs to move to a tag helper, this is why its so ugly
+
+            get;
+
+
+
+
+
+            set;
+        }
     }
 }
