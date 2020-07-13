@@ -1,4 +1,5 @@
 ﻿@inject Threax.ProgressiveWebApp.DisplayConfig config;
+@using AppTemplate.Controllers;
 @{
     ViewData["Title"] = "Welcome";
     Layout = "_MainLayout";
@@ -28,4 +29,4 @@
     </div>
 </nav>
 
-<iframe data-hr-controller="contentFrame" src="https://@Context.Request.Host.Value@Url.Content("~/CacheUi/needscache/Startup")" data-hr-handle="frame" id="contentFrame" name="contentFrame" frameborder="0" data-hr-on-load="load" title="Main Content"></iframe>
+<iframe data-hr-controller="contentFrame" src="@Url.CacheUiActionLink(nameof(CacheUiController.Startup), typeof(CacheUiController))" data-hr-handle="frame" id="contentFrame" name="contentFrame" frameborder="0" data-hr-on-load="load" title="Main Content"></iframe>

@@ -107,10 +107,12 @@ namespace AppTemplate
             services.AddAppMapper();
             services.AddAppRepositories();
 
+            var assemblyMd5 = this.GetType().Assembly.ComputeMd5();
+            CacheUiUrlHelperExtensions.CacheToken = assemblyMd5;
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
-                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController), this.GetType().Assembly.ComputeMd5()),
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController), assemblyMd5),
                 EnableValueProviders = appConfig.EnableValueProviders
             };
 

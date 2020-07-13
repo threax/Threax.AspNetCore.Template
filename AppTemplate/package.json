@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.5.0",
-    "htmlrapier": "^22.0.2",
+    "htmlrapier": "^23.0.0",
     "htmlrapier.bootstrap": "^8.0.0",
     "htmlrapier.bootstrap.datetime": "^4.0.0",
     "htmlrapier.form.bootstrap4": "^3.0.1",

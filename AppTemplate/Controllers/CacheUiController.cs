@@ -15,15 +15,25 @@ namespace AppTemplate.Controllers
     public class CacheUiController : Controller
     {
         //A root page for the embedded iframe to load.
-        public IActionResult Startup()
+        public IActionResult Startup(String cacheToken)
         {
+            HandleCache(cacheToken);
             return View();
         }
 
         //[Authorize(Roles = Roles.EditValues)]
-        public IActionResult Values()
+        public IActionResult Values(String cacheToken)
         {
+            HandleCache(cacheToken);
             return View();
+        }
+
+        private void HandleCache(string cacheToken)
+        {
+            if (cacheToken != null && cacheToken != "nocache")
+            {
+                HttpContext.Response.Headers["Cache-Control"] = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+            }
         }
     }
 }
