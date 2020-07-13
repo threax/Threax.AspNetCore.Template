@@ -44,7 +44,8 @@ export function createBuilder() {
         //Setup content frame controller
         builder.Services.addShared(contentFrame.ContentFrameControllerConfig, s => {
             const frameConfig = new contentFrame.ContentFrameControllerConfig();
-            frameConfig.urlBasePath = config.client.PageBasePath + config.client.HashUiBasePath;
+            frameConfig.cacheUrlBasePath = config.client.PageBasePath + config.client.HashUiBasePath;
+            frameConfig.noCacheUrlBasePath = config.client.PageBasePath;
             return frameConfig;
         });
 
