@@ -24,7 +24,7 @@
     <PackageReference Include="Threax.AspNetCore.Models" Version="7.0.0" />
     <PackageReference Include="Threax.AspNetCore.Tracking" Version="2.0.3" />
     <PackageReference Include="Threax.AspNetCore.Validators" Version="2.0.1" />
-    <PackageReference Include="Threax.AspNetCore.IdServerAuth" Version="3.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Threax.AspNetCore.IdServerAuth" Version="3.1.0-pre01" GeneratePathProperty="true" />
     <PackageReference Include="Threax.AspNetCore.UrlFix" Version="1.1.4" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder" Version="3.3.0" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities" Version="5.0.0" />

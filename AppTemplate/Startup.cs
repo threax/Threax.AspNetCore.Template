@@ -100,6 +100,7 @@ namespace AppTemplate
                 {
                     cookOpt.BearerHttpOnly = false;
                 };
+                o.ValidateAntiforgery = false;
             });
 
             services.AddAppDatabase(appConfig.ConnectionString);

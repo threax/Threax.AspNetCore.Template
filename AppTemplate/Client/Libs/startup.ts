@@ -11,7 +11,6 @@ import * as client from 'clientlibs.ServiceClient';
 import * as userSearch from 'clientlibs.UserSearchClientEntryPointInjector';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
-import * as xsrf from 'hr.xsrftoken';
 import * as pageConfig from 'hr.pageconfig';
 
 //Activate htmlrapier
@@ -25,11 +24,7 @@ export interface Config {
         ServiceUrl: string;
         PageBasePath: string;
         BearerCookieName?: string;
-    };
-    tokens: {
         AccessTokenPath?: string;
-        XsrfCookie?: string;
-        XsrfPaths?: string[];
     };
     page: {
         AlwaysRequestLogin: boolean;
@@ -62,16 +57,9 @@ export function createBuilder() {
 function createFetcher(config: Config): fetcher.Fetcher {
     let fetcher = new WindowFetch.WindowFetch();
 
-    if (config.tokens !== undefined) {
-        fetcher = new xsrf.XsrfTokenFetcher(
-            new xsrf.CookieTokenAccessor(config.tokens.XsrfCookie),
-            new whitelist.Whitelist(config.tokens.XsrfPaths),
-            fetcher);
-    }
-
-    if (config.tokens.AccessTokenPath !== undefined) {
+    if (config.client.AccessTokenPath) {
         const accessFetcher = new AccessTokens.AccessTokenFetcher(
-            config.tokens.AccessTokenPath,
+            config.client.AccessTokenPath,
             new whitelist.Whitelist([config.client.ServiceUrl]),
             fetcher);
         accessFetcher.alwaysRequestLogin = config.page.AlwaysRequestLogin;

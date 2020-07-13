@@ -16,6 +16,9 @@ namespace AppTemplate
         [ExpandHostPath]
         public string ServiceUrl { get; set; } = "~/api";
 
+        [ExpandHostPath]
+        public string AccessTokenPath { get; set; } = "~/AccessToken";
+
         /// <summary>
         /// The path to the bearer cookie. Move this somewhere else
         /// </summary>
