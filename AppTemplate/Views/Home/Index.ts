@@ -3,6 +3,7 @@ import * as startup from 'clientlibs.startup';
 import * as deepLink from 'hr.deeplink';
 import * as client from 'clientlibs.ServiceClient';
 import * as loginPopup from 'hr.relogin.LoginPopup';
+import * as uri from 'hr.uri';
 
 declare function iFrameResize(arg: any, iframe: HTMLIFrameElement);
 
@@ -44,7 +45,27 @@ class ContentFrameController {
     }
 
     public load(evt: Event): void {
-        console.log("Frame loaded");
+        let path: string = "External";
+        let query: string = "";
+        const currentUrl = uri.parseUri(window.location.href);
+        try {
+            const frameUrl = uri.parseUri(this.frame.contentWindow.location.href);
+            path = frameUrl.path;
+            query = frameUrl.query;
+            const hashString = frameUrl.getPathPart(2);
+            if (hashString) {
+                const index = frameUrl.path.indexOf(hashString) + hashString.length;
+                path = path.substr(index);
+            }
+        }
+        catch (err) { } //Ignored
+
+        if (query && query.charAt(0) !== '?') {
+            query = '?' + query;
+        }
+        currentUrl.anchor = path + query;
+        const newUrl = `${currentUrl.build()}#${currentUrl.anchor}`;
+        window.location.href = newUrl;
     }
 }
 

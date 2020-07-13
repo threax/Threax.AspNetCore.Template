@@ -28,8 +28,8 @@ namespace AppTemplate.Controllers
                 return NotFound(); //For files return not found
             }
 
-            //Otherwise redirect to the slash bang version of the page, this will put us in index above
-            return Redirect($"https://{HttpContext.Request.Host.Value}{Url.Content($"~/#{url}")}");
+            //Otherwise redirect to the slash bang slash version of the page, this will put us in index above
+            return Redirect($"https://{HttpContext.Request.Host.Value}{Url.Content($"~/#/{url}")}");
         }
 
         //The following functions enable this site to work as a progressive web app.
