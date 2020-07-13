@@ -1,0 +1,29 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AppTemplate.Controllers
+{
+    //No authorization, since pages are cached assume some amount of public access
+    //This could be locked down if you want to lock down all pages on the front end.
+    //With caching all must be locked or unlocked for best performance. If you want to
+    //hide admin pages you can do that.
+    //Need to investigate the behavior more once this is all in place.
+    public class CacheUiController : Controller
+    {
+        //A root page for the embedded iframe to load.
+        public IActionResult Startup()
+        {
+            return View();
+        }
+
+        //[Authorize(Roles = Roles.EditValues)]
+        public IActionResult Values()
+        {
+            return View();
+        }
+    }
+}

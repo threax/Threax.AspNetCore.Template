@@ -233,14 +233,23 @@ namespace AppTemplate
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: "root",
+                //    pattern: "{action=Index}/{*inPagePath}",
+                //    defaults: new { controller = "Home" });
+
                 endpoints.MapControllerRoute(
-                    name: "root",
-                    pattern: "{action=Index}/{*inPagePath}",
-                    defaults: new { controller = "Home" });
+                    name: "cacheUi",
+                    pattern: "{controller:regex(^CacheUi$)=CacheUi}/{cacheToken}/{action=Index}/{*inPagePath}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{*inPagePath}");
+
+                endpoints.MapControllerRoute(
+                    name: "slashbang",
+                    pattern: "{*url}",
+                    defaults: new { controller = "Home", action = "SlashBang" });
             });
         }
     }

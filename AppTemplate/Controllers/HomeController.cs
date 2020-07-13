@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Threax.ProgressiveWebApp;
+using System.IO;
 
 namespace AppTemplate.Controllers
 {
@@ -18,19 +19,24 @@ namespace AppTemplate.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult SlashBang(String url)
+        {
+            //There is probably a better way to do this, try to match the url to the routes on the other controllers or something.
+            if (!String.IsNullOrEmpty(Path.GetExtension(url)))
+            {
+                return NotFound(); //For files return not found
+            }
+
+            //Otherwise redirect to the slash bang version of the page, this will put us in index above
+            return Redirect($"https://{HttpContext.Request.Host.Value}{Url.Content($"~/#{url}")}");
+        }
+
         //The following functions enable this site to work as a progressive web app.
         //They can be removed if you don't want this functionality.
 
         [AllowAnonymous]
         public IActionResult AppStart()
-        {
-            return View();
-        }
-
-        //A root page for the embedded iframe to load.
-
-        [AllowAnonymous]
-        public IActionResult Startup()
         {
             return View();
         }

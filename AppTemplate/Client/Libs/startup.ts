@@ -28,6 +28,7 @@ export interface Config {
     };
     page: {
         AlwaysRequestLogin: boolean;
+        AllowServerTokenRefresh: boolean;
     };
 }
 
@@ -65,6 +66,7 @@ function createFetcher(config: Config): fetcher.Fetcher {
         accessFetcher.alwaysRequestLogin = config.page.AlwaysRequestLogin;
         accessFetcher.disableOnNoToken = false;
         accessFetcher.bearerCookieName = config.client.BearerCookieName;
+        accessFetcher.allowServerTokenRefresh = config.page.AllowServerTokenRefresh;
         fetcher = accessFetcher;
     }
 

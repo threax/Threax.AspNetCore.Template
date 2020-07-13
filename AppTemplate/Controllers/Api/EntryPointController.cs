@@ -49,8 +49,8 @@ namespace AppTemplate.Controllers.Api
 
         private IEnumerable<AppMenuItem> GetMenuItems(ClaimsPrincipal user)
         {
-            yield return new AppMenuItem("Home", Url.Content("~/Startup"));
-            yield return new AppMenuItem("Values", Url.Content("~/Values"));
+            yield return new AppMenuItem("Home", Url.Content("~/CacheUi/needscache/Startup"));
+            yield return new AppMenuItem("Values", Url.Content("~/CacheUi/needscache/Values"));
 
             if (user.IsInRole(AuthorizationAdminRoles.EditRoles))
             {

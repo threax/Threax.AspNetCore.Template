@@ -26,7 +26,8 @@
         window.hr_config = (function (next) {
             return function (config) {
                 config.page = {
-                    "AlwaysRequestLogin": true
+                    "AlwaysRequestLogin": true,
+                    "AllowServerTokenRefresh": true
                 };
                 return next ? next(config) : config;
             }

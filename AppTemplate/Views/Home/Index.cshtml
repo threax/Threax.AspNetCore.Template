@@ -6,7 +6,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-brand-app" data-hr-controller="appMenu">
     <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Startup" target="contentFrame">@config.SiteName</a>
+        <a class="navbar-brand" asp-area="" asp-controller="CacheUi" asp-action="Startup" target="contentFrame">@config.SiteName</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,4 +28,4 @@
     </div>
 </nav>
 
-<iframe data-hr-controller="contentFrame" src="https://@Context.Request.Host.Value@Url.Content("~/Startup")" data-hr-handle="frame" id="contentFrame" name="contentFrame" frameborder="0" data-hr-on-load="load" title="Main Content"></iframe>
+<iframe data-hr-controller="contentFrame" src="https://@Context.Request.Host.Value@Url.Content("~/CacheUi/needscache/Startup")" data-hr-handle="frame" id="contentFrame" name="contentFrame" frameborder="0" data-hr-on-load="load" title="Main Content"></iframe>
