@@ -51,8 +51,7 @@
     <div class="container">
         <hr />
     </div>
-    <relogin></relogin>
-    @* this line fills in the client config using the tag helper and what has been defined in the di *@
+    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Relogin), typeof(AppTemplate.Controllers.HomeController))"></script>
     <client-config csp-nonce></client-config>
     <style csp-nonce>html{visibility: visible;opacity: 1;}</style>
     <asset-bundle src="~/bundle.min.js"></asset-bundle>
