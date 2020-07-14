@@ -68,6 +68,10 @@ export class ContentFrameController {
         this.frame.addEventListener("load", (e) => this.validateCanReadSize(e));
     }
 
+    public getContentWindow(): Window {
+        return this.frame.contentWindow;
+    }
+
     public load(evt: Event): void {
         let path: string = "External";
         let query: string = "";
@@ -96,7 +100,7 @@ export class ContentFrameController {
         window.location.href = newUrl;
     }
 
-    public validateCanReadSize(evt: Event): void {
+    private validateCanReadSize(evt: Event): void {
         try {
             let href = this.frame.contentWindow.location.href;
         }
@@ -119,5 +123,5 @@ export class ContentFrameController {
 
 export function addServices(services: controller.ServiceCollection) {
     services.tryAddShared(ContentFrameControllerConfig, s => new ContentFrameControllerConfig());
-    services.tryAddTransient(ContentFrameController, ContentFrameController);
+    services.tryAddShared(ContentFrameController, ContentFrameController); //Can only create one of these
 }
