@@ -13,9 +13,9 @@ namespace AppTemplate.Controllers
     {
         //You can get rid of this AllowAnonymous to secure the welcome page
         [AllowAnonymous]
-        public IActionResult Index()
+        public IActionResult Index(String cacheToken)
         {
-            return View();
+            return HandleCache(cacheToken);
         }
 
         //The following functions enable this site to work as a progressive web app.
@@ -34,7 +34,7 @@ namespace AppTemplate.Controllers
             return Json(webManifestProvider.CreateManifest(Url));
         }
 
-        private IActionResult HandleCache(string cacheToken, string view)
+        private IActionResult HandleCache(string cacheToken, string view = "Index")
         {
             if (cacheToken != null) //Cache and return as js if we have a token
             {
