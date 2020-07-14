@@ -52,6 +52,8 @@ namespace AppTemplate
             Configuration.Bind("ClientConfig", clientConfig);
             Configuration.Bind("Cors", corsOptions);
             Configuration.Define("Deploy", typeof(Threax.DeployConfig.DeploymentConfig));
+
+            clientConfig.BearerCookieName = $"{authConfig.ClientId}.BearerToken";
         }
 
         public SchemaConfigurationBinder Configuration { get; }
@@ -94,16 +96,21 @@ namespace AppTemplate
                 {
                     jwtOpt.Audience = "Threax.IdServer";
                 };
+                o.CustomizeCookies = cookOpt =>
+                {
+                    cookOpt.BearerHttpOnly = false;
+                };
             });
 
             services.AddAppDatabase(appConfig.ConnectionString);
             services.AddAppMapper();
             services.AddAppRepositories();
 
+            var assemblyMd5 = this.GetType().Assembly.ComputeMd5();
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
-                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController), this.GetType().Assembly.ComputeMd5()),
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController), assemblyMd5),
                 EnableValueProviders = appConfig.EnableValueProviders
             };
 

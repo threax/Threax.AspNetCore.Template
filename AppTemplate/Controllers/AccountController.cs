@@ -27,5 +27,11 @@ namespace AppTemplate.Controllers
             await HttpContext.SignOutOfIdServer();
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AccessToken()
+        {
+            return new EmptyResult();
+        }
     }
 }
