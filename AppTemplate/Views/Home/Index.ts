@@ -4,17 +4,18 @@ import * as deepLink from 'hr.deeplink';
 import * as client from 'clientlibs.ServiceClient';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as contentFrame from 'clientlibs.ContentFrameController';
+import * as safepost from 'hr.safepostmessage';
 
 class AppMenu {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, client.EntryPointInjector];
+        return [controller.BindingCollection, client.EntryPointInjector, safepost.PostMessageValidator];
     }
 
     private userInfoView: controller.IView<client.AppMenu>;
     private menuItemsView: controller.IView<client.AppMenuItem>;
     private loggedInAreaToggle: controller.OnOffToggle;
 
-    constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector) {
+    constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector, private messageValidator: safepost.PostMessageValidator) {
         this.userInfoView = bindings.getView("userInfo");
         this.menuItemsView = bindings.getView("menuItems");
         this.loggedInAreaToggle = bindings.getToggle("loggedInArea");
@@ -34,13 +35,12 @@ class AppMenu {
     }
 
     private handleMessage(e: MessageEvent): void {
-        try {
-            const message: loginPopup.ILoginMessage = JSON.parse(e.data);
+        if (this.messageValidator.isValid(e)) {
+            const message: loginPopup.ILoginMessage = e.data;
             if (message.type === loginPopup.MessageType && message.success) {
                 this.reloadMenu();
             }
         }
-        catch (err) { }
     }
 }
 

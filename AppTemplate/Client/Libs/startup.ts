@@ -13,6 +13,7 @@ import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 import * as pageConfig from 'hr.pageconfig';
 import * as contentFrame from 'clientlibs.ContentFrameController';
+import * as safepost from 'hr.safepostmessage';
 
 //Activate htmlrapier
 hr.setup();
@@ -51,6 +52,8 @@ export function createBuilder() {
 
         //Set up the access token fetcher
         builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config));
+        builder.Services.tryAddShared(safepost.MessagePoster, s => new safepost.MessagePoster(window.location.href));
+        builder.Services.tryAddShared(safepost.PostMessageValidator, s => new safepost.PostMessageValidator(window.location.href));
         builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
         
         userSearch.addServices(builder);
