@@ -236,7 +236,7 @@ namespace AppTemplate
             {
                 endpoints.MapControllerRoute(
                     name: "cacheUi",
-                    pattern: "{controller:regex(^CacheUi$)=CacheUi}/{cacheToken}/{action=Index}/{*inPagePath}");
+                    pattern: "{controller=Home}/{cacheToken}/{action=Index}/{*inPagePath}");
 
                 endpoints.MapControllerRoute(
                     name: "root",

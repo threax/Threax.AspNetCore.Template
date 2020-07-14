@@ -34,6 +34,21 @@ namespace AppTemplate.Controllers
             return Json(webManifestProvider.CreateManifest(Url));
         }
 
+        private IActionResult HandleCache(string cacheToken, string view)
+        {
+            if (cacheToken != null) //Cache and return as js if we have a token
+            {
+                if (cacheToken != "nocache")
+                {
+                    HttpContext.Response.Headers["Cache-Control"] = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+                }
+                HttpContext.Response.Headers["Content-Type"] = "application/javascript";
+                view += "Cache";
+            }
+
+            return View(view);
+        }
+
         //The other view action methods are in the additional partial classes for HomeController, expand the node for
         //this class to see them.
 
