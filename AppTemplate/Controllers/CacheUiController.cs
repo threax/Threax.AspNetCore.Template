@@ -21,6 +21,12 @@ namespace AppTemplate.Controllers
             return View();
         }
 
+        public IActionResult Index(String cacheToken)
+        {
+            HandleCache(cacheToken);
+            return View();
+        }
+
         //[Authorize(Roles = Roles.EditValues)]
         public IActionResult Values(String cacheToken)
         {

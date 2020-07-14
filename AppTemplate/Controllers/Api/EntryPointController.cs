@@ -49,7 +49,7 @@ namespace AppTemplate.Controllers.Api
 
         private IEnumerable<AppMenuItem> GetMenuItems(ClaimsPrincipal user)
         {
-            yield return new AppMenuItem("Home", Url.CacheUiActionLink(nameof(CacheUiController.Startup), typeof(CacheUiController)));
+            yield return new AppMenuItem("Home", Url.CacheUiActionLink(nameof(CacheUiController.Index), typeof(CacheUiController)));
             yield return new AppMenuItem("Values", Url.CacheUiActionLink(nameof(CacheUiController.Values), typeof(CacheUiController)));
 
             if (user.IsInRole(AuthorizationAdminRoles.EditRoles))

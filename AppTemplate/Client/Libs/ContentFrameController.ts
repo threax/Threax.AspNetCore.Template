@@ -43,6 +43,11 @@ export class ContentFrameController {
                 }
             }
         }
+        else {
+            //This means that index is being called. Assume this means cached since if it wasn't the above if would be true for the lone '!' in the string.
+            const newUrl = url.protocol + '://' + url.authority + this.config.cacheUrlBasePath;
+            this.frame.src = newUrl;
+        }
 
         const opt = {
             log: false,                  // Enable console logging
