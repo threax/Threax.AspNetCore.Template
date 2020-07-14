@@ -1159,7 +1159,7 @@ export interface ValueCollection {
 }
 
 export interface ValueInput {
-    name: string;
+    name?: string;
 }
 
 export interface Value {

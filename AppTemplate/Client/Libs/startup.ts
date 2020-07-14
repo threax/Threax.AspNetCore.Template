@@ -14,12 +14,6 @@ import * as deepLink from 'hr.deeplink';
 import * as pageConfig from 'hr.pageconfig';
 import * as safepost from 'hr.safepostmessage';
 
-//Activate htmlrapier
-hr.setup();
-datetime.setup();
-bootstrap.setup();
-bootstrap4form.setup();
-
 export interface Config {
     client: {
         ServiceUrl: string;
@@ -33,6 +27,13 @@ let builder: controller.InjectedControllerBuilder = null;
 
 export function createBuilder() {
     if (builder === null) {
+        //Activate htmlrapier
+        hr.setup();
+        datetime.setup();
+        bootstrap.setup();
+        bootstrap4form.setup();
+
+        //Create builder
         builder = new controller.InjectedControllerBuilder();
 
         //Set up the access token fetcher
