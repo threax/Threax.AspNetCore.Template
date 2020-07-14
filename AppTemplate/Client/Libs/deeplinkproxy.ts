@@ -101,11 +101,57 @@ function isGetCurrentStateMessageRequest(t: any): t is GetCurrentStateMessageReq
 }
 
 interface GetCurrentStateMessageResponse extends ProxyDeepLinkMessage {
-    args: deeplink.DeepLinkArgs;
+    args: deeplink.IDeepLinkArgs;
 }
 
 function isGetCurrentStateMessageResponse(t: any): t is GetCurrentStateMessageResponse {
     return t && t.messageType === GetCurrentStateRequestType && t.args;
+}
+
+const OnPopStateRequestType = "OnPopState";
+
+interface OnPopStateRequest extends ProxyDeepLinkMessage {
+    args: deeplink.IDeepLinkArgs;
+}
+
+function isOnPopStateRequest(t: any): t is OnPopStateRequest {
+    return t && t.messageType === OnPopStateRequestType && t.args;
+}
+
+const HandlerAddedRequestType = "HandlerAdded";
+
+interface HandlerAddedRequest extends ProxyDeepLinkMessage {
+    name: string;
+}
+
+function isHandlerAddedRequest(t: any): t is HandlerAddedRequest {
+    return t && t.messageType === HandlerAddedRequestType && t.name;
+}
+
+function createRequest(type: string, flightId: string): ProxyDeepLinkMessage {
+    return {
+        proxyDeepLinkVersion: CurrentProxyDeepLinkVersion,
+        flightId: flightId,
+        messageType: type,
+        direction: MessageDirection.Request,
+    };
+}
+
+function createResponse(type: string, flightId: string): ProxyDeepLinkMessage {
+    return {
+        proxyDeepLinkVersion: CurrentProxyDeepLinkVersion,
+        flightId: flightId,
+        messageType: type,
+        direction: MessageDirection.Response,
+    };
+}
+
+function makeArgsTransferrable(args: deeplink.IDeepLinkArgs): deeplink.IDeepLinkArgs {
+    return {
+        handler: args.handler,
+        inPagePath: args.inPagePath,
+        query: args.query
+    };
 }
 
 export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
@@ -113,7 +159,7 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
     private handlers: { [key: string]: deeplink.IDeepLinkHandler } = {};
     private inflightPushState: FlightRequestMap<void> = {};
     private inflightReplaceState: FlightRequestMap<void> = {};
-    private inflightCurrentState: FlightRequestMap<deeplink.DeepLinkArgs> = {};
+    private inflightCurrentState: FlightRequestMap<deeplink.IDeepLinkArgs> = {};
     private currentFlightId: number = 0;
 
     public static get InjectorArgs(): di.DiFunction<any>[] {
@@ -133,10 +179,13 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
             throw new Error("Attempted to register an IDeepLinkHandler named '" + name + "' multiple times, only one is allowed.");
         }
         this.handlers[name] = handler;
+        let request = createRequest(HandlerAddedRequestType, this.getNextFlightId()) as HandlerAddedRequest;
+        request.name = name;
+        this.poster.postWindowMessage(top, request);
     }
 
     public pushStateAsync<T extends {}>(handler: string, inPagePath: string | null, query: {} | null): Promise<void> {
-        const request = this.createRequest(PushStateRequestType) as PushStateMessage;
+        const request = createRequest(PushStateRequestType, this.getNextFlightId()) as PushStateMessage;
         request.handler = handler;
         request.inPagePath = inPagePath;
         request.query = query;
@@ -148,7 +197,7 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
     }
 
     public replaceStateAsync<T extends {}>(handler: string, inPagePath: string | null, query: {} | null): Promise<void> {
-        const request = this.createRequest(ReplaceStateRequestType) as ReplaceStateMessage;
+        const request = createRequest(ReplaceStateRequestType, this.getNextFlightId()) as ReplaceStateMessage;
         request.handler = handler;
         request.inPagePath = inPagePath;
         request.query = query;
@@ -159,45 +208,54 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
         return ep.Promise;
     }
 
-    public getCurrentStateAsync<T>(proto?: {} | null): Promise<deeplink.DeepLinkArgs | null> {
-        const request = this.createRequest(GetCurrentStateRequestType) as GetCurrentStateMessageRequest;
+    public getCurrentStateAsync<T>(proto?: {} | null): Promise<deeplink.IDeepLinkArgs | null> {
+        const request = createRequest(GetCurrentStateRequestType, this.getNextFlightId()) as GetCurrentStateMessageRequest;
         request.proto = proto;
 
-        const ep = new ExternalPromise<deeplink.DeepLinkArgs | null>();
+        const ep = new ExternalPromise<deeplink.IDeepLinkArgs | null>();
         this.poster.postWindowMessage(top, request);
-        this.inflightCurrentState[request.flightId] = new InFlightRequest<deeplink.DeepLinkArgs>(ep, GetCurrentStateRequestType, request.flightId, this.inflightCurrentState);
+        this.inflightCurrentState[request.flightId] = new InFlightRequest<deeplink.IDeepLinkArgs>(ep, GetCurrentStateRequestType, request.flightId, this.inflightCurrentState);
         return ep.Promise;
-    }
-
-    private createRequest(type: string): ProxyDeepLinkMessage {
-        return {
-            proxyDeepLinkVersion: CurrentProxyDeepLinkVersion,
-            flightId: this.getNextFlightId(),
-            messageType: type,
-            direction: MessageDirection.Request,
-        };
     }
 
     private handleMessage(e: MessageEvent): void {
         if (this.validator.isValid(e)) {
             const message = e.data;
-            if (isDeepLinkProxyMessage(message) && message.direction === MessageDirection.Response) {
-                const flightMap = this.getFlightMap(message.messageType);
-                if (flightMap) {
-                    const flight = flightMap[message.flightId];
-                    if (flight) {
-                        if (isErrorStateMessage(message)) {
-                            flight.reject(message.error);
-                        }
-                        else {
-                            let result = undefined;
-                            if (isGetCurrentStateMessageResponse(message)) {
-                                result = message.args;
+            if (isDeepLinkProxyMessage(message)) {
+                if (message.direction === MessageDirection.Response) {
+                    const flightMap = this.getFlightMap(message.messageType);
+                    if (flightMap) {
+                        const flight = flightMap[message.flightId];
+                        if (flight) {
+                            if (isErrorStateMessage(message)) {
+                                flight.reject(message.error);
                             }
-                            flight.resolve(result);
+                            else {
+                                let result = undefined;
+                                if (isGetCurrentStateMessageResponse(message)) {
+                                    result = message.args;
+                                }
+                                flight.resolve(result);
+                            }
                         }
                     }
                 }
+                else if (message.direction === MessageDirection.Request) {
+                    if (isOnPopStateRequest(message)) {
+                        this.fireOnPopState(message.args);
+                    }
+                }
+            }
+        }
+    }
+
+    private fireOnPopState(args: deeplink.IDeepLinkArgs) {
+        const myArgs = args;
+        const handlerName = myArgs.handler;
+        if (handlerName) {
+            const handler = this.handlers[handlerName];
+            if (handler) {
+                handler.onPopState(myArgs);
             }
         }
     }
@@ -237,11 +295,12 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
     }
 }
 
-export class ProxyDeepLinkManagerListener {
+export class ProxyDeepLinkManagerListener implements deeplink.IDeepLinkHandler {
     public static get InjectorArgs(): di.DiFunction<any>[] {
         return [safepost.MessagePoster, safepost.PostMessageValidator, deeplink.IDeepLinkManager, cfc.ContentFrameController];
     }
 
+    private registeredHandlers = {};
 
     constructor(private poster: safepost.MessagePoster, private validator: safepost.PostMessageValidator, private deepLinkManager: deeplink.IDeepLinkManager, private contentFrame: cfc.ContentFrameController) {
         window.addEventListener("message", e => {
@@ -249,13 +308,14 @@ export class ProxyDeepLinkManagerListener {
         });
     }
 
+    public onPopState(args: deeplink.IDeepLinkArgs) {
+        const request = createRequest(OnPopStateRequestType, "none") as OnPopStateRequest; //Don't care about responses for this
+        request.args = makeArgsTransferrable(args);
+        this.poster.postWindowMessage(this.contentFrame.getContentWindow(), request);
+    }
+
     private async handlePushState<T extends {}>(message: PushStateMessage): Promise<void> {
-        const response: ProxyDeepLinkMessage = {
-            proxyDeepLinkVersion: CurrentProxyDeepLinkVersion,
-            flightId: message.flightId,
-            messageType: PushStateRequestType,
-            direction: MessageDirection.Response,
-        };
+        const response = createResponse(PushStateRequestType, message.flightId);
 
         try {
             await this.deepLinkManager.pushStateAsync(message.handler, message.inPagePath, message.query);
@@ -268,12 +328,7 @@ export class ProxyDeepLinkManagerListener {
     }
 
     private async handleReplaceState<T extends {}>(message: PushStateMessage): Promise<void> {
-        const response: ProxyDeepLinkMessage = {
-            proxyDeepLinkVersion: CurrentProxyDeepLinkVersion,
-            flightId: message.flightId,
-            messageType: ReplaceStateRequestType,
-            direction: MessageDirection.Response,
-        };
+        const response = createResponse(ReplaceStateRequestType, message.flightId);
 
         try {
             await this.deepLinkManager.replaceStateAsync(message.handler, message.inPagePath, message.query);
@@ -286,20 +341,24 @@ export class ProxyDeepLinkManagerListener {
     }
 
     private async handleGetCurrentState<T>(message: GetCurrentStateMessageRequest): Promise<void> {
-        const response: ProxyDeepLinkMessage = {
-            proxyDeepLinkVersion: CurrentProxyDeepLinkVersion,
-            flightId: message.flightId,
-            messageType: GetCurrentStateRequestType,
-            direction: MessageDirection.Response
-        }
+        const response = createResponse(GetCurrentStateRequestType, message.flightId);
 
         try {
-            (response as GetCurrentStateMessageResponse).args = await this.deepLinkManager.getCurrentStateAsync(message.proto);
+            (response as GetCurrentStateMessageResponse).args = makeArgsTransferrable(await this.deepLinkManager.getCurrentStateAsync(message.proto));
             this.poster.postWindowMessage(this.contentFrame.getContentWindow(), response);
         }
         catch (err) {
             (response as ProxyDeepLinkErrorMessage).error = err;
             this.poster.postWindowMessage(this.contentFrame.getContentWindow(), response);
+        }
+    }
+
+    private async handleHandlerAdded<T>(message: HandlerAddedRequest): Promise<void> {
+        if (!this.registeredHandlers[message.name]) {
+            //Don't try to register this again. This isn't really an error since the handler may have been registered before.
+            //Technically these leak into the main page since the sub pages never rename them, but apps don't make that many handlers
+            this.registeredHandlers[message.name] = true;
+            this.deepLinkManager.registerHandler(message.name, this);
         }
     }
 
@@ -316,6 +375,9 @@ export class ProxyDeepLinkManagerListener {
                 }
                 else if (isGetCurrentStateMessageRequest(message)) {
                     this.handleGetCurrentState(message);
+                }
+                else if (isHandlerAddedRequest(message)) {
+                    this.handleHandlerAdded(message);
                 }
             }
         }
