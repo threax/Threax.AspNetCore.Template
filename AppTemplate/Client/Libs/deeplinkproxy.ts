@@ -154,8 +154,11 @@ function makeArgsTransferrable(args: deeplink.IDeepLinkArgs): deeplink.IDeepLink
     };
 }
 
+class ProxyDeepLinkManagerConfig {
+    constructor(public pageBasePath: string, public hashUiBasePath: string) {}
+}
+
 export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
-    private pageBaseUrl: string;
     private handlers: { [key: string]: deeplink.IDeepLinkHandler } = {};
     private inflightPushState: FlightRequestMap<void> = {};
     private inflightReplaceState: FlightRequestMap<void> = {};
@@ -163,12 +166,11 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
     private currentFlightId: number = 0;
 
     public static get InjectorArgs(): di.DiFunction<any>[] {
-        return [safepost.MessagePoster, safepost.PostMessageValidator];
+        return [safepost.MessagePoster, safepost.PostMessageValidator, ProxyDeepLinkManagerConfig];
     }
 
 
-    constructor(private poster: safepost.MessagePoster, private validator: safepost.PostMessageValidator) {
-
+    constructor(private poster: safepost.MessagePoster, private validator: safepost.PostMessageValidator, private config: ProxyDeepLinkManagerConfig) {
         window.addEventListener("message", e => {
             this.handleMessage(e);
         });
@@ -176,10 +178,10 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
 
     public registerHandler<T>(name: string, handler: deeplink.IDeepLinkHandler) {
         if (this.handlers[name] !== undefined) {
-            throw new Error("Attempted to register an IDeepLinkHandler named '" + name + "' multiple times, only one is allowed.");
+            throw new Error(`Attempted to register an IDeepLinkHandler named '${name}' multiple times, only one is allowed.`);
         }
         this.handlers[name] = handler;
-        let request = createRequest(HandlerAddedRequestType, this.getNextFlightId()) as HandlerAddedRequest;
+        const request = createRequest(HandlerAddedRequestType, this.getNextFlightId()) as HandlerAddedRequest;
         request.name = name;
         this.poster.postWindowMessage(top, request);
     }
@@ -388,6 +390,7 @@ export function addListener(services: di.ServiceCollection) {
     services.tryAddShared(ProxyDeepLinkManagerListener, ProxyDeepLinkManagerListener);
 }
 
-export function addDeepLinkManager(services: di.ServiceCollection) {
+export function addDeepLinkManager(services: di.ServiceCollection, pageBasePath: string, hashUiBasePath: string) {
+    services.tryAddSharedInstance(ProxyDeepLinkManagerConfig, new ProxyDeepLinkManagerConfig(pageBasePath, hashUiBasePath));
     services.tryAddShared(deeplink.IDeepLinkManager, ProxyDeepLinkManager);
 }

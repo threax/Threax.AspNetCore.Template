@@ -43,11 +43,12 @@ export function createBuilder() {
     if (builder === null) {
         const config = pageConfig.read<Config>();
         builder = new controller.InjectedControllerBuilder();
+        const hashUiBasePath = config.client.PageBasePath + config.client.HashUiBasePath;
 
         //Setup content frame controller
         builder.Services.addShared(contentFrame.ContentFrameControllerConfig, s => {
             const frameConfig = new contentFrame.ContentFrameControllerConfig();
-            frameConfig.cacheUrlBasePath = config.client.PageBasePath + config.client.HashUiBasePath;
+            frameConfig.cacheUrlBasePath = hashUiBasePath;
             frameConfig.noCacheUrlBasePath = config.client.PageBasePath;
             return frameConfig;
         });
@@ -63,7 +64,7 @@ export function createBuilder() {
         //Setup Deep Links
         deepLink.setPageUrl(builder.Services, config.client.PageBasePath);
         if (config.page.UseProxyDeepLinks) {
-            deeplinkproxy.addDeepLinkManager(builder.Services);
+            deeplinkproxy.addDeepLinkManager(builder.Services, config.client.PageBasePath, hashUiBasePath);
         }
         else {
             deeplinkproxy.addListener(builder.Services);
