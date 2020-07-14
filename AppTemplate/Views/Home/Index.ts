@@ -5,6 +5,7 @@ import * as client from 'clientlibs.ServiceClient';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as contentFrame from 'clientlibs.ContentFrameController';
 import * as safepost from 'hr.safepostmessage';
+import * as deeplinkproxy from 'clientlibs.deeplinkproxy';
 
 class AppMenu {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
@@ -50,4 +51,4 @@ builder.Services.tryAddTransient(AppMenu, AppMenu);
 deepLink.addServices(builder.Services);
 builder.create("contentFrame", contentFrame.ContentFrameController);
 builder.create("appMenu", AppMenu);
-
+builder.createUnbound(deeplinkproxy.ProxyDeepLinkManagerListener);

@@ -14,6 +14,7 @@ import * as deepLink from 'hr.deeplink';
 import * as pageConfig from 'hr.pageconfig';
 import * as contentFrame from 'clientlibs.ContentFrameController';
 import * as safepost from 'hr.safepostmessage';
+import * as deeplinkproxy from 'clientlibs.deeplinkproxy';
 
 //Activate htmlrapier
 hr.setup();
@@ -32,6 +33,7 @@ export interface Config {
     page: {
         AlwaysRequestLogin: boolean;
         AllowServerTokenRefresh: boolean;
+        UseProxyDeepLinks: boolean;
     };
 }
 
@@ -60,6 +62,12 @@ export function createBuilder() {
 
         //Setup Deep Links
         deepLink.setPageUrl(builder.Services, config.client.PageBasePath);
+        if (config.page.UseProxyDeepLinks) {
+            deeplinkproxy.addDeepLinkManager(builder.Services);
+        }
+        else {
+            deeplinkproxy.addListener(builder.Services);
+        }
 
         //Setup relogin
         loginPopup.addServices(builder.Services);

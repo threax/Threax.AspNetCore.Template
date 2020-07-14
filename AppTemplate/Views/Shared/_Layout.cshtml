@@ -27,7 +27,8 @@
             return function (config) {
                 config.page = {
                     "AlwaysRequestLogin": true,
-                    "AllowServerTokenRefresh": true
+                    "AllowServerTokenRefresh": true,
+                    "UseProxyDeepLinks": true
                 };
                 return next ? next(config) : config;
             }

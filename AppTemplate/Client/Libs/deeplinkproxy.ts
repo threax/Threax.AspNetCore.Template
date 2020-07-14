@@ -9,7 +9,7 @@ import * as cfc from 'clientlibs.ContentFrameController';
 
 type FlightRequestMap<T> = { [key: string]: InFlightRequest<T> };
 const MaxFlightId = 2147483647;
-const Timeout = 20000;
+const Timeout = 2000;
 const CurrentProxyDeepLinkVersion = "dlv1";
 
 class InFlightRequest<T> {
@@ -75,7 +75,7 @@ interface PushStateMessage extends ProxyDeepLinkMessage {
 }
 
 function isPushStateMessage(t: any): t is PushStateMessage {
-    return t && t.type === PushStateRequestType && t.handler;
+    return t && t.messageType === PushStateRequestType && t.handler;
 }
 
 const ReplaceStateRequestType = "ReplaceState";
@@ -87,7 +87,7 @@ interface ReplaceStateMessage extends ProxyDeepLinkMessage {
 }
 
 function isReplaceStateMessage(t: any): t is PushStateMessage {
-    return t && t.type === ReplaceStateRequestType && t.handler;
+    return t && t.messageType === ReplaceStateRequestType && t.handler;
 }
 
 const GetCurrentStateRequestType = "GetCurrentState";
@@ -97,7 +97,7 @@ interface GetCurrentStateMessageRequest extends ProxyDeepLinkMessage {
 }
 
 function isGetCurrentStateMessageRequest(t: any): t is GetCurrentStateMessageRequest {
-    return t && t.type === GetCurrentStateRequestType;
+    return t && t.messageType === GetCurrentStateRequestType;
 }
 
 interface GetCurrentStateMessageResponse extends ProxyDeepLinkMessage {
@@ -105,7 +105,7 @@ interface GetCurrentStateMessageResponse extends ProxyDeepLinkMessage {
 }
 
 function isGetCurrentStateMessageResponse(t: any): t is GetCurrentStateMessageResponse {
-    return t && t.type === GetCurrentStateRequestType && t.args;
+    return t && t.messageType === GetCurrentStateRequestType && t.args;
 }
 
 export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
@@ -136,7 +136,7 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
     }
 
     public pushStateAsync<T extends {}>(handler: string, inPagePath: string | null, query: {} | null): Promise<void> {
-        const request = this.createRequest(ReplaceStateRequestType) as PushStateMessage;
+        const request = this.createRequest(PushStateRequestType) as PushStateMessage;
         request.handler = handler;
         request.inPagePath = inPagePath;
         request.query = query;
@@ -160,12 +160,12 @@ export class ProxyDeepLinkManager implements deeplink.IDeepLinkManager {
     }
 
     public getCurrentStateAsync<T>(proto?: {} | null): Promise<deeplink.DeepLinkArgs | null> {
-        const request = this.createRequest(ReplaceStateRequestType) as GetCurrentStateMessageRequest;
+        const request = this.createRequest(GetCurrentStateRequestType) as GetCurrentStateMessageRequest;
         request.proto = proto;
 
         const ep = new ExternalPromise<deeplink.DeepLinkArgs | null>();
         this.poster.postWindowMessage(top, request);
-        this.inflightCurrentState[request.flightId] = new InFlightRequest<deeplink.DeepLinkArgs>(ep, ReplaceStateRequestType, request.flightId, this.inflightCurrentState);
+        this.inflightCurrentState[request.flightId] = new InFlightRequest<deeplink.DeepLinkArgs>(ep, GetCurrentStateRequestType, request.flightId, this.inflightCurrentState);
         return ep.Promise;
     }
 
@@ -320,4 +320,12 @@ export class ProxyDeepLinkManagerListener {
             }
         }
     }
+}
+
+export function addListener(services: di.ServiceCollection) {
+    services.tryAddShared(ProxyDeepLinkManagerListener, ProxyDeepLinkManagerListener);
+}
+
+export function addDeepLinkManager(services: di.ServiceCollection) {
+    services.tryAddShared(deeplink.IDeepLinkManager, ProxyDeepLinkManager);
 }
