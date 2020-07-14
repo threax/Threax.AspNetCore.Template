@@ -107,6 +107,7 @@ namespace AppTemplate
             services.AddAppRepositories();
 
             var assemblyMd5 = this.GetType().Assembly.ComputeMd5();
+            CacheUiUrlHelperExtensions.CacheToken = assemblyMd5;
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
@@ -233,6 +234,10 @@ namespace AppTemplate
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "cacheUi",
+                    pattern: "{controller:regex(^CacheUi$)=CacheUi}/{cacheToken}/{action=Index}/{*inPagePath}");
+
                 endpoints.MapControllerRoute(
                     name: "root",
                     pattern: "{action=Index}/{*inPagePath}",
