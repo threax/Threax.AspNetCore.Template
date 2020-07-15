@@ -23,25 +23,5 @@ namespace AppTemplate.ViewModels
         public String UserName { get; set; }
 
         public bool IsAuthenticated { get; set; }
-
-        public List<AppMenuItem> MenuItems { get; set; }
-    }
-
-    public class AppMenuItem
-    {
-        public AppMenuItem()
-        {
-
-        }
-
-        public AppMenuItem(String text, String href)
-        {
-            this.Text = text;
-            this.Href = href;
-        }
-
-        public String Text { get; set; }
-
-        public String Href { get; set; }
     }
 }

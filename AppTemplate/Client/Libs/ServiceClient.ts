@@ -15,9 +15,9 @@ export class RoleAssignmentsResult {
 
     public refresh(): Promise<RoleAssignmentsResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new RoleAssignmentsResult(r);
-            });
+               .then(r => {
+                    return new RoleAssignmentsResult(r);
+                });
 
     }
 
@@ -42,9 +42,9 @@ export class RoleAssignmentsResult {
 
     public setUser(data: RoleAssignments): Promise<RoleAssignmentsResult> {
         return this.client.LoadLinkWithData("SetUser", data)
-            .then(r => {
-                return new RoleAssignmentsResult(r);
-            });
+               .then(r => {
+                    return new RoleAssignmentsResult(r);
+                });
 
     }
 
@@ -69,9 +69,9 @@ export class RoleAssignmentsResult {
 
     public update(data: RoleAssignments): Promise<RoleAssignmentsResult> {
         return this.client.LoadLinkWithData("Update", data)
-            .then(r => {
-                return new RoleAssignmentsResult(r);
-            });
+               .then(r => {
+                    return new RoleAssignmentsResult(r);
+                });
 
     }
 
@@ -110,9 +110,7 @@ export class RoleAssignmentsResult {
 export class EntryPointInjector {
     private instancePromise: Promise<EntryPointResult>;
 
-    constructor(private url: string, private fetcher: hal.Fetcher, private data?: any) {
-
-    }
+    constructor(private url: string, private fetcher: hal.Fetcher, private data?: any) {}
 
     public load(): Promise<EntryPointResult> {
         if (!this.instancePromise) {
@@ -136,9 +134,9 @@ export class EntryPointResult {
             method: "GET"
         }, fetcher)
             .then(c => {
-                return new EntryPointResult(c);
-            });
-    }
+                 return new EntryPointResult(c);
+             });
+            }
 
     constructor(client: hal.HalEndpointClient) {
         this.client = client;
@@ -152,9 +150,9 @@ export class EntryPointResult {
 
     public refresh(): Promise<EntryPointResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new EntryPointResult(r);
-            });
+               .then(r => {
+                    return new EntryPointResult(r);
+                });
 
     }
 
@@ -179,9 +177,9 @@ export class EntryPointResult {
 
     public getUser(): Promise<RoleAssignmentsResult> {
         return this.client.LoadLink("GetUser")
-            .then(r => {
-                return new RoleAssignmentsResult(r);
-            });
+               .then(r => {
+                    return new RoleAssignmentsResult(r);
+                });
 
     }
 
@@ -206,9 +204,9 @@ export class EntryPointResult {
 
     public listUsers(data: RolesQuery): Promise<UserCollectionResult> {
         return this.client.LoadLinkWithData("ListUsers", data)
-            .then(r => {
-                return new UserCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserCollectionResult(r);
+                });
 
     }
 
@@ -233,9 +231,9 @@ export class EntryPointResult {
 
     public setUser(data: RoleAssignments): Promise<RoleAssignmentsResult> {
         return this.client.LoadLinkWithData("SetUser", data)
-            .then(r => {
-                return new RoleAssignmentsResult(r);
-            });
+               .then(r => {
+                    return new RoleAssignmentsResult(r);
+                });
 
     }
 
@@ -260,9 +258,9 @@ export class EntryPointResult {
 
     public listAppUsers(data: UserSearchQuery): Promise<UserSearchCollectionResult> {
         return this.client.LoadLinkWithData("ListAppUsers", data)
-            .then(r => {
-                return new UserSearchCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserSearchCollectionResult(r);
+                });
 
     }
 
@@ -287,9 +285,9 @@ export class EntryPointResult {
 
     public listValues(data: ValueQuery): Promise<ValueCollectionResult> {
         return this.client.LoadLinkWithData("ListValues", data)
-            .then(r => {
-                return new ValueCollectionResult(r);
-            });
+               .then(r => {
+                    return new ValueCollectionResult(r);
+                });
 
     }
 
@@ -314,9 +312,9 @@ export class EntryPointResult {
 
     public addValue(data: ValueInput): Promise<ValueResult> {
         return this.client.LoadLinkWithData("AddValue", data)
-            .then(r => {
-                return new ValueResult(r);
-            });
+               .then(r => {
+                    return new ValueResult(r);
+                });
 
     }
 
@@ -355,9 +353,9 @@ export class ValueResult {
 
     public refresh(): Promise<ValueResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new ValueResult(r);
-            });
+               .then(r => {
+                    return new ValueResult(r);
+                });
 
     }
 
@@ -382,9 +380,9 @@ export class ValueResult {
 
     public update(data: ValueInput): Promise<ValueResult> {
         return this.client.LoadLinkWithData("Update", data)
-            .then(r => {
-                return new ValueResult(r);
-            });
+               .then(r => {
+                    return new ValueResult(r);
+                });
 
     }
 
@@ -448,9 +446,9 @@ export class ValueCollectionResult {
 
     public refresh(): Promise<ValueCollectionResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new ValueCollectionResult(r);
-            });
+               .then(r => {
+                    return new ValueCollectionResult(r);
+                });
 
     }
 
@@ -508,9 +506,9 @@ export class ValueCollectionResult {
 
     public add(data: ValueInput): Promise<ValueResult> {
         return this.client.LoadLinkWithData("Add", data)
-            .then(r => {
-                return new ValueResult(r);
-            });
+               .then(r => {
+                    return new ValueResult(r);
+                });
 
     }
 
@@ -535,9 +533,9 @@ export class ValueCollectionResult {
 
     public next(): Promise<ValueCollectionResult> {
         return this.client.LoadLink("next")
-            .then(r => {
-                return new ValueCollectionResult(r);
-            });
+               .then(r => {
+                    return new ValueCollectionResult(r);
+                });
 
     }
 
@@ -562,9 +560,9 @@ export class ValueCollectionResult {
 
     public previous(): Promise<ValueCollectionResult> {
         return this.client.LoadLink("previous")
-            .then(r => {
-                return new ValueCollectionResult(r);
-            });
+               .then(r => {
+                    return new ValueCollectionResult(r);
+                });
 
     }
 
@@ -589,9 +587,9 @@ export class ValueCollectionResult {
 
     public first(): Promise<ValueCollectionResult> {
         return this.client.LoadLink("first")
-            .then(r => {
-                return new ValueCollectionResult(r);
-            });
+               .then(r => {
+                    return new ValueCollectionResult(r);
+                });
 
     }
 
@@ -616,9 +614,9 @@ export class ValueCollectionResult {
 
     public last(): Promise<ValueCollectionResult> {
         return this.client.LoadLink("last")
-            .then(r => {
-                return new ValueCollectionResult(r);
-            });
+               .then(r => {
+                    return new ValueCollectionResult(r);
+                });
 
     }
 
@@ -670,9 +668,9 @@ export class UserCollectionResult {
 
     public refresh(): Promise<UserCollectionResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new UserCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserCollectionResult(r);
+                });
 
     }
 
@@ -730,9 +728,9 @@ export class UserCollectionResult {
 
     public add(data: RoleAssignments): Promise<RoleAssignmentsResult> {
         return this.client.LoadLinkWithData("Add", data)
-            .then(r => {
-                return new RoleAssignmentsResult(r);
-            });
+               .then(r => {
+                    return new RoleAssignmentsResult(r);
+                });
 
     }
 
@@ -757,9 +755,9 @@ export class UserCollectionResult {
 
     public next(): Promise<UserCollectionResult> {
         return this.client.LoadLink("next")
-            .then(r => {
-                return new UserCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserCollectionResult(r);
+                });
 
     }
 
@@ -784,9 +782,9 @@ export class UserCollectionResult {
 
     public previous(): Promise<UserCollectionResult> {
         return this.client.LoadLink("previous")
-            .then(r => {
-                return new UserCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserCollectionResult(r);
+                });
 
     }
 
@@ -811,9 +809,9 @@ export class UserCollectionResult {
 
     public first(): Promise<UserCollectionResult> {
         return this.client.LoadLink("first")
-            .then(r => {
-                return new UserCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserCollectionResult(r);
+                });
 
     }
 
@@ -838,9 +836,9 @@ export class UserCollectionResult {
 
     public last(): Promise<UserCollectionResult> {
         return this.client.LoadLink("last")
-            .then(r => {
-                return new UserCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserCollectionResult(r);
+                });
 
     }
 
@@ -879,9 +877,9 @@ export class UserSearchResult {
 
     public refresh(): Promise<UserSearchResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new UserSearchResult(r);
-            });
+               .then(r => {
+                    return new UserSearchResult(r);
+                });
 
     }
 
@@ -933,9 +931,9 @@ export class UserSearchCollectionResult {
 
     public refresh(): Promise<UserSearchCollectionResult> {
         return this.client.LoadLink("self")
-            .then(r => {
-                return new UserSearchCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserSearchCollectionResult(r);
+                });
 
     }
 
@@ -982,9 +980,9 @@ export class UserSearchCollectionResult {
 
     public next(): Promise<UserSearchCollectionResult> {
         return this.client.LoadLink("next")
-            .then(r => {
-                return new UserSearchCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserSearchCollectionResult(r);
+                });
 
     }
 
@@ -1009,9 +1007,9 @@ export class UserSearchCollectionResult {
 
     public previous(): Promise<UserSearchCollectionResult> {
         return this.client.LoadLink("previous")
-            .then(r => {
-                return new UserSearchCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserSearchCollectionResult(r);
+                });
 
     }
 
@@ -1036,9 +1034,9 @@ export class UserSearchCollectionResult {
 
     public first(): Promise<UserSearchCollectionResult> {
         return this.client.LoadLink("first")
-            .then(r => {
-                return new UserSearchCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserSearchCollectionResult(r);
+                });
 
     }
 
@@ -1063,9 +1061,9 @@ export class UserSearchCollectionResult {
 
     public last(): Promise<UserSearchCollectionResult> {
         return this.client.LoadLink("last")
-            .then(r => {
-                return new UserSearchCollectionResult(r);
-            });
+               .then(r => {
+                    return new UserSearchCollectionResult(r);
+                });
 
     }
 
@@ -1107,15 +1105,9 @@ export interface RoleAssignments {
     superAdmin?: boolean;
 }
 
-export interface AppMenuItem {
-    text?: string;
-    href?: string;
-}
-
 export interface EntryPoint {
     userName?: string;
     isAuthenticated?: boolean;
-    menuItems?: AppMenuItem[];
 }
 
 export interface RolesQuery {

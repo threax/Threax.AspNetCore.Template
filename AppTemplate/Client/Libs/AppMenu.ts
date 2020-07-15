@@ -2,7 +2,6 @@
 
 import * as controller from 'hr.controller';
 import * as startup from 'clientlibs.startup';
-import * as deepLink from 'hr.deeplink';
 import * as client from 'clientlibs.ServiceClient';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as safepost from 'hr.safepostmessage';
@@ -21,6 +20,7 @@ class AppMenu {
     private userInfoView: controller.IView<client.EntryPoint>;
     private menuItemsView: controller.IView<AppMenuItem>;
     private loggedInAreaToggle: controller.OnOffToggle;
+    private refreshEntry = false;
 
     constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector, private messageValidator: safepost.PostMessageValidator) {
         this.userInfoView = bindings.getView("userInfo");
@@ -35,6 +35,10 @@ class AppMenu {
 
     private async reloadMenu(): Promise<void> {
         const entry = await this.entryPointInjector.load();
+        if (this.refreshEntry) {
+            await entry.refresh();
+        }
+        this.refreshEntry = true; //Want to skip this the first time, since the data will be fresh.
         this.userInfoView.setData(entry.data);
         const menu = this.createMenu(entry);
         this.menuItemsView.setData(new iter.Iterable(menu));
