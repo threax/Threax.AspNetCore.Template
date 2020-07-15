@@ -1,8 +1,5 @@
-﻿@model Threax.AspNetCore.CacheUi.CacheRootModel
-
-@{
-    ViewData["Title"] = Model.Title;
+﻿@{
     Layout = "_Layout";
 }
 
-<script type="text/javascript" src="@Model.ContentLink"></script>
+<script type="text/javascript" src="@ViewData["ContentLink"]"></script>

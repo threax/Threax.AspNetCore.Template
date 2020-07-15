@@ -1,6 +1,5 @@
 ﻿@using Threax.AspNetCore.AuthCore;
 @inject Threax.ProgressiveWebApp.DisplayConfig config;
-@model Threax.AspNetCore.CacheUi.LayoutModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +13,13 @@
     <link rel="manifest" href="@Url.Content("~/webmanifest.json")">
 </head>
 <body>
-    @if (Model != null && Model.EntryJson != null)
+    @if (ViewData["EntryJson"] != null)
     {
     <script type="text/javascript" csp-nonce>
         window.hr_config = (function (next) {
             return function (config) {
                 config.user = {
-                    "EntryPoint": @Html.Raw(Model.EntryJson)
+                    "EntryPoint": @Html.Raw(ViewData["EntryJson"])
                 };
                 return next ? next(config) : config;
             }

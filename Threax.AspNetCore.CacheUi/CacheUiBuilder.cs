@@ -60,13 +60,11 @@ namespace Threax.AspNetCore.CacheUi
                     throw new InvalidOperationException($"Cannot convert entry point class '{entryPoint.GetType().FullName}' to a hal result.");
                 }
                 var halEntryPoint = halConverter.Convert(entryPoint);
-                var model = new CacheRootModel()
-                {
-                    EntryJson = JsonConvert.SerializeObject(halEntryPoint, HalcyonConvention.DefaultJsonSerializerSettings),
-                    Title = title ?? view,
-                    ContentLink = controller.Url.CacheUiActionLink(action, controller.GetType())
-                };
-                return controller.View("CacheRoot", model);
+                controller.ViewData["EntryJson"] = JsonConvert.SerializeObject(halEntryPoint, HalcyonConvention.DefaultJsonSerializerSettings);
+
+                controller.ViewData["Title"] = title;
+                controller.ViewData["ContentLink"] = controller.Url.CacheUiActionLink(action, controller.GetType());
+                return controller.View("CacheRoot");
             }
         }
     }
