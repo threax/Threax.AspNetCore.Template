@@ -206,6 +206,8 @@ namespace AppTemplate
                     .AddConsole()
                     .AddDebug();
             });
+
+            services.AddTransient<EntryPointController, EntryPointController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

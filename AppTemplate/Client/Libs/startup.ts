@@ -21,6 +21,9 @@ export interface Config {
         BearerCookieName?: string;
         AccessTokenPath?: string;
     };
+    user: {
+        EntryPoint: any;
+    };
 }
 
 let builder: controller.InjectedControllerBuilder = null;
@@ -36,10 +39,14 @@ export function createBuilder() {
         //Create builder
         builder = new controller.InjectedControllerBuilder();
 
-        //Set up the access token fetcher
+        //Set up the fetcher and entry point
         const config = pageConfig.read<Config>();
+        let entryPointData = null;
+        if (config.user && config.user.EntryPoint) {
+            entryPointData = config.user.EntryPoint;
+        }
         builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config));
-        builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
+        builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher), entryPointData));
         builder.Services.tryAddShared(safepost.MessagePoster, s => new safepost.MessagePoster(window.location.href));
         builder.Services.tryAddShared(safepost.PostMessageValidator, s => new safepost.PostMessageValidator(window.location.href));
 
