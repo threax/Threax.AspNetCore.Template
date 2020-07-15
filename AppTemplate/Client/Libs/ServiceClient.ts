@@ -1106,7 +1106,15 @@ export interface RoleAssignments {
     superAdmin?: boolean;
 }
 
+export interface AppMenuItem {
+    text?: string;
+    href?: string;
+}
+
 export interface EntryPoint {
+    userName?: string;
+    isAuthenticated?: boolean;
+    menuItems?: AppMenuItem[];
 }
 
 export interface RolesQuery {

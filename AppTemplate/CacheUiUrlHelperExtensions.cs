@@ -20,6 +20,12 @@ namespace Microsoft.AspNetCore.Mvc
             return helper.ActionLink(action, controllerName, values, "https", helper.ActionContext.HttpContext.Request.Host.Value, fragment);
         }
 
+        public static string ActionLink(this IUrlHelper helper, string action = null, Type controller = null, string fragment = null)
+        {
+            string controllerName = GetControllerName(controller);
+            return helper.ActionLink(action, controllerName, null, "https", helper.ActionContext.HttpContext.Request.Host.Value, fragment);
+        }
+
         private static string GetControllerName(Type controller)
         {
             var controllerName = controller.Name;

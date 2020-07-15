@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
+using System.Security.Claims;
+using Threax.AspNetCore.UserBuilder.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace AppTemplate.Controllers.Api
 {
@@ -22,9 +25,28 @@ namespace AppTemplate.Controllers.Api
         [HttpGet]
         [HalRel(Rels.Get)]
         [AllowAnonymous]
-        public EntryPoint Get()
+        public EntryPoint Get([FromServices] IHttpContextAccessor httpContextAccessor)
         {
-            return new EntryPoint();
+            var httpContex = httpContextAccessor.HttpContext;
+            var user = httpContex.User;
+
+            return new EntryPoint()
+            {
+                IsAuthenticated = user.Identity.IsAuthenticated,
+                MenuItems = GetMenuItems(user).ToList(),
+                UserName = user.Identity.Name
+            };
+        }
+
+        private IEnumerable<AppMenuItem> GetMenuItems(ClaimsPrincipal user)
+        {
+            yield return new AppMenuItem("Home", Url.ActionLink(nameof(HomeController.Index), typeof(HomeController)));
+            yield return new AppMenuItem("Values", Url.ActionLink(nameof(HomeController.Values), typeof(HomeController)));
+
+            if (user.IsInRole(AuthorizationAdminRoles.EditRoles))
+            {
+                yield return new AppMenuItem("Edit Users", Url.ActionLink(nameof(AdminController.Users), typeof(AdminController)));
+            }
         }
     }
 }

@@ -31,9 +31,15 @@ namespace AppTemplate.Controllers
         //They can be removed if you don't want this functionality.
 
         [AllowAnonymous]
-        public IActionResult Relogin(String cacheToken)
+        public IActionResult Header(String cacheToken)
         {
-            return HandleCache(cacheToken, nameof(Relogin));
+            return HandleCache(cacheToken, nameof(Header));
+        }
+
+        [AllowAnonymous]
+        public IActionResult Footer(String cacheToken)
+        {
+            return HandleCache(cacheToken, nameof(Footer));
         }
 
         [Route("webmanifest.json")]
@@ -45,6 +51,8 @@ namespace AppTemplate.Controllers
 
         private IActionResult HandleCache(string cacheToken, string view)
         {
+            this.Request.RouteValues.Remove("cacheToken");
+            this.RouteData.Values.Remove("cacheToken");
             if (cacheToken != null) //Cache and return as js if we have a token
             {
                 if (cacheToken != "nocache")
