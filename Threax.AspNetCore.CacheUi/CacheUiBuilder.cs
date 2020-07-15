@@ -38,6 +38,7 @@ namespace Threax.AspNetCore.CacheUi
                     controller.HttpContext.Response.Headers["Cache-Control"] = "no-store"; //Force no cache if requested.
                 }
                 controller.HttpContext.Response.Headers["Content-Type"] = "application/javascript";
+                controller.ViewData["Layout"] = "_Embedded";
                 usingCacheRoot = false;
                 return controller.View(view);
             }
@@ -45,6 +46,7 @@ namespace Threax.AspNetCore.CacheUi
             {
                 controller.HttpContext.Response.Headers["Cache-Control"] = "no-store"; //No caching for the entry page.
 
+                controller.ViewData["Layout"] = "_Layout";
                 controller.ViewData["Title"] = action;
                 controller.ViewData["ContentLink"] = controller.Url.CacheUiActionLink(action, controller.GetType());
                 usingCacheRoot = true;
