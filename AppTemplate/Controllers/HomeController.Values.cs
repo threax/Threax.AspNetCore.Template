@@ -12,7 +12,7 @@ namespace AppTemplate.Controllers
         [Authorize(Roles = Roles.EditValues)]
         public IActionResult Values(String cacheToken)
         {
-            return HandleCache(cacheToken, nameof(Values));
+            return cacheUiBuilder.HandleCache(this, cacheToken);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Mvc
     {
         private const string ControllerSuffix = "Controller";
 
-        public static String CacheToken { get; set; }
+        internal static String CacheToken { get; set; }
 
         public static string CacheUiActionLink(this IUrlHelper helper, string action = null, Type controller = null, string fragment = null)
         {

@@ -8,30 +8,27 @@ using Threax.ProgressiveWebApp;
 using Halcyon.HAL;
 using AppTemplate.Controllers.Api;
 using Microsoft.AspNetCore.Http;
-using AppTemplate.Views;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
+using Threax.AspNetCore.CacheUi;
 
 namespace AppTemplate.Controllers
 {
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
     public partial class HomeController : Controller
     {
-        private readonly IHALConverter halConverter;
-        private readonly EntryPointController entryPointController;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly ICacheUiBuilder cacheUiBuilder;
 
-        public HomeController(IHALConverter halConverter, EntryPointController entryPointController, IHttpContextAccessor httpContextAccessor)
+        public HomeController(ICacheUiBuilder cacheUiBuilder)
         {
-            this.halConverter = halConverter;
-            this.entryPointController = entryPointController;
-            this.httpContextAccessor = httpContextAccessor;
+            this.cacheUiBuilder = cacheUiBuilder;
         }
 
         //You can get rid of this AllowAnonymous to secure the welcome page
         [AllowAnonymous]
         public IActionResult Index(String cacheToken)
         {
-            return HandleCache(cacheToken, nameof(Index));
+            return cacheUiBuilder.HandleCache(this, cacheToken);
         }
 
         //The following functions enable this site to work as a progressive web app.
@@ -49,13 +46,13 @@ namespace AppTemplate.Controllers
         [AllowAnonymous]
         public IActionResult Header(String cacheToken)
         {
-            return HandleCache(cacheToken, nameof(Header));
+            return cacheUiBuilder.HandleCache(this, cacheToken);
         }
 
         [AllowAnonymous]
         public IActionResult Footer(String cacheToken)
         {
-            return HandleCache(cacheToken, nameof(Footer));
+            return cacheUiBuilder.HandleCache(this, cacheToken);
         }
 
         [Route("webmanifest.json")]
@@ -63,39 +60,6 @@ namespace AppTemplate.Controllers
         public IActionResult Manifest([FromServices] IWebManifestProvider webManifestProvider)
         {
             return Json(webManifestProvider.CreateManifest(Url));
-        }
-
-        private IActionResult HandleCache(string cacheToken, string view)
-        {
-            //Have to do this here or we don't have these properties yet.
-            this.entryPointController.Url = Url;
-            this.entryPointController.ControllerContext = ControllerContext;
-
-            this.Request.RouteValues.Remove("cacheToken");
-            this.RouteData.Values.Remove("cacheToken");
-            if (cacheToken != null) //Cache and return as js if we have a token
-            {
-                if (cacheToken != "nocache")
-                {
-                    HttpContext.Response.Headers["Cache-Control"] = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
-                }
-                HttpContext.Response.Headers["Content-Type"] = "application/javascript";
-                return View($"{view}Cache");
-            }
-            else
-            {
-                var entryPoint = entryPointController.Get(httpContextAccessor);
-                if (!halConverter.CanConvert(entryPoint.GetType()))
-                {
-                    throw new InvalidOperationException($"Cannot convert entry point class '{entryPoint.GetType().FullName}' to a hal result.");
-                }
-                var halEntryPoint = halConverter.Convert(entryPoint);
-                var model = new EntryPageModel()
-                {
-                    EntryJson = JsonConvert.SerializeObject(halEntryPoint, Microsoft.Extensions.DependencyInjection.HalcyonConvention.DefaultJsonSerializerSettings)
-                };
-                return View(view, model);
-            }
         }
 
         //The other view action methods are in the additional partial classes for HomeController, expand the node for

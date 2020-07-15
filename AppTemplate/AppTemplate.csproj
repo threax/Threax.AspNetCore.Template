@@ -56,6 +56,10 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Threax.AspNetCore.CacheUi\Threax.AspNetCore.CacheUi.csproj" />
+  </ItemGroup>
+
   <Target Name="CopyDocs" AfterTargets="Build">
     <Copy SourceFiles="$(PkgThreax_DeployConfig)\lib\netstandard2.0\Threax.DeployConfig.xml" DestinationFolder="$(OutDir)" />
     <Copy SourceFiles="$(PkgThreax_AspNetCore_IdServerAuth)\lib\netstandard2.0\Threax.AspNetCore.IdServerAuth.xml" DestinationFolder="$(OutDir)" />

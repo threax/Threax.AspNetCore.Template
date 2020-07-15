@@ -107,7 +107,6 @@ namespace AppTemplate
             services.AddAppRepositories();
 
             var assemblyMd5 = this.GetType().Assembly.ComputeMd5();
-            CacheUiUrlHelperExtensions.CacheToken = assemblyMd5;
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
@@ -117,6 +116,8 @@ namespace AppTemplate
 
             services.AddConventionalHalcyon(halOptions);
             services.AddHalcyonClient();
+
+            services.AddThreaxCacheUi<EntryPointController>(assemblyMd5);
 
             services.AddExceptionErrorFilters(new ExceptionFilterOptions()
             {

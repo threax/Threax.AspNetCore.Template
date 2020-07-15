@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplateClient", "AppTem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppTemplateTests", "AppTemplate.Tests\AppTemplateTests.csproj", "{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.AspNetCore.CacheUi", "Threax.AspNetCore.CacheUi\Threax.AspNetCore.CacheUi.csproj", "{6719839E-EF94-4EDC-8A7A-7D0DDF0A5703}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA7EACE0-1F02-4D86-8786-76A18BBFC39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6719839E-EF94-4EDC-8A7A-7D0DDF0A5703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6719839E-EF94-4EDC-8A7A-7D0DDF0A5703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6719839E-EF94-4EDC-8A7A-7D0DDF0A5703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6719839E-EF94-4EDC-8A7A-7D0DDF0A5703}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
