@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Welcome";
+﻿@inject Threax.ProgressiveWebApp.DisplayConfig config;
+@{
+    Layout = "_Embedded";
 }
 
-<script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Index), typeof(AppTemplate.Controllers.HomeController))"></script>
+<h1>Welcome to @config.SiteName</h1>
+<p>This is the welcome page for @config.SiteName.</p>

@@ -18,6 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             CacheUiUrlHelperExtensions.CacheToken = cacheToken;
 
+            services.TryAddSingleton<CacheUiConfig>(options);
             services.TryAddScoped<ICacheUiBuilder, CacheUiBuilder>();
             services.TryAddScoped<IEntryPointProvider, ReflectedEntryPointProvider<T>>();
 

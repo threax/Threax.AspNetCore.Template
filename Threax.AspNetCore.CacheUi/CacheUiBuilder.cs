@@ -10,11 +10,13 @@ namespace Threax.AspNetCore.CacheUi
     {
         private readonly IHALConverter halConverter;
         private readonly IEntryPointProvider entryPointProvider;
+        private readonly CacheUiConfig cacheUiConfig;
 
-        public CacheUiBuilder(IHALConverter halConverter, IEntryPointProvider entryPointProvider)
+        public CacheUiBuilder(IHALConverter halConverter, IEntryPointProvider entryPointProvider, CacheUiConfig cacheUiConfig)
         {
             this.halConverter = halConverter;
             this.entryPointProvider = entryPointProvider;
+            this.cacheUiConfig = cacheUiConfig;
         }
 
         public IActionResult HandleCache(Controller controller, string cacheToken, string title = null, string view = null, string action = null)
@@ -44,13 +46,14 @@ namespace Threax.AspNetCore.CacheUi
             {
                 if (cacheToken != "nocache")
                 {
-                    controller.HttpContext.Response.Headers["Cache-Control"] = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+                    controller.HttpContext.Response.Headers["Cache-Control"] = cacheUiConfig.CacheControlHeader;
                 }
                 controller.HttpContext.Response.Headers["Content-Type"] = "application/javascript";
-                return controller.View($"{view}Cache");
+                return controller.View(view);
             }
             else
             {
+                controller.HttpContext.Response.Headers["Cache-Control"] = "no-store"; //No caching for the entry page.
                 var entryPoint = entryPointProvider.GetEntryPoint(controller);
                 if (!halConverter.CanConvert(entryPoint.GetType()))
                 {
@@ -63,7 +66,7 @@ namespace Threax.AspNetCore.CacheUi
                     Title = title ?? view,
                     ContentLink = controller.Url.CacheUiActionLink(action, controller.GetType())
                 };
-                return controller.View(view, model);
+                return controller.View("CacheRoot", model);
             }
         }
     }
