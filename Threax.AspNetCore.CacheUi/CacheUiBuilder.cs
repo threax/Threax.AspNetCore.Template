@@ -29,7 +29,7 @@ namespace Threax.AspNetCore.CacheUi
             controller.RouteData.Values.Remove("cacheToken");
             if (cacheToken != null) //Cache and return as js if we have a token
             {
-                if (cacheToken != "nocache")
+                if (cacheToken != cacheUiConfig.NoCacheModeToken)
                 {
                     controller.HttpContext.Response.Headers["Cache-Control"] = cacheUiConfig.CacheControlHeader;
                 }
