@@ -6,6 +6,12 @@ import * as deepLink from 'hr.deeplink';
 import * as client from 'clientlibs.ServiceClient';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as safepost from 'hr.safepostmessage';
+import * as iter from 'hr.iterable';
+
+interface AppMenuItem {
+    text: string;
+    href: string;
+}
 
 class AppMenu {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
@@ -13,7 +19,7 @@ class AppMenu {
     }
 
     private userInfoView: controller.IView<client.EntryPoint>;
-    private menuItemsView: controller.IView<client.AppMenuItem>;
+    private menuItemsView: controller.IView<AppMenuItem>;
     private loggedInAreaToggle: controller.OnOffToggle;
 
     constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector, private messageValidator: safepost.PostMessageValidator) {
@@ -30,7 +36,8 @@ class AppMenu {
     private async reloadMenu(): Promise<void> {
         const entry = await this.entryPointInjector.load();
         this.userInfoView.setData(entry.data);
-        this.menuItemsView.setData(entry.data.menuItems);
+        const menu = this.createMenu(entry);
+        this.menuItemsView.setData(new iter.Iterable(menu));
         this.loggedInAreaToggle.mode = entry.data.isAuthenticated;
     }
 
@@ -40,6 +47,15 @@ class AppMenu {
             if (message.type === loginPopup.MessageType && message.success) {
                 this.reloadMenu();
             }
+        }
+    }
+
+    private * createMenu(entry: client.EntryPointResult): Generator<AppMenuItem> {
+        yield { text: "Home", href: "" };
+        yield { text: "Values", href: "Values" };
+
+        if (entry.canListUsers()) {
+            yield { text: "Users", href: "Admin/Users" };
         }
     }
 }
