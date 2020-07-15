@@ -1,28 +1,36 @@
-﻿///<amd-module name="clientlibs.AppMenu"/>
-
-import * as controller from 'hr.controller';
-import * as startup from 'clientlibs.startup';
-import * as client from 'clientlibs.ServiceClient';
+﻿import * as controller from 'hr.controller';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as safepost from 'hr.safepostmessage';
 import * as iter from 'hr.iterable';
+import * as di from 'hr.di';
 
-interface AppMenuItem {
+export interface AppMenuItem {
     text: string;
     href: string;
 }
 
-class AppMenu {
+export interface EntryPoint {
+    data: any;
+    refresh(): Promise<EntryPoint>;
+    canRefresh(): boolean;
+}
+
+export abstract class AppMenuInjector<T extends EntryPoint> {
+    public abstract createMenu(entry: T): Generator<AppMenuItem>;
+    public abstract getEntryPoint(): Promise<T>;
+}
+
+export class AppMenu {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, client.EntryPointInjector, safepost.PostMessageValidator];
+        return [controller.BindingCollection, safepost.PostMessageValidator, AppMenuInjector];
     }
 
-    private userInfoView: controller.IView<client.EntryPoint>;
+    private userInfoView: controller.IView<any>;
     private menuItemsView: controller.IView<AppMenuItem>;
     private loggedInAreaToggle: controller.OnOffToggle;
-    private refreshEntry = false;
+    private entry: EntryPoint;
 
-    constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector, private messageValidator: safepost.PostMessageValidator) {
+    constructor(bindings: controller.BindingCollection, private messageValidator: safepost.PostMessageValidator, private menuInjector: AppMenuInjector<EntryPoint>) {
         this.userInfoView = bindings.getView("userInfo");
         this.menuItemsView = bindings.getView("menuItems");
         this.loggedInAreaToggle = bindings.getToggle("loggedInArea");
@@ -30,19 +38,26 @@ class AppMenu {
         //Listen for relogin events
         window.addEventListener("message", e => { this.handleMessage(e); });
 
-        this.reloadMenu();
+        this.setup();
+    }
+
+    private async setup(): Promise<void> {
+        this.entry = await this.menuInjector.getEntryPoint();
+        this.setMenu();
     }
 
     private async reloadMenu(): Promise<void> {
-        const entry = await this.entryPointInjector.load();
-        if (this.refreshEntry) {
-            await entry.refresh();
+        if (this.entry && this.entry.canRefresh()) {
+            this.entry = await this.entry.refresh();
+            this.setMenu();
         }
-        this.refreshEntry = true; //Want to skip this the first time, since the data will be fresh.
-        this.userInfoView.setData(entry.data);
-        const menu = this.createMenu(entry);
+    }
+
+    private async setMenu(): Promise<void> {
+        this.userInfoView.setData(this.entry.data);
+        const menu = this.menuInjector.createMenu(this.entry);
         this.menuItemsView.setData(new iter.Iterable(menu));
-        this.loggedInAreaToggle.mode = entry.data.isAuthenticated;
+        this.loggedInAreaToggle.mode = this.entry.data.isAuthenticated;
     }
 
     private handleMessage(e: MessageEvent): void {
@@ -53,17 +68,9 @@ class AppMenu {
             }
         }
     }
-
-    private * createMenu(entry: client.EntryPointResult): Generator<AppMenuItem> {
-        yield { text: "Home", href: "" };
-        yield { text: "Values", href: "Values" };
-
-        if (entry.canListUsers()) {
-            yield { text: "Users", href: "Admin/Users" };
-        }
-    }
 }
 
-const builder = startup.createBuilder();
-builder.Services.tryAddTransient(AppMenu, AppMenu);
-builder.create("appMenu", AppMenu);
+export function addServices<T extends EntryPoint>(services: controller.ServiceCollection, injectorType: di.ResolverFunction<AppMenuInjector<T>> | di.InjectableConstructor<AppMenuInjector<T>>) {
+    services.tryAddShared(AppMenuInjector, injectorType);
+    services.tryAddShared(AppMenu, AppMenu);
+}
