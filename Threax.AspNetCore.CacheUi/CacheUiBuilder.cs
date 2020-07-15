@@ -33,6 +33,10 @@ namespace Threax.AspNetCore.CacheUi
                 {
                     controller.HttpContext.Response.Headers["Cache-Control"] = cacheUiConfig.CacheControlHeader;
                 }
+                else
+                {
+                    controller.HttpContext.Response.Headers["Cache-Control"] = "no-store"; //Force no cache if requested.
+                }
                 controller.HttpContext.Response.Headers["Content-Type"] = "application/javascript";
                 usingCacheRoot = false;
                 return controller.View(view);

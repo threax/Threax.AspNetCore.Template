@@ -1,6 +1,6 @@
 import * as controller from 'hr.controller';
 import * as startup from 'clientlibs.startup';
-import * as menu from 'clientlibs.AppMenu';
+import * as menu from 'hr.appmenu.AppMenu';
 import * as client from 'clientlibs.ServiceClient';
 
 class AppMenuInjector extends menu.AppMenuInjector<client.EntryPointResult> {
