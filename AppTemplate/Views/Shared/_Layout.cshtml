@@ -1,5 +1,8 @@
 ﻿@using Threax.AspNetCore.AuthCore;
 @inject Threax.ProgressiveWebApp.DisplayConfig config;
+@{ 
+    Newtonsoft.Json.Linq.JObject entryJson;
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,23 +16,23 @@
     <link rel="manifest" href="@Url.Content("~/webmanifest.json")">
 </head>
 <body>
-    @if (ViewData["EntryJson"] != null)
+    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Header), typeof(AppTemplate.Controllers.HomeController))"></script>
+    <div class="container body-content mt-3">@RenderBody()</div>
+    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Footer), typeof(AppTemplate.Controllers.HomeController))"></script>
+    <client-config csp-nonce></client-config>
+    @if ((entryJson = ViewData["EntryJson"] as Newtonsoft.Json.Linq.JObject) != null) @*This cast makes sure we got a JObject input object. Helps protect us from ourselves before we write raw, since the JOBject ToString will escape everything.*@
     {
     <script type="text/javascript" csp-nonce>
         window.hr_config = (function (next) {
             return function (config) {
                 config.user = {
-                    "EntryPoint": @Html.Raw(ViewData["EntryJson"])
+                    "EntryPoint": @Html.Raw(entryJson.ToString(Newtonsoft.Json.Formatting.None))
                 };
                 return next ? next(config) : config;
             }
         })(window.hr_config);
     </script>
     }
-    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Header), typeof(AppTemplate.Controllers.HomeController))"></script>
-    <div class="container body-content mt-3">@RenderBody()</div>
-    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Footer), typeof(AppTemplate.Controllers.HomeController))"></script>
-    <client-config csp-nonce></client-config>
     <style csp-nonce>html{visibility:visible;opacity:1;}
     </style><asset-bundle src="~/bundle.min.js"></asset-bundle>@RenderSection("scripts", required: false)
     <script type="text/javascript" src="~/lib/hr-run.js" asp-append-version="true"></script><threax-csp></threax-csp>

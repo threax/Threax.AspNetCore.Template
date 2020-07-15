@@ -3,15 +3,20 @@ using Halcyon.HAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppTemplate.Services
 {
     public class EntryPointRenderer : IEntryPointRenderer
     {
+        private static Lazy<JsonSerializer> serializer;
+
+        static EntryPointRenderer()
+        {
+            serializer = new Lazy<JsonSerializer>(() => JsonSerializer.Create(HalcyonConvention.DefaultJsonSerializerSettings), true);
+        }
+
         private readonly EntryPointController entryPointController;
         private readonly IHALConverter halConverter;
 
@@ -32,7 +37,7 @@ namespace AppTemplate.Services
                 throw new InvalidOperationException($"Cannot convert entry point class '{entryPoint.GetType().FullName}' to a hal result.");
             }
             var halEntryPoint = halConverter.Convert(entryPoint);
-            controller.ViewData["EntryJson"] = JsonConvert.SerializeObject(halEntryPoint, HalcyonConvention.DefaultJsonSerializerSettings);
+            controller.ViewData["EntryJson"] = JObject.FromObject(halEntryPoint, serializer.Value);
         }
     }
 }
