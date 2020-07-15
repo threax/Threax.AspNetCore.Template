@@ -1,6 +1,7 @@
 ﻿using AppTemplate.Controllers;
 using AppTemplate.Controllers.Api;
 using AppTemplate.Database;
+using AppTemplate.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -117,7 +118,7 @@ namespace AppTemplate
             services.AddConventionalHalcyon(halOptions);
             services.AddHalcyonClient();
 
-            services.AddThreaxCacheUi<EntryPointController>(assemblyMd5);
+            services.AddThreaxCacheUi(assemblyMd5);
 
             services.AddExceptionErrorFilters(new ExceptionFilterOptions()
             {
@@ -209,6 +210,8 @@ namespace AppTemplate
             });
 
             services.AddTransient<EntryPointController, EntryPointController>();
+            services.AddScoped<IEntryPointRenderer, EntryPointRenderer>();
+            services.AddScoped<ICachedPageBuilder, CachedPageBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

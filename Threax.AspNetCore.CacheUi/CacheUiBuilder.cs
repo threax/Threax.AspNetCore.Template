@@ -1,43 +1,28 @@
-﻿using Halcyon.HAL;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Threax.AspNetCore.CacheUi
 {
     public class CacheUiBuilder : ICacheUiBuilder
     {
-        private readonly IHALConverter halConverter;
-        private readonly IEntryPointProvider entryPointProvider;
         private readonly CacheUiConfig cacheUiConfig;
 
-        public CacheUiBuilder(IHALConverter halConverter, IEntryPointProvider entryPointProvider, CacheUiConfig cacheUiConfig)
+        public CacheUiBuilder(CacheUiConfig cacheUiConfig)
         {
-            this.halConverter = halConverter;
-            this.entryPointProvider = entryPointProvider;
             this.cacheUiConfig = cacheUiConfig;
         }
 
-        public IActionResult HandleCache(Controller controller, string cacheToken, string title = null, string view = null, string action = null)
+        public IActionResult HandleCache(Controller controller, string cacheToken, out bool usingCacheRoot, string view = null)
         {
+            var action = controller.Request.RouteValues["action"]?.ToString();
             if (action == null)
             {
-                action = controller.Request.RouteValues["action"]?.ToString();
-                if (action == null)
-                {
-                    throw new InvalidOperationException("Cannot determine action for handling cache. Is the Request.ReouteValue 'action' set?");
-                }
+                throw new InvalidOperationException("Cannot determine action for handling cache. Is the Request.ReouteValue 'action' set?");
             }
 
             if (view == null)
             {
                 view = action;
-            }
-
-            if (title == null)
-            {
-                title = action;
             }
 
             controller.Request.RouteValues.Remove("cacheToken");
@@ -49,23 +34,23 @@ namespace Threax.AspNetCore.CacheUi
                     controller.HttpContext.Response.Headers["Cache-Control"] = cacheUiConfig.CacheControlHeader;
                 }
                 controller.HttpContext.Response.Headers["Content-Type"] = "application/javascript";
+                usingCacheRoot = false;
                 return controller.View(view);
             }
             else
             {
                 controller.HttpContext.Response.Headers["Cache-Control"] = "no-store"; //No caching for the entry page.
-                var entryPoint = entryPointProvider.GetEntryPoint(controller);
-                if (!halConverter.CanConvert(entryPoint.GetType()))
-                {
-                    throw new InvalidOperationException($"Cannot convert entry point class '{entryPoint.GetType().FullName}' to a hal result.");
-                }
-                var halEntryPoint = halConverter.Convert(entryPoint);
-                controller.ViewData["EntryJson"] = JsonConvert.SerializeObject(halEntryPoint, HalcyonConvention.DefaultJsonSerializerSettings);
 
-                controller.ViewData["Title"] = title;
+                controller.ViewData["Title"] = action;
                 controller.ViewData["ContentLink"] = controller.Url.CacheUiActionLink(action, controller.GetType());
+                usingCacheRoot = true;
                 return controller.View("CacheRoot");
             }
+        }
+
+        public IActionResult HandleCache(Controller controller, string cacheToken, string view = null)
+        {
+            return HandleCache(controller, cacheToken, out _, view);
         }
     }
 }

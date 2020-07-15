@@ -4,6 +4,8 @@ namespace Threax.AspNetCore.CacheUi
 {
     public interface ICacheUiBuilder
     {
-        IActionResult HandleCache(Controller controller, string cacheToken, string title = null, string view = null, string action = null);
+        IActionResult HandleCache(Controller controller, string cacheToken, out bool useContentRoot, string view = null);
+
+        IActionResult HandleCache(Controller controller, string cacheToken, string view = null);
     }
 }

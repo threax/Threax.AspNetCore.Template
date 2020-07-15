@@ -10,8 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DiExtensions
     {
-        public static IServiceCollection AddThreaxCacheUi<T>(this IServiceCollection services, String cacheToken, Action<CacheUiConfig> configureOptions = null)
-            where T : Controller
+        public static IServiceCollection AddThreaxCacheUi(this IServiceCollection services, String cacheToken, Action<CacheUiConfig> configureOptions = null)
         {
             var options = new CacheUiConfig();
             configureOptions?.Invoke(options);
@@ -20,7 +19,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddSingleton<CacheUiConfig>(options);
             services.TryAddScoped<ICacheUiBuilder, CacheUiBuilder>();
-            services.TryAddScoped<IEntryPointProvider, ReflectedEntryPointProvider<T>>();
 
             return services;
         }

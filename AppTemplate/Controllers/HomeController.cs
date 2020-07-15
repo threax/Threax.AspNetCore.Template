@@ -11,24 +11,25 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 using Threax.AspNetCore.CacheUi;
+using AppTemplate.Services;
 
 namespace AppTemplate.Controllers
 {
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
     public partial class HomeController : Controller
     {
-        private readonly ICacheUiBuilder cacheUiBuilder;
+        private readonly ICachedPageBuilder pageBuilder;
 
-        public HomeController(ICacheUiBuilder cacheUiBuilder)
+        public HomeController(ICachedPageBuilder pageBuilder)
         {
-            this.cacheUiBuilder = cacheUiBuilder;
+            this.pageBuilder = pageBuilder;
         }
 
         //You can get rid of this AllowAnonymous to secure the welcome page
         [AllowAnonymous]
         public IActionResult Index(String cacheToken)
         {
-            return cacheUiBuilder.HandleCache(this, cacheToken);
+            return pageBuilder.Build(this, cacheToken);
         }
 
         //The following functions enable this site to work as a progressive web app.
@@ -46,13 +47,13 @@ namespace AppTemplate.Controllers
         [AllowAnonymous]
         public IActionResult Header(String cacheToken)
         {
-            return cacheUiBuilder.HandleCache(this, cacheToken);
+            return pageBuilder.Build(this, cacheToken);
         }
 
         [AllowAnonymous]
         public IActionResult Footer(String cacheToken)
         {
-            return cacheUiBuilder.HandleCache(this, cacheToken);
+            return pageBuilder.Build(this, cacheToken);
         }
 
         [Route("webmanifest.json")]
