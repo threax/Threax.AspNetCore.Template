@@ -3,8 +3,6 @@ using AppTemplate.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
 using Threax.AspNetCore.UserLookup.Mvc.Controllers;
-using System;
-using System.Collections.Generic;
 
 namespace AppTemplate.ViewModels
 {
@@ -20,6 +18,5 @@ namespace AppTemplate.ViewModels
     //The additional entry point links are in the other entry point partial classes, expand this node to see them
     public partial class EntryPoint
     {
-
     }
 }

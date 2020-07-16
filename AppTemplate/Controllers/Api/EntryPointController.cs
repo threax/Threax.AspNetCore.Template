@@ -6,9 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
-using System.Security.Claims;
-using Threax.AspNetCore.UserBuilder.Entities;
-using Microsoft.AspNetCore.Http;
 
 namespace AppTemplate.Controllers.Api
 {

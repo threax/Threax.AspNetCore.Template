@@ -5,12 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Threax.ProgressiveWebApp;
-using Halcyon.HAL;
-using AppTemplate.Controllers.Api;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
-using Threax.AspNetCore.CacheUi;
 using AppTemplate.Services;
 
 namespace AppTemplate.Controllers
@@ -32,18 +26,6 @@ namespace AppTemplate.Controllers
             return pageBuilder.Build(this, cacheToken);
         }
 
-        //The following functions enable this site to work as a progressive web app.
-        //They can be removed if you don't want this functionality.
-
-        [AllowAnonymous]
-        public IActionResult AppStart()
-        {
-            return View();
-        }
-
-        //The following functions enable this site to work as a progressive web app.
-        //They can be removed if you don't want this functionality.
-
         [AllowAnonymous]
         public IActionResult Header(String cacheToken)
         {
@@ -54,6 +36,15 @@ namespace AppTemplate.Controllers
         public IActionResult Footer(String cacheToken)
         {
             return pageBuilder.Build(this, cacheToken);
+        }
+
+        //The following functions enable this site to work as a progressive web app.
+        //They can be removed if you don't want this functionality.
+
+        [AllowAnonymous]
+        public IActionResult AppStart()
+        {
+            return View();
         }
 
         [Route("webmanifest.json")]

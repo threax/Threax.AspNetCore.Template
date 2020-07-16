@@ -16,9 +16,9 @@
     <link rel="manifest" href="@Url.Content("~/webmanifest.json")">
 </head>
 <body>
-    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Header), typeof(AppTemplate.Controllers.HomeController))"></script>
+    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Header), typeof(HomeController))"></script>
     <div class="container body-content mt-3">@RenderBody()</div>
-    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(AppTemplate.Controllers.HomeController.Footer), typeof(AppTemplate.Controllers.HomeController))"></script>
+    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Footer), typeof(HomeController))"></script>
     <client-config csp-nonce></client-config>
     @if ((entryJson = ViewData["EntryJson"] as Newtonsoft.Json.Linq.JObject) != null) @*This cast makes sure we got a JObject input object. Helps protect us from ourselves before we write raw, since the JOBject ToString will escape everything.*@
     {
