@@ -1,40 +1,8 @@
 ﻿@using Threax.AspNetCore.AuthCore;
 @inject Threax.ProgressiveWebApp.DisplayConfig config;
-@{ 
-    Newtonsoft.Json.Linq.JObject entryJson;
+@{
+    Layout = "_LayoutTop";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <style csp-nonce>html{visibility:hidden;opacity:0;background-color: #222;}</style>
-    <link rel="shortcut icon" type="image/x-icon" href="@Url.Content(config.Favicon)" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - @config.SiteName</title>
-    <asset-bundle src="~/bundle.min.css"></asset-bundle>
-    @RenderSection("css", required: false)
-    <link rel="manifest" href="@Url.Content("~/webmanifest.json")">
-</head>
-<body>
-    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Header), typeof(HomeController))"></script>
-    <div class="container body-content mt-3">@RenderBody()</div>
-    <script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Footer), typeof(HomeController))"></script>
-    <client-config csp-nonce></client-config>
-    @if ((entryJson = ViewData["EntryJson"] as Newtonsoft.Json.Linq.JObject) != null) @*This cast makes sure we got a JObject input object. Helps protect us from ourselves before we write raw, since the JOBject ToString will escape everything.*@
-    {
-    <script type="text/javascript" csp-nonce>
-        window.hr_config = (function (next) {
-            return function (config) {
-                config.user = {
-                    "EntryPoint": @Html.Raw(entryJson.ToString(Newtonsoft.Json.Formatting.None))
-                };
-                return next ? next(config) : config;
-            }
-        })(window.hr_config);
-    </script>
-    }
-    <style csp-nonce>html{visibility:visible;opacity:1;}
-    </style><asset-bundle src="~/bundle.min.js"></asset-bundle>@RenderSection("scripts", required: false)
-    <script type="text/javascript" src="~/lib/hr-run.js" asp-append-version="true"></script><threax-csp></threax-csp>
-</body>
-</html>
+<script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Header), typeof(HomeController))"></script>
+<div class="container body-content mt-3">@RenderBody()</div>
+<script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Footer), typeof(HomeController))"></script>
