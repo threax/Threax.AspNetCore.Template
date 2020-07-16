@@ -17,16 +17,9 @@ namespace AppTemplate.Controllers.Api
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer)]
     public class EntryPointController : Controller
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-
         public class Rels
         {
             public const String Get = "GetEntryPoint";
-        }
-
-        public EntryPointController(IHttpContextAccessor httpContextAccessor)
-        {
-            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -34,14 +27,7 @@ namespace AppTemplate.Controllers.Api
         [AllowAnonymous]
         public EntryPoint Get()
         {
-            var httpContex = httpContextAccessor.HttpContext;
-            var user = httpContex.User;
-
-            return new EntryPoint()
-            {
-                IsAuthenticated = user.Identity.IsAuthenticated,
-                UserName = user.Identity.Name
-            };
+            return new EntryPoint();
         }
     }
 }

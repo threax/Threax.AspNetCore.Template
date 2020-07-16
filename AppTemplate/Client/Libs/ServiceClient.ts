@@ -1107,8 +1107,6 @@ export interface RoleAssignments {
 }
 
 export interface EntryPoint {
-    userName?: string;
-    isAuthenticated?: boolean;
 }
 
 export interface RolesQuery {

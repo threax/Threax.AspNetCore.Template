@@ -20,8 +20,6 @@ namespace AppTemplate.ViewModels
     //The additional entry point links are in the other entry point partial classes, expand this node to see them
     public partial class EntryPoint
     {
-        public String UserName { get; set; }
 
-        public bool IsAuthenticated { get; set; }
     }
 }
