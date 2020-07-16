@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Threading;
 
 namespace AppTemplate.Services
 {
@@ -14,7 +15,7 @@ namespace AppTemplate.Services
 
         static EntryPointRenderer()
         {
-            serializer = new Lazy<JsonSerializer>(() => JsonSerializer.Create(HalcyonConvention.DefaultJsonSerializerSettings), true);
+            serializer = new Lazy<JsonSerializer>(() => JsonSerializer.Create(HalcyonConvention.DefaultJsonSerializerSettings), LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
         private readonly EntryPointController entryPointController;
