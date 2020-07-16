@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Threax.AspNetCore.CacheUi
 {
     public interface ICacheUiBuilder
     {
-        IActionResult HandleCache(Controller controller, string cacheToken, out bool useContentRoot, string view = null);
-
-        IActionResult HandleCache(Controller controller, string cacheToken, string view = null);
+        Task<CacheUiResult> HandleCache(Controller controller, string cacheToken, string view = null, object model = null);
     }
 }

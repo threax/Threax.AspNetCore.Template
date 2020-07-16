@@ -21,19 +21,19 @@ namespace AppTemplate.Controllers
 
         //You can get rid of this AllowAnonymous to secure the welcome page
         [AllowAnonymous]
-        public IActionResult Index(String cacheToken)
+        public Task<IActionResult> Index(String cacheToken)
         {
             return pageBuilder.Build(this, cacheToken);
         }
 
         [AllowAnonymous]
-        public IActionResult Header(String cacheToken)
+        public Task<IActionResult> Header(String cacheToken)
         {
             return pageBuilder.Build(this, cacheToken);
         }
 
         [AllowAnonymous]
-        public IActionResult Footer(String cacheToken)
+        public Task<IActionResult> Footer(String cacheToken)
         {
             return pageBuilder.Build(this, cacheToken);
         }

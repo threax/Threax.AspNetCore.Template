@@ -18,14 +18,14 @@ namespace AppTemplate.Services
             this.entryPointRenderer = entryPointRenderer;
         }
 
-        public IActionResult Build(Controller controller, string cacheToken, string view = null)
+        public async Task<IActionResult> Build(Controller controller, string cacheToken, string view = null, object model = null)
         {
-            var result = cacheUiBuilder.HandleCache(controller, cacheToken, out var useContentRoot, view);
-            if (useContentRoot)
+            var result = await cacheUiBuilder.HandleCache(controller, cacheToken, view, model);
+            if (result.UsingCacheRoot)
             {
                 this.entryPointRenderer.AddEntryPoint(controller);
             }
-            return result;
+            return result.ActionResult;
         }
     }
 }
