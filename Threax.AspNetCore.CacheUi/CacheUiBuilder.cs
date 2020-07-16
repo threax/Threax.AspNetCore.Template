@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace Threax.AspNetCore.CacheUi
 {
     public class CacheUiBuilder : ICacheUiBuilder
     {
+        private static readonly ConcurrentDictionary<String, String> viewCache = new ConcurrentDictionary<string, string>();
+
         private readonly CacheUiConfig cacheUiConfig;
         private readonly ICompositeViewEngine viewEngine;
 
@@ -39,10 +42,18 @@ namespace Threax.AspNetCore.CacheUi
             controller.RouteData.Values.Remove("cacheToken");
             if (cacheToken != null) //Cache and return as js if we have a token
             {
-                //Render and escape view
-                controller.ViewData["Layout"] = "_Embedded";
-                String viewString = await this.RenderView(controller, view);
-                viewString = EscapeTemplateString(viewString);
+                //Get cached view
+                var viewKey = $"{controller.GetType().FullName}|{action}|{view}";
+
+                String viewString;
+                if (!viewCache.TryGetValue(viewKey, out viewString))
+                {
+                    //Render and escape view
+                    controller.ViewData["Layout"] = "_Embedded";
+                    viewString = await this.RenderView(controller, view);
+                    viewString = $"document.write(`{EscapeTemplateString(viewString)}`);";
+                    viewString = viewCache.GetOrAdd(viewKey, viewString);
+                }
 
                 //Handle cache mode
                 if (cacheToken != cacheUiConfig.NoCacheModeToken)
@@ -55,12 +66,10 @@ namespace Threax.AspNetCore.CacheUi
                 }
 
                 //Create result
-                controller.HttpContext.Response.Headers["Content-Type"] = "application/javascript";
-                controller.ViewData["ViewString"] = viewString;
                 return new CacheUiResult()
                 {
                     UsingCacheRoot = false,
-                    ActionResult = controller.View("CacheChild")
+                    ActionResult = controller.Content(viewString, "application/javascript")
                 };
             }
             else
