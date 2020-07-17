@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -212,11 +213,18 @@ namespace AppTemplate
             });
 
             services.AddEntryPointRenderer<EntryPointController>(e => e.Get());
+
+            if (appConfig.EnableResponseCompression)
+            {
+                services.AddResponseCompression();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            IdentityModelEventSource.ShowPII = appConfig.ShowPII;
+
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedProto
@@ -229,6 +237,11 @@ namespace AppTemplate
             {
                 o.CorrectPathBase = appConfig.PathBase;
             });
+
+            if (appConfig.EnableResponseCompression)
+            {
+                app.UseResponseCompression();
+            }
 
             //Setup static files
             var staticFileOptions = new StaticFileOptions();

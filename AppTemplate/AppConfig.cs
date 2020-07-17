@@ -23,6 +23,11 @@ namespace AppTemplate
         public bool DetailedErrors { get; set; }
 
         /// <summary>
+        /// Set this to true to ShowPII in the logs.
+        /// </summary>
+        public bool ShowPII { get; set; }
+
+        /// <summary>
         /// The base path the app lives on. Used for cookie paths and to enforce the url spelling.
         /// Can be null to live on the root path.
         /// </summary>
@@ -62,5 +67,13 @@ namespace AppTemplate
         /// Default: 'private, max-age=2592000, stale-while-revalidate=86400, immutable'
         /// </summary>
         public string StaticAssetCacheString { get; set; } = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+
+        /// <summary>
+        /// Set this to true to enable response compression from inside this application directly. 
+        /// If this is enabled it really only applies to static assets. The razor views are not
+        /// compressed and neither are the api results due to issues with https and compression.
+        /// Default: false (no compression)
+        /// </summary>
+        public bool EnableResponseCompression { get; set; } = false;
     }
 }
