@@ -56,5 +56,11 @@ namespace AppTemplate
         /// disable the cache. Default: null (use assembly hash)
         /// </summary>
         public string CacheToken { get; set; } = null; //(use assembly hash)
+
+        /// <summary>
+        /// Set this to the string to use for the cache-control header on any static assets that include a v=something parameter in their query.
+        /// Default: 'private, max-age=2592000, stale-while-revalidate=86400, immutable'
+        /// </summary>
+        public string StaticAssetCacheString { get; set; } = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
     }
 }
