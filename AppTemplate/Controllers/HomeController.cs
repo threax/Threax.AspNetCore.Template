@@ -6,36 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Threax.ProgressiveWebApp;
 using AppTemplate.Services;
+using Threax.AspNetCore.Mvc.CacheUi;
 
 namespace AppTemplate.Controllers
 {
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
-    public partial class HomeController : Controller
+    public partial class HomeController : CacheUiController
     {
-        private readonly ICachedPageBuilder pageBuilder;
-
-        public HomeController(ICachedPageBuilder pageBuilder)
+        public HomeController(ICacheUiBuilder builder)
+            :base(builder)
         {
-            this.pageBuilder = pageBuilder;
+            
         }
 
         //You can get rid of this AllowAnonymous to secure the welcome page
         [AllowAnonymous]
-        public Task<IActionResult> Index(String cacheToken)
+        public Task<IActionResult> Index()
         {
-            return pageBuilder.Build(this, cacheToken);
+            return CacheUiView();
         }
 
         [AllowAnonymous]
-        public Task<IActionResult> Header(String cacheToken)
+        public Task<IActionResult> Header()
         {
-            return pageBuilder.Build(this, cacheToken);
+            return CacheUiView();
         }
 
         [AllowAnonymous]
-        public Task<IActionResult> Footer(String cacheToken)
+        public Task<IActionResult> Footer()
         {
-            return pageBuilder.Build(this, cacheToken);
+            return CacheUiView();
         }
 
         //The following functions enable this site to work as a progressive web app.

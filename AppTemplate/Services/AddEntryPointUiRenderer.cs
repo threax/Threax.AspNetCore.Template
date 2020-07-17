@@ -7,25 +7,25 @@ using Threax.AspNetCore.Mvc.CacheUi;
 
 namespace AppTemplate.Services
 {
-    public class CachedPageBuilder : ICachedPageBuilder
+    public class AddEntryPointUiRenderer : ICacheUiBuilder
     {
         private readonly ICacheUiBuilder cacheUiBuilder;
         private readonly IEntryPointRenderer entryPointRenderer;
 
-        public CachedPageBuilder(ICacheUiBuilder cacheUiBuilder, IEntryPointRenderer entryPointRenderer)
+        public AddEntryPointUiRenderer(ICacheUiBuilder cacheUiBuilder, IEntryPointRenderer entryPointRenderer)
         {
             this.cacheUiBuilder = cacheUiBuilder;
             this.entryPointRenderer = entryPointRenderer;
         }
 
-        public async Task<IActionResult> Build(Controller controller, string cacheToken, string view = null, object model = null)
+        public async Task<CacheUiResult> Build(Controller controller, string view, object model, string cacheToken)
         {
-            var result = await cacheUiBuilder.HandleCache(controller, cacheToken, view, model);
+            var result = await cacheUiBuilder.Build(controller, view, model, cacheToken);
             if (result.UsingCacheRoot)
             {
                 this.entryPointRenderer.AddEntryPoint(controller);
             }
-            return result.ActionResult;
+            return result;
         }
     }
 }

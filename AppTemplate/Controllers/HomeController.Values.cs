@@ -10,9 +10,9 @@ namespace AppTemplate.Controllers
     public partial class HomeController
     {
         [Authorize(Roles = Roles.EditValues)]
-        public Task<IActionResult> Values(String cacheToken)
+        public Task<IActionResult> Values()
         {
-            return pageBuilder.Build(this, cacheToken);
+            return CacheUiView();
         }
     }
 }

@@ -150,7 +150,10 @@ namespace AppTemplate
             {
                 o.UseIdServer();
             })
-            .AddThreaxCacheUi(assemblyMd5);
+            .AddThreaxCacheUi(assemblyMd5, o =>
+            {
+                o.CustomizeCacheBuilder = (s, b) => new AddEntryPointUiRenderer(b, s.GetRequiredService<IEntryPointRenderer>());
+            });
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
@@ -210,7 +213,6 @@ namespace AppTemplate
 
             services.AddTransient<EntryPointController, EntryPointController>();
             services.AddScoped<IEntryPointRenderer, EntryPointRenderer>();
-            services.AddScoped<ICachedPageBuilder, CachedPageBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
