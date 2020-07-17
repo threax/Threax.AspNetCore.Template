@@ -63,10 +63,15 @@ namespace AppTemplate
         public string CacheToken { get; set; } = null; //(use assembly hash)
 
         /// <summary>
-        /// Set this to the string to use for the cache-control header on any static assets that include a v=something parameter in their query.
+        /// Set this to the string to use for the cache-control header on anything that is cached.
         /// Default: 'private, max-age=2592000, stale-while-revalidate=86400, immutable'
         /// </summary>
-        public string StaticAssetCacheString { get; set; } = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+        public string CacheControlHeaderString { get; set; } = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+
+        /// <summary>
+        /// Set this to true to cache static assets like javascript and css files.
+        /// </summary>
+        public bool CacheStaticAssets { get; set; } = true;
 
         /// <summary>
         /// Set this to true to enable response compression from inside this application directly. 

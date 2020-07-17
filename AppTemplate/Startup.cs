@@ -154,7 +154,10 @@ namespace AppTemplate
             {
                 o.UseIdServer();
             })
-            .AddThreaxCacheUi(appConfig.CacheToken);
+            .AddThreaxCacheUi(appConfig.CacheToken, o =>
+            {
+                o.CacheControlHeader = appConfig.CacheControlHeaderString;
+            });
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
@@ -213,6 +216,7 @@ namespace AppTemplate
             });
 
             services.AddEntryPointRenderer<EntryPointController>(e => e.Get());
+            services.AddSingleton<AppConfig>(appConfig);
 
             if (appConfig.EnableResponseCompression)
             {
@@ -245,13 +249,13 @@ namespace AppTemplate
 
             //Setup static files
             var staticFileOptions = new StaticFileOptions();
-            if (!String.IsNullOrWhiteSpace(appConfig.StaticAssetCacheString)) {
+            if (appConfig.CacheStaticAssets) {
                 staticFileOptions.OnPrepareResponse = ctx =>
                 {
                     //If the request is coming in with a v query it can be cached
                     if (!String.IsNullOrWhiteSpace(ctx.Context.Request.Query["v"]))
                     {
-                        ctx.Context.Response.Headers["Cache-Control"] = appConfig.StaticAssetCacheString;
+                        ctx.Context.Response.Headers["Cache-Control"] = appConfig.CacheControlHeaderString;
                     }
                 };
             }
