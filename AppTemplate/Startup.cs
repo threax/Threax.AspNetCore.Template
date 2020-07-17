@@ -1,7 +1,6 @@
 ﻿using AppTemplate.Controllers;
 using AppTemplate.Controllers.Api;
 using AppTemplate.Database;
-using AppTemplate.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -150,10 +149,7 @@ namespace AppTemplate
             {
                 o.UseIdServer();
             })
-            .AddThreaxCacheUi(assemblyMd5, o =>
-            {
-                o.CustomizeCacheBuilder = (s, b) => new AddEntryPointUiRenderer(b, s.GetRequiredService<IEntryPointRenderer>());
-            });
+            .AddThreaxCacheUi(assemblyMd5);
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
@@ -211,8 +207,7 @@ namespace AppTemplate
                     .AddDebug();
             });
 
-            services.AddTransient<EntryPointController, EntryPointController>();
-            services.AddScoped<IEntryPointRenderer, EntryPointRenderer>();
+            services.AddEntryPointRenderer<EntryPointController>(e => e.Get());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

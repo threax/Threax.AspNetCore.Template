@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Threax.ProgressiveWebApp;
-using AppTemplate.Services;
 using Threax.AspNetCore.Mvc.CacheUi;
 
 namespace AppTemplate.Controllers
