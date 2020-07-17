@@ -47,5 +47,14 @@ namespace AppTemplate
         /// doing stuff like regenerating clients. The default is true.
         /// </summary>
         public bool EnableValueProviders { get; set; } = true;
+
+        /// <summary>
+        /// The token to use as a cache token. This is a unique id for a particular website build. If this is null a hash
+        /// of the main library that contains Startup.cs will be used. You can set this to something unique like your 
+        /// build number and that will ensure the cache always invalidates with each new release. Do not use the same
+        /// value for multiple releases, or clients will never update their caches. You can set this to 'nocache' to totally
+        /// disable the cache. Default: null (use assembly hash)
+        /// </summary>
+        public string CacheToken { get; set; } = null; //(use assembly hash)
     }
 }

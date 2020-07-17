@@ -54,6 +54,11 @@ namespace AppTemplate
             Configuration.Define("Deploy", typeof(Threax.DeployConfig.DeploymentConfig));
 
             clientConfig.BearerCookieName = $"{authConfig.ClientId}.BearerToken";
+
+            if (string.IsNullOrWhiteSpace(appConfig.CacheToken))
+            {
+                appConfig.CacheToken = this.GetType().Assembly.ComputeMd5();
+            }
         }
 
         public SchemaConfigurationBinder Configuration { get; }
@@ -106,11 +111,10 @@ namespace AppTemplate
             services.AddAppMapper();
             services.AddAppRepositories();
 
-            var assemblyMd5 = this.GetType().Assembly.ComputeMd5();
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
-                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController), assemblyMd5),
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController), appConfig.CacheToken),
                 EnableValueProviders = appConfig.EnableValueProviders
             };
 
@@ -149,7 +153,7 @@ namespace AppTemplate
             {
                 o.UseIdServer();
             })
-            .AddThreaxCacheUi(assemblyMd5);
+            .AddThreaxCacheUi(appConfig.CacheToken);
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
