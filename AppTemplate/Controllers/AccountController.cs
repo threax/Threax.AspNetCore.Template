@@ -29,7 +29,7 @@ namespace AppTemplate.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AccessToken()
+        public IActionResult AccessToken()
         {
             return new EmptyResult();
         }

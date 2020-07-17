@@ -41,7 +41,7 @@ export function createBuilder() {
 
         //Set up the fetcher and entry point
         const config = pageConfig.read<Config>();
-        let entryPointData = config.entry || null;
+        const entryPointData = config.entry || null;
         builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(s, config));
         builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher), entryPointData));
         builder.Services.tryAddShared(safepost.MessagePoster, s => new safepost.MessagePoster(window.location.href));
