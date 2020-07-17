@@ -230,7 +230,17 @@ namespace AppTemplate
                 o.CorrectPathBase = appConfig.PathBase;
             });
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    //If the request is coming in with a v query it can be cached
+                    if (!String.IsNullOrWhiteSpace(ctx.Context.Request.Query["v"]))
+                    {
+                        ctx.Context.Response.Headers["Cache-Control"] = "private, max-age=2592000, stale-while-revalidate=86400, immutable";
+                    }
+                }
+            });
 
             app.UseCorsManager(corsOptions, loggerFactory);
 
