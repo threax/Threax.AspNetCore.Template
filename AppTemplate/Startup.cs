@@ -118,8 +118,6 @@ namespace AppTemplate
             services.AddConventionalHalcyon(halOptions);
             services.AddHalcyonClient();
 
-            services.AddThreaxCacheUi(assemblyMd5);
-
             services.AddExceptionErrorFilters(new ExceptionFilterOptions()
             {
                 DetailedErrors = appConfig.DetailedErrors
@@ -151,7 +149,8 @@ namespace AppTemplate
             .AddThreaxUserLookup(o =>
             {
                 o.UseIdServer();
-            });
+            })
+            .AddThreaxCacheUi(assemblyMd5);
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
