@@ -18,7 +18,7 @@ namespace AppTemplate.Controllers
             
         }
 
-        //You can get rid of this AllowAnonymous to secure the welcome page
+        //You can get rid of this AllowAnonymous to secure the welcome page, you can secure the header and footer if desired too.
         [AllowAnonymous]
         public Task<IActionResult> Index()
         {
@@ -39,6 +39,7 @@ namespace AppTemplate.Controllers
 
         //The following functions enable this site to work as a progressive web app.
         //They can be removed if you don't want this functionality.
+        //This uses _LayoutTop, so you can secure the header and footer and this will still work.
 
         [AllowAnonymous]
         public IActionResult AppStart()
