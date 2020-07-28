@@ -58,7 +58,7 @@ namespace AppTemplate
 
             if (string.IsNullOrWhiteSpace(appConfig.CacheToken))
             {
-                appConfig.CacheToken = this.GetType().Assembly.ComputeMd5();
+                appConfig.CacheToken = this.GetType().Assembly.ComputeMd5ForAllNearby();
             }
         }
 
