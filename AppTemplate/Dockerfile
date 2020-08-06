@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:1.0-experimental
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 
@@ -6,13 +7,13 @@ WORKDIR /src
 COPY . .
 WORKDIR /src/AppTemplate
 RUN npm install
-RUN dotnet restore AppTemplate.csproj
-RUN dotnet build AppTemplate.csproj -c Release -o /app
+RUN --mount=type=cache,target=/root/.nuget/packages,id=threax-build-dotnet-310-nuget dotnet restore AppTemplate.csproj
+RUN --mount=type=cache,target=/root/.nuget/packages,id=threax-build-dotnet-310-nuget dotnet build AppTemplate.csproj -c Release -o /app
 RUN npm run clean
 RUN npm run build
 
 FROM build AS publish
-RUN dotnet publish AppTemplate.csproj -c Release -o /app
+RUN --mount=type=cache,target=/root/.nuget/packages,id=threax-build-dotnet-310-nuget dotnet publish AppTemplate.csproj -c Release -o /app
 
 FROM base AS final
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
