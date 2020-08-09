@@ -80,5 +80,11 @@ namespace AppTemplate
         /// Default: false (no compression)
         /// </summary>
         public bool EnableResponseCompression { get; set; } = false;
+
+        /// <summary>
+        /// Set this to true to enable the metadata for the id server. This can be disabled after
+        /// initial setup. Default: true
+        /// </summary>
+        public bool EnableIdServerMetadata { get; set; } = true;
     }
 }

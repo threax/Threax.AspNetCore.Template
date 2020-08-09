@@ -98,10 +98,7 @@ namespace AppTemplate
                 o.AppOptions = authConfig;
                 o.CookiePath = appConfig.PathBase;
                 o.AccessDeniedPath = "/Account/AccessDenied";
-                o.ConfigureIdServerMetadataJwtOptions = jwtOpt =>
-                {
-                    jwtOpt.Audience = "Threax.IdServer";
-                };
+                o.EnableIdServerMetadata = appConfig.EnableIdServerMetadata;
                 o.CustomizeCookies = cookOpt =>
                 {
                     cookOpt.BearerHttpOnly = false;
