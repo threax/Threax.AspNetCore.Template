@@ -52,6 +52,7 @@ namespace AppTemplate
             Configuration.Bind("AppConfig", appConfig);
             Configuration.Bind("ClientConfig", clientConfig);
             Configuration.Bind("Cors", corsOptions);
+            Configuration.Define("Build", typeof(Threax.DockerBuildConfig.BuildConfig));
             Configuration.Define("Deploy", typeof(Threax.DeployConfig.DeploymentConfig));
 
             clientConfig.BearerCookieName = $"{authConfig.ClientId}.BearerToken";
