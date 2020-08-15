@@ -91,5 +91,10 @@ namespace AppTemplate
         /// Set this to true to add user secrets. Good for development. Default: false
         /// </summary>
         public bool AddUserSecrets { get; set; }
+
+        /// <summary>
+        /// The path to the folder to load key per files keys from. Can be null to not load anything. Default: null
+        /// </summary>
+        public string KeyPerFilePath { get; set; }
     }
 }
