@@ -4,6 +4,11 @@ This is the template app for building hypermedia applications. It uses the dotne
 ## Installing Templates
 Run InstallTemplates.bat or do `dotnet new -i .` in each of the directories.
 
+## Creating App
+Use Create.ps1 to get prompted for inputs or call using `dotnet new threaxapp --port $port --containername $containerName`.
+
+Use `dotnet new threaxapp --help` for more info.
+
 ## Building Dockerfile
 To build this image you will need to use the experimental buildkit. This applies to any projects built with this template.
 
