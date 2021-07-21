@@ -15,7 +15,7 @@
     "htmlrapier.roleclient": "^5.0.0-pre.1",
     "htmlrapier.widgets": "^16.0.0-pre.1",
     "jquery": "^3.5.1",
-    "jsns": "^5.1.0-pre.0",
+    "jsns": "^5.1.0-pre.2",
     "threax.bootstrap4": "^0.0.3"
   },
   "scripts": {

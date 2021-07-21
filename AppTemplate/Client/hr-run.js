@@ -1,1 +1,0 @@
-jsns.run("node_modules/jsns/runattributes");
