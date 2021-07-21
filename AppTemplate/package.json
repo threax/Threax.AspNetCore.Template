@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.5.0",
-    "htmlrapier": "^25.0.0-pre.2",
+    "htmlrapier": "^25.0.0-pre.3",
     "htmlrapier.accesstoken": "^2.0.0-pre.1",
     "htmlrapier.bootstrap": "^9.0.0-pre.1",
     "htmlrapier.bootstrap.datetime": "^5.0.0-pre.1",
@@ -15,7 +15,7 @@
     "htmlrapier.roleclient": "^5.0.0-pre.1",
     "htmlrapier.widgets": "^16.0.0-pre.1",
     "jquery": "^3.5.1",
-    "jsns": "^5.0.0",
+    "jsns": "^5.1.0-pre.0",
     "threax.bootstrap4": "^0.0.3"
   },
   "scripts": {

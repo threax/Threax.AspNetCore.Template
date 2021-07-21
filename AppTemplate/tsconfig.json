@@ -36,6 +36,7 @@
   ],
   "exclude": [],
   "files": [
-    "node_modules\\jsns\\jsns.ts"
+    "node_modules\\jsns\\jsns.ts",
+    "node_modules\\jsns\\runattributes.ts"
   ]
 }

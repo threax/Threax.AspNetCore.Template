@@ -1,1 +1,1 @@
-jsns.run("node_modules/htmlrapier/src/runattributes");
+jsns.run("node_modules/jsns/runattributes");
