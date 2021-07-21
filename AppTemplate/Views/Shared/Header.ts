@@ -1,6 +1,6 @@
 import * as controller from 'hr.controller';
-import * as startup from 'clientlibs.startup';
-import * as client from 'clientlibs.ServiceClient';
+import * as startup from 'Client/Libs/startup';
+import * as client from 'Client/Libs/ServiceClient';
 import * as tm from 'hr.accesstoken.manager';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as safepost from 'hr.safepostmessage';

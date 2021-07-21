@@ -1,4 +1,4 @@
-﻿import * as startup from 'clientlibs.startup';
+﻿import * as startup from 'Client/Libs/startup';
 import * as loggedInPage from 'hr.relogin.LoggedInPage';
 
 const builder = startup.createBuilder();

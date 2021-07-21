@@ -1,6 +1,6 @@
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 import * as controller from 'hr.controller';
-import * as startup from 'clientlibs.startup';
+import * as startup from 'Client/Libs/startup';
 import { Uri } from 'hr.uri';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 

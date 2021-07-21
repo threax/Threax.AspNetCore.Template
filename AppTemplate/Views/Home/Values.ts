@@ -1,7 +1,7 @@
 import * as standardCrudPage from 'hr.widgets.StandardCrudPage';
-import * as startup from 'clientlibs.startup';
+import * as startup from 'Client/Libs/startup';
 import * as deepLink from 'hr.deeplink';
-import { ValueCrudInjector } from 'clientlibs.ValueCrudInjector';
+import { ValueCrudInjector } from 'Client/Libs/ValueCrudInjector';
 
 var injector = ValueCrudInjector;
 

@@ -1,4 +1,4 @@
-﻿import * as startup from 'clientlibs.startup';
+﻿import * as startup from 'Client/Libs/startup';
 import * as controller from 'hr.controller';
 import * as crudService from 'hr.roleclient.UserCrudService';
 import * as deepLink from 'hr.deeplink';

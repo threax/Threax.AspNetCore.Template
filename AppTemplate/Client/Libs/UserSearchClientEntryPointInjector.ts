@@ -1,5 +1,5 @@
 ﻿import * as controller from 'hr.controller';
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 import * as userDirectoryClient from 'hr.roleclient.UserDirectoryClient';
 import * as roleClient from 'hr.roleclient.RoleClient';
 

@@ -1,4 +1,4 @@
-import * as client from 'clientlibs.ServiceClient';
+import * as client from 'Client/Libs/ServiceClient';
 import * as hyperCrud from 'hr.widgets.HypermediaCrudService';
 import * as di from 'hr.di';
 

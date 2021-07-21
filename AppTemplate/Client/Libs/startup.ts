@@ -8,8 +8,8 @@ import * as tokenmanager from 'hr.accesstoken.manager';
 import * as tokenfetcher from 'hr.accesstoken.fetcher';
 import * as whitelist from 'hr.whitelist';
 import * as fetcher from 'hr.fetcher';
-import * as client from 'clientlibs.ServiceClient';
-import * as userSearch from 'clientlibs.UserSearchClientEntryPointInjector';
+import * as client from 'Client/Libs/ServiceClient';
+import * as userSearch from 'Client/Libs/UserSearchClientEntryPointInjector';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 import * as pageConfig from 'hr.pageconfig';
@@ -32,7 +32,7 @@ export function createBuilder() {
     if (builder === null) {
         //Activate htmlrapier
         hr.setup();
-        datetime.setup();
+        //datetime.setup();
         bootstrap.setup();
         bootstrap4form.setup();
 

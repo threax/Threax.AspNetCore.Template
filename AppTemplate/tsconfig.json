@@ -18,9 +18,6 @@
       "ES2015"
     ],
     "paths": {
-      "clientlibs.*": [
-        "Client\\Libs\\*"
-      ],
       "hr.accesstoken.*": [
         "node_modules\\htmlrapier.accesstoken\\src\\*"
       ],
