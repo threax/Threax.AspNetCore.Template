@@ -1,6 +1,6 @@
-import * as standardCrudPage from 'hr.widgets.StandardCrudPage';
+import * as standardCrudPage from 'htmlrapier.widgets/src/StandardCrudPage';
 import * as startup from 'Client/Libs/startup';
-import * as deepLink from 'hr.deeplink';
+import * as deepLink from 'htmlrapier/src/deeplink';
 import { ValueCrudInjector } from 'Client/Libs/ValueCrudInjector';
 
 var injector = ValueCrudInjector;
