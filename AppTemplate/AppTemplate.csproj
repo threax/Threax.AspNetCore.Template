@@ -35,9 +35,9 @@
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="6.0.1" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.Client" Version="10.0.1" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.Client.OpenIdConnect" Version="2.0.0" />
-    <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen.Tools" Version="6.0.1" />
+    <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen.Tools" Version="7.0.0-pre01" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="14.4.1" />
-    <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen" Version="12.3.2" />
+    <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen" Version="14.0.0-pre01" />
     <PackageReference Include="Threax.Extensions.Configuration.SchemaBinder" Version="2.0.1" />
     <PackageReference Include="HtmlRapier.TagHelpers" Version="8.2.1" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.1" />
@@ -50,7 +50,7 @@
     <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.1" />
     <PackageReference Include="IdentityModel" Version="5.1.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-    <PackageReference Include="Threax.ModelGen" Version="15.0.3" />
+    <PackageReference Include="Threax.ModelGen" Version="16.0.0-pre01" />
     <PackageReference Include="Threax.DeployConfig" Version="1.1.0" />
     <PackageReference Include="Threax.DockerBuildConfig" Version="1.1.0" />
   </ItemGroup>
