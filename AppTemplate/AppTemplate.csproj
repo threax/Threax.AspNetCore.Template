@@ -44,7 +44,7 @@
     <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="15.0.0" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen" Version="15.0.0" />
     <PackageReference Include="Threax.Extensions.Configuration.SchemaBinder" Version="2.0.1" />
-    <PackageReference Include="HtmlRapier.TagHelpers" Version="8.2.1" />
+    <PackageReference Include="HtmlRapier.TagHelpers" Version="9.0.0" />
     <PackageReference Include="Threax.ReflectedServices" Version="1.0.1" />
     <PackageReference Include="Threax.Sqlite.Ext" Version="3.0.0" />
     <PackageReference Include="Threax.AspNetCore.JwtCookieAuth" Version="11.0.0" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using HtmlRapier.TagHelpers;
-using Newtonsoft.Json;
 
 namespace AppTemplate
 {
