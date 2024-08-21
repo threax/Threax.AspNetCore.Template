@@ -8,6 +8,7 @@
     "target": "ES2015",
     "outDir": "obj/tscout/lib",
     "outFile": "wwwroot/lib/tsbin.js",
+    "allowUmdGlobalAccess": true,
     "module": "amd",
     "baseUrl": ".",
     "noEmitHelpers": true,
