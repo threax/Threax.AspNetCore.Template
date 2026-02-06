@@ -13,6 +13,7 @@ using System.Security.Principal;
 using System.Text;
 using Threax.AspNetCore.Tests;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace AppTemplate.Tests
 {
@@ -61,18 +62,19 @@ namespace AppTemplate.Tests
         /// <returns>The passed in mockup test.</returns>
         public static Mockup SetupWebHost(this Mockup mockup)
         {
-            mockup.Add<IWebHost>(m =>
+            mockup.Add<IHost>(m =>
             {
-                var hostBuilder = new WebHostBuilder()
-                                    .UseEnvironment("development")
-                                    .UseKestrel()
-                                    .UseStartup<Startup>()
-                                    .ConfigureAppConfiguration(configuration =>
-                                    {
-                                        configuration.Sources.Clear();
-                                        configuration.AddJsonFile("appsettings.json");
-                                        configuration.AddJsonFile("appsettings.Development.json");
-                                    });
+                var hostBuilder = new HostBuilder()
+                     .ConfigureWebHostDefaults(webHostBuilder =>
+                     {
+                         webHostBuilder.UseStartup<Startup>();
+                     })
+                    .ConfigureAppConfiguration(configuration =>
+                    {
+                        configuration.Sources.Clear();
+                        configuration.AddJsonFile("appsettings.json");
+                        configuration.AddJsonFile("appsettings.Development.json");
+                    });
 
                 return hostBuilder.Build();
             });
