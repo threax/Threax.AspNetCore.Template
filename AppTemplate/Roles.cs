@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq;
 
 namespace AppTemplate
 {
     /// <summary>
     /// This class makes it easy to keep track of role constants throught the system.
     /// </summary>
-    public static class Roles
+    public static partial class Roles
     {
         /// <summary>
         /// A default role to edit values, you will probably want to replace this role.
@@ -25,6 +27,7 @@ namespace AppTemplate
         public static IEnumerable<String> DatabaseRoles()
         {
             yield return EditValues;
+            //return typeof(Roles).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static).Select(i => i.GetValue(null)?.ToString());
         }
     }
 

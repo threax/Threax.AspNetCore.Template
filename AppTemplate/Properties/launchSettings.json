@@ -28,6 +28,13 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Create All Models": {
+      "commandName": "Project",
+      "commandLineArgs": "tools createAllModels",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

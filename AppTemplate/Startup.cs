@@ -4,7 +4,6 @@ using AppTemplate.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,6 +13,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Threax.AspNetCore.BuiltInTools;
 using Threax.AspNetCore.CorsManager;
@@ -175,16 +175,26 @@ namespace AppTemplate
                 {
                     await a.AddAdmin();
                 }));
-#if DEBUG
+
                 runner.AddTool("updateConfigSchema", new ToolCommand("Update the schema file for this application's configuration.", async a =>
                 {
                     var json = await Configuration.CreateSchema();
                     await File.WriteAllTextAsync("appsettings.schema.json", json);
                 }))
+                .AddTool("createAllModels", new ToolCommand("Create a model from a model schema using Threax.ModelGen.", async a =>
+                {
+                    var modelTypes = typeof(Startup).GetTypeInfo().Assembly.GetTypes()
+                         .Where(t => t.Namespace?.StartsWith("AppTemplate.ModelSchemas") == true);
+
+                    foreach(var modelType in modelTypes)
+                    {
+                        await Threax.ModelGen.ModelGenerator.RunGenerate(modelType.FullName);
+                    }
+                }))
                 .AddTool("createModel", new ToolCommand("Create a model from a model schema using Threax.ModelGen.", a => Threax.ModelGen.ModelGenerator.RunGenerate(a.Args[0])))
                 .AddTool("deleteModel", new ToolCommand("Delete a model from a model schema using Threax.ModelGen.", a => Threax.ModelGen.ModelGenerator.RunDelete(a.Args[0])))
                 .UseClientGenTools();
-#endif
+
                 return runner;
             });
 
