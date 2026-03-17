@@ -17,12 +17,20 @@ namespace AppTemplate.Controllers.Api
         public class Rels
         {
             public const String Get = "GetEntryPoint";
+            public const String GetLoggedIn = "GetLoggedIn";
         }
 
         [HttpGet]
         [HalRel(Rels.Get)]
         [AllowAnonymous]
         public EntryPoint Get()
+        {
+            return new EntryPoint();
+        }
+
+        [HttpGet]
+        [HalRel(Rels.GetLoggedIn)]
+        public EntryPoint LoggedIn()
         {
             return new EntryPoint();
         }
