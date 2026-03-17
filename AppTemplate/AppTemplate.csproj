@@ -53,14 +53,14 @@
     <PackageReference Include="Threax.AspNetCore.UserLookup.IdServer" Version="12.0.0" />
     <PackageReference Include="Threax.IdServer.Client" Version="3.0.3" />
     <PackageReference Include="Threax.ProgressiveWebApp" Version="1.0.1" />
-    <PackageReference Include="Threax.ModelGen" Version="19.0.1" />
+    <PackageReference Include="Threax.ModelGen" Version="19.1.0" />
     <PackageReference Include="Threax.DeployConfig" Version="1.1.0" />
     <PackageReference Include="Threax.DockerBuildConfig" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="ModelSchemas\" />
+	<Folder Include="ModelSchemas\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

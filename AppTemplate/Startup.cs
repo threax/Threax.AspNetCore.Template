@@ -186,9 +186,16 @@ namespace AppTemplate
                     var modelTypes = typeof(Startup).GetTypeInfo().Assembly.GetTypes()
                          .Where(t => t.Namespace?.StartsWith("AppTemplate.ModelSchemas") == true);
 
-                    foreach(var modelType in modelTypes)
+                    foreach (var modelType in modelTypes)
                     {
-                        await Threax.ModelGen.ModelGenerator.RunGenerate(modelType.FullName);
+                        if (modelType.Name == "Roles")
+                        {
+                            await Threax.ModelGen.ModelGenerator.CreateRoles(modelType.FullName);
+                        }
+                        else
+                        {
+                            await Threax.ModelGen.ModelGenerator.RunGenerate(modelType.FullName);
+                        }
                     }
                 }))
                 .AddTool("createModel", new ToolCommand("Create a model from a model schema using Threax.ModelGen.", a => Threax.ModelGen.ModelGenerator.RunGenerate(a.Args[0])))

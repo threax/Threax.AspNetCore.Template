@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Linq;
 
 namespace AppTemplate
@@ -16,18 +15,12 @@ namespace AppTemplate
     public static partial class Roles
     {
         /// <summary>
-        /// A default role to edit values, you will probably want to replace this role.
-        /// </summary>
-        public const String EditValues = "EditValues";
-
-        /// <summary>
         /// All roles, any roles added above that you want to add to the database should be defined here.
         /// </summary>
         /// <returns></returns>
         public static IEnumerable<String> DatabaseRoles()
         {
-            yield return EditValues;
-            //return typeof(Roles).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static).Select(i => i.GetValue(null)?.ToString());
+            yield break;
         }
     }
 
@@ -38,10 +31,6 @@ namespace AppTemplate
     [HalActionLink(CrudRels.Delete, RolesControllerRels.DeleteUser, typeof(RolesController))]
     public class RoleAssignments : ReflectedRoleAssignments
     {
-        /// <summary>
-        /// Also add a property for any roles you define, this way the ui can offer them for editing.
-        /// </summary>
-        [Display(Name = "Edit Values")]
-        public bool EditValues { get; set; }
+
     }
 }
