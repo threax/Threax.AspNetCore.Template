@@ -2,5 +2,12 @@
 @{
     renderData.Title = ViewData["Title"]?.ToString();
 }
+@{
+    string path = System.IO.Path.ChangeExtension(ViewContext.View.Path, ".css");
+    if (System.IO.File.Exists(System.IO.Path.Join("wwwroot", path)))
+    {
+        <link rel='stylesheet' href="@path" />
+    }
+}
 @RenderBody()
 <page-runner></page-runner>
